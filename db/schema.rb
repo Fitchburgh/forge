@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161112182852) do
+ActiveRecord::Schema.define(version: 20161112183530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,16 @@ ActiveRecord::Schema.define(version: 20161112182852) do
     t.index ["user_id"], name: "index_obstacles_on_user_id", using: :btree
   end
 
+  create_table "save_games", force: :cascade do |t|
+    t.integer  "game_id"
+    t.integer  "user_id"
+    t.json     "obj"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_save_games_on_game_id", using: :btree
+    t.index ["user_id"], name: "index_save_games_on_user_id", using: :btree
+  end
+
   create_table "scenes", force: :cascade do |t|
     t.integer  "map_id"
     t.string   "name"
@@ -89,7 +99,7 @@ ActiveRecord::Schema.define(version: 20161112182852) do
 
   create_table "shards", force: :cascade do |t|
     t.integer  "scene_id"
-    t.string   "type"
+    t.string   "category"
     t.string   "name"
     t.string   "description"
     t.datetime "created_at",  null: false
@@ -115,6 +125,8 @@ ActiveRecord::Schema.define(version: 20161112182852) do
   add_foreign_key "maps", "games"
   add_foreign_key "obstacles", "shards"
   add_foreign_key "obstacles", "users"
+  add_foreign_key "save_games", "games"
+  add_foreign_key "save_games", "users"
   add_foreign_key "scenes", "maps"
   add_foreign_key "shards", "scenes"
 end

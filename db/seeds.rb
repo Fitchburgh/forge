@@ -1,7 +1,5 @@
 User.create(
-  username: 'fitchburgh',
-  email: 'taco@pies.com',
-  password: 'brandon'
+  username: 'fitchburgh'
 )
 
 Game.create(

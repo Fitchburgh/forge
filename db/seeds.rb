@@ -4,6 +4,7 @@ User.create(
 
 Game.create(
   name: 'Quest',
+  tags: '[war, fight, adventure]',
   user_id: 1,
   description: 'test descript'
 )

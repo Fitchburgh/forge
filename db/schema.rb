@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20161112183530) do
 
   create_table "games", force: :cascade do |t|
     t.string   "name"
+    t.json     "tags"
     t.integer  "user_id"
     t.string   "description"
     t.datetime "created_at",  null: false

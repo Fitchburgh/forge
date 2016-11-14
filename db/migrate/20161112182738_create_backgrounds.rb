@@ -4,7 +4,7 @@ class CreateBackgrounds < ActiveRecord::Migration[5.0]
       t.json :obj
       t.references :user, foreign_key: true
       t.references :shard, foreign_key: true
-      t.boolean :public
+      t.boolean :public, default: true
       t.json :tags
 
       t.timestamps

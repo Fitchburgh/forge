@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root '/'
+
   get 'games/index'
 
   post 'games/create'

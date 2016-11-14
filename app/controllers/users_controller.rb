@@ -10,9 +10,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def current_user
+    User.find_by token: params[:token]
+  end
+
+  def login
+  end
+
   private
 
   def user_params
     params.permit(:username, :token)
   end
 end
+# user.find_by_token [params[:token]]

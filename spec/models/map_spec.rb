@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Map, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "validations" do
+    it "should not save if the map does not have a name" do
+      expect {
+        Map.create!(game_id: 4, description: "pirate ship")
+      }.to raise_error(ActiveRecord::RecordInvalid)
+    end
+  end
 end

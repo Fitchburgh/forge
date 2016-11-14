@@ -1,5 +1,6 @@
 User.create(
-  username: 'fitchburgh'
+  username: 'fitchburgh',
+  token: 'asoidaiosdjgas8235hy09130t1h3tQahg8123450176304'
 )
 
 Game.create(

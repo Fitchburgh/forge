@@ -1,0 +1,14 @@
+class CreateEntities < ActiveRecord::Migration[5.0]
+  def change
+    create_table :entities do |t|
+      t.json :obj
+      t.references :user, foreign_key: true
+      t.references :scene, foreign_key: true
+      t.string :name
+      t.boolean :public
+      t.json :tags
+
+      t.timestamps
+    end
+  end
+end

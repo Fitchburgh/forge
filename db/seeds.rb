@@ -9,7 +9,8 @@ Game.create(
   name: 'Quest',
   tags: '[war, fight, adventure]',
   user_id: 1,
-  description: 'test descript'
+  description: 'test descript',
+  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Collaborator.create(
@@ -20,13 +21,15 @@ Collaborator.create(
 Map.create(
   game_id: 1,
   name: 'Mappy',
-  description: 'map for quest game'
+  description: 'map for quest game',
+  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
   map_id: 1,
   name: 'Sceney',
-  description: 'scene!'
+  description: 'scene!',
+  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Background.create(

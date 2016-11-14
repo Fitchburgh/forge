@@ -20,7 +20,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:username, :token)
+    params.permit(:username, :token, :uid, :google_oauth_data)
   end
 end
-# user.find_by_token [params[:token]]

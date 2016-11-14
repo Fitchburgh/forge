@@ -1,6 +1,8 @@
 User.create(
   username: 'fitchburgh',
-  token: 'asoidaiosdjgas8235hy09130t1h3tQahg8123450176304'
+  token: 'asoidaiosdjgas8235hy09130t1h3tQahg8123450176304',
+  uid: '12498720913851029',
+  google_oauth_data: '{298p3urp93j4wefq9834cjrpoqwiejfc0q}'
 )
 
 Game.create(

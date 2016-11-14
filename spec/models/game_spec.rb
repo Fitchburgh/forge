@@ -11,5 +11,9 @@ RSpec.describe Game do
     it "should not save if the game does not have a unique name" do
       expect { should validate_uniqueness_of(:name).case_insensitive }
     end
+
+    it "should not save if the game has a name of nil" do
+      expect { Game.create!(user_id: 4, name: nil) }.to raise_error(ActiveRecord::RecordInvalid)
+    end
   end
 end

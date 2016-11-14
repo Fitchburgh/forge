@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   get 'games/restore' => 'games#restore'
 
   post 'users/create'
+
+  patch 'users/login'
 end

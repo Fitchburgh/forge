@@ -15,6 +15,14 @@ class UsersController < ApplicationController
   end
 
   def login
+    @user = User.find_by uid: params[:uid]
+    if @user.nil?
+      render :json => "User does not exist"
+    else
+      @user.token = params[:token]
+      @user.save
+      render :json => @user.username
+    end
   end
 
   private

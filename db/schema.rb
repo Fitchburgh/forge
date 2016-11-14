@@ -18,12 +18,13 @@ ActiveRecord::Schema.define(version: 20161112183530) do
   create_table "backgrounds", force: :cascade do |t|
     t.json     "obj"
     t.integer  "user_id"
-    t.integer  "shard_id"
-    t.boolean  "public"
+    t.integer  "scene_id"
+    t.boolean  "public",     default: true
+    t.string   "name"
     t.json     "tags"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["shard_id"], name: "index_backgrounds_on_shard_id", using: :btree
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["scene_id"], name: "index_backgrounds_on_scene_id", using: :btree
     t.index ["user_id"], name: "index_backgrounds_on_user_id", using: :btree
   end
 
@@ -39,12 +40,13 @@ ActiveRecord::Schema.define(version: 20161112183530) do
   create_table "entities", force: :cascade do |t|
     t.json     "obj"
     t.integer  "user_id"
-    t.integer  "shard_id"
+    t.integer  "scene_id"
+    t.string   "name"
     t.boolean  "public"
     t.json     "tags"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["shard_id"], name: "index_entities_on_shard_id", using: :btree
+    t.index ["scene_id"], name: "index_entities_on_scene_id", using: :btree
     t.index ["user_id"], name: "index_entities_on_user_id", using: :btree
   end
 
@@ -69,12 +71,13 @@ ActiveRecord::Schema.define(version: 20161112183530) do
   create_table "obstacles", force: :cascade do |t|
     t.json     "obj"
     t.integer  "user_id"
-    t.integer  "shard_id"
+    t.integer  "scene_id"
+    t.string   "name"
     t.boolean  "public"
     t.json     "tags"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["shard_id"], name: "index_obstacles_on_shard_id", using: :btree
+    t.index ["scene_id"], name: "index_obstacles_on_scene_id", using: :btree
     t.index ["user_id"], name: "index_obstacles_on_user_id", using: :btree
   end
 
@@ -97,36 +100,23 @@ ActiveRecord::Schema.define(version: 20161112183530) do
     t.index ["map_id"], name: "index_scenes_on_map_id", using: :btree
   end
 
-  create_table "shards", force: :cascade do |t|
-    t.integer  "scene_id"
-    t.string   "category"
-    t.string   "name"
-    t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["scene_id"], name: "index_shards_on_scene_id", using: :btree
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "username"
-    t.string   "email"
-    t.string   "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "backgrounds", "shards"
+  add_foreign_key "backgrounds", "scenes"
   add_foreign_key "backgrounds", "users"
   add_foreign_key "collaborators", "games"
   add_foreign_key "collaborators", "users"
-  add_foreign_key "entities", "shards"
+  add_foreign_key "entities", "scenes"
   add_foreign_key "entities", "users"
   add_foreign_key "games", "users"
   add_foreign_key "maps", "games"
-  add_foreign_key "obstacles", "shards"
+  add_foreign_key "obstacles", "scenes"
   add_foreign_key "obstacles", "users"
   add_foreign_key "save_games", "games"
   add_foreign_key "save_games", "users"
   add_foreign_key "scenes", "maps"
-  add_foreign_key "shards", "scenes"
 end

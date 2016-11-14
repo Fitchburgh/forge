@@ -1,11 +1,4 @@
-require 'pry'
-
-#
 class UsersController < ApplicationController
-  def new
-    @user = User.new
-  end
-
   def create
     @user = User.new(user_params)
     respond_to do |format|
@@ -20,6 +13,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:username)
+    params.require(:user).permit(:username)
   end
 end

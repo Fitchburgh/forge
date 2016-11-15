@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def login
     @user = User.find_by uid: params[:uid]
     if @user.nil?
-      render :json => 'User does not exist'
+      render :json => 'User does not exist', :status => 404
     else
       @user.token = params[:token]
       @user.save

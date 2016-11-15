@@ -13,17 +13,15 @@ Rails.application.routes.draw do
 
   post 'games/create'
 
-  patch 'games/update'
+  put 'games/update'
 
   delete 'games/delete'
 
-  get 'games/play'
-
   get 'games/search'
 
-  post 'games/savegame'
+  get 'games/user_games' => 'games#find_user_games'
 
-  get 'games/restore' => 'games#restore'
+  post 'games/savegame'
 
   post 'users/create'
 

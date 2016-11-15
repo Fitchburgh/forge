@@ -48,7 +48,9 @@ class GamesController < ApplicationController
     @games = []
     games = Game.all
     games.each do |t|
-      @games << t if t.tags.include?(params[:tags].downcase) || t.name.include?(params[:tags].downcase)
+      if t.tags.include?(params[:tags].downcase) || t.name.include?(params[:tags].downcase)
+        @games << {id: t.id, name: t.name, tags: t.tags, user_id: t.user_id, description: t.description, created_at: t.created_at}
+      end
     end
     render :json => @games
   end
@@ -56,7 +58,8 @@ class GamesController < ApplicationController
   def find_user_games
     user_games = Game.where(user_id: params[:user_id])
     if user_games.empty?
-      render :json => { error: 'user has no games' }, status: 404
+      render :json => []
+      # render :json => { error: 'user has no games' }, status: 404
     else
       render :json => user_games
     end

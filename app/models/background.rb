@@ -1,5 +1,5 @@
 class Background < ApplicationRecord
   belongs_to :user
   belongs_to :scene
-  validates :obj, :name, presence: true
+  validates :obj, :tags, :name, presence: true
 end

@@ -6,7 +6,7 @@ class CreateBackgrounds < ActiveRecord::Migration[5.0]
       t.references :scene, foreign_key: true
       t.boolean :public, default: true
       t.string :name
-      t.json :tags
+      t.json :tags, default: '', null: false
 
       t.timestamps
     end

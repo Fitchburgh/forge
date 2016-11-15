@@ -6,7 +6,7 @@ class CreateEntities < ActiveRecord::Migration[5.0]
       t.references :scene, foreign_key: true
       t.string :name
       t.boolean :public
-      t.json :tags
+      t.json :tags, default: '', null: false
 
       t.timestamps
     end

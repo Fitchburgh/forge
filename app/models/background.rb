@@ -16,7 +16,6 @@ class Background < ApplicationRecord
     var = self.new_background(options)
     if var.save
       var
-      render :status => 201
     else
       halt(404)
     end

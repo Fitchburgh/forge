@@ -15,7 +15,6 @@ class Obstacle < ApplicationRecord
     var = self.new_obstacle(options)
     if var.save
       var
-      render :status => 201
     else
       halt(404)
     end

@@ -41,9 +41,16 @@ class ArticlesController < ApplicationController
   end
 
   def update
+
   end
 
   def delete
+    @background = Background.find_by(id: params[:id])
+    if @background.nil?
+      render :json => { error: 'background not detected' }, status: 404
+    else
+      render :json => { message: 'background deleted' } if @background.delete
+    end
   end
 
   def search

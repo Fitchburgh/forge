@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20161112183530) do
     t.json     "tags"
     t.integer  "user_id"
     t.string   "description"
+    t.json     "obj"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["user_id"], name: "index_games_on_user_id", using: :btree
@@ -64,6 +65,7 @@ ActiveRecord::Schema.define(version: 20161112183530) do
     t.integer  "game_id"
     t.string   "name"
     t.string   "description"
+    t.json     "obj"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["game_id"], name: "index_maps_on_game_id", using: :btree
@@ -96,6 +98,7 @@ ActiveRecord::Schema.define(version: 20161112183530) do
     t.integer  "map_id"
     t.string   "name"
     t.string   "description"
+    t.json     "obj"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["map_id"], name: "index_scenes_on_map_id", using: :btree

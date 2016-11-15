@@ -1,8 +1,15 @@
+#
 class Game < ApplicationRecord
   belongs_to :user
   validates :name, presence: true, uniqueness: true
 
-  def keyword_search(user_input)
-    @games = Game.where(tags: includes(user_input))
+  def self.keyword_search(input)
+    @games = []
+    games = Game.all
+    games.each do |t|
+      @games << t.name if t.tags.include?(input)
+    end
+    return @games
+    binding.pry
   end
 end

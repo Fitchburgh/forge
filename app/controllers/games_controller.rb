@@ -15,6 +15,7 @@ class GamesController < ApplicationController
     end
   end
 
+  # this action should be to update the entire game json object, never one part
   def update
   end
 
@@ -25,8 +26,13 @@ class GamesController < ApplicationController
   end
 
   def search
+    @games = []
+    games = Game.all
+    games.each do |t|
+      @games << t.name if t.tags.include?(params[:tags]) || t.name.include?(params[:tags])
+    end
     render :json => @games
-  # name and description field are checked for existence of searched word, return each game if true
+    # Right now @games is just the names of the games, we can adjust to send back whatever FE needs
   end
 
   def savegame
@@ -52,7 +58,7 @@ class GamesController < ApplicationController
   end
 
   def create_game_params
-    params.permit(:name, :tags, :description)
+    params.permit(:name, :tags, :description, :user_id, :obj)
   end
 
 end

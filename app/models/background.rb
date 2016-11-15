@@ -1,3 +1,4 @@
+require 'pry'
 class Background < ApplicationRecord
   belongs_to :user
   belongs_to :game
@@ -9,5 +10,22 @@ class Background < ApplicationRecord
       var << t if t.tags.include?(params) || t.name.include?(params)
     end
     var
+  end
+
+  def self.create_background_article(var, options)
+    var = self.new_background(options)
+    if var.save
+      var
+    else
+      halt(404)
+    end
+  end
+
+  def self.new_background(options)
+    Background.new(
+      obj: options['obj'].downcase, user_id: options['user_id'].downcase,
+      game_id: options['game_id'].downcase, name: options['name'].downcase,
+      tags: options['tags'].downcase
+    )
   end
 end

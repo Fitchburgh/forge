@@ -1,7 +1,7 @@
 #
 class Article < ApplicationRecord
   def create_article(var, class_name)
-    var = class_name.new(asset_params)
+    var.downcase = class_name.new(asset_params)
     if var.save
       render json: var
     else

@@ -1,12 +1,16 @@
+require 'pry'
 #
 class ArticlesController < ApplicationController
   def create
     if params[:category] == 'background'
-      create_article(@background, Background)
+      @background = Background.create_background_article(@background, params)
+      render json: @background
     elsif params[:category] == 'obstacle'
-      create_article(@obstacle, Obstacle)
+      @obstacle = Obstacle.create_obstacle_article(@obstacle, params)
+      render json: @obstacle
     elsif params[:category] == 'entity'
-      create_article(@entity, Entity)
+      @entity = Entity.create_entity_article(@entity, params)
+      render json: @entity
     else
       halt(404)
     end

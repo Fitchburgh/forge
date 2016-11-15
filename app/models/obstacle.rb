@@ -10,4 +10,21 @@ class Obstacle < ApplicationRecord
     end
     var
   end
+
+  def self.create_obstacle_article(var, options)
+    var = self.new_obstacle(options)
+    if var.save
+      var
+    else
+      halt(404)
+    end
+  end
+
+  def self.new_obstacle(options)
+    Obstacle.new(
+      obj: options['obj'].downcase, user_id: options['user_id'].downcase,
+      game_id: options['game_id'].downcase, name: options['name'].downcase,
+      tags: options['tags'].downcase
+    )
+  end
 end

@@ -22,9 +22,9 @@ class Entity < ApplicationRecord
 
   def self.new_entity(options)
     Entity.new(
-      obj: options['obj'].to_a, user_id: options['user_id'],
+      obj: options['obj'].to_s, user_id: options['user_id'],
       game_id: options['game_id'], name: options['name'].downcase,
-      tags: options['tags'].downcase.to_a
+      tags: options['tags'].downcase.to_s, public: options['public']
     )
   end
 end

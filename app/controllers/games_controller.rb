@@ -7,37 +7,68 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(create_game_params)
+    @game = Game.new(
+      name: params[:name].downcase,
+      tags: params[:tags].downcase,
+      description: params[:description].downcase,
+      obj: params[:obj].downcase,
+      user_id: params[:user_id].downcase
+    )
     if @game.save
       render :json => @game
     else
-      render :json => { :errors => @game.errors.full_messages }
+      render :json => { :errors => @game.errors.full_messages }, status: 406
     end
   end
 
-  # this action should be to update the entire game json object, never one part
   def update
+    @game = Game.find_by(id: params[:id])
+
+    @game.name = params[:name].downcase
+    @game.tags = params[:tags].downcase
+    @game.description = params[:description].downcase
+    @game.obj = params[:obj].downcase
+    if @game.save
+      render :json => @game
+    else
+      render :json => { :errors => @savegame.errors.full_messages }, status: 404
+    end
   end
 
   def delete
-  end
-
-  def play
+    @game = Game.find_by(id: params[:id])
+    if @game.nil?
+      render :json => { error: 'game not detected' }, status: 404
+    else
+      render :json => { message: 'game deleted' } if @game.delete
+    end
   end
 
   def search
     @games = []
     games = Game.all
     games.each do |t|
-      @games << t.name if t.tags.include?(params[:tags]) || t.name.include?(params[:tags])
+      @games << t if t.tags.include?(params[:tags].downcase) || t.name.include?(params[:tags].downcase)
     end
     render :json => @games
-    # Right now @games is just the names of the games, we can adjust to send back whatever FE needs
+  end
+
+  def find_user_games
+    user_games = Game.where(user_id: params[:user_id])
+    if user_games.empty?
+      render :json => { error: 'user has no games' }, status: 404
+    else
+      render :json => user_games
+    end
   end
 
   def savegame
     # need to automatically populate user_id and game_id fields
-    @savegame = SaveGame.new(savegame_params)
+    @savegame = SaveGame.new(
+      game_id: params[:game_id],
+      user_id: params[:user_id],
+      obj: params[:obj].downcase
+    )
     if @savegame.save
       render :json => @savegame
     else
@@ -45,20 +76,6 @@ class GamesController < ApplicationController
     end
   end
 
-  def restore
-  end
-
   def welcome
   end
-
-  private
-
-  def savegame_params
-    params.permit(:obj)
-  end
-
-  def create_game_params
-    params.permit(:name, :tags, :description, :user_id, :obj)
-  end
-
 end

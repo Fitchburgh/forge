@@ -11,7 +11,7 @@ class GamesController < ApplicationController
       name: params[:name].downcase,
       tags: params[:tags].downcase,
       description: params[:description].downcase,
-      obj: params[:obj].downcase,
+      obj: params[:obj],
       user_id: params[:user_id].downcase
     )
     if @game.save
@@ -27,7 +27,7 @@ class GamesController < ApplicationController
     @game.name = params[:name].downcase
     @game.tags = params[:tags].downcase
     @game.description = params[:description].downcase
-    @game.obj = params[:obj].downcase
+    @game.obj = params[:obj]
     if @game.save
       render :json => @game
     else
@@ -67,7 +67,7 @@ class GamesController < ApplicationController
     @savegame = SaveGame.new(
       game_id: params[:game_id],
       user_id: params[:user_id],
-      obj: params[:obj].downcase
+      obj: params[:obj]
     )
     if @savegame.save
       render :json => @savegame

@@ -1,7 +1,12 @@
 #
 class UsersController < ApplicationController
   def create
-    @user = User.new(user_params)
+    @user = User.new(
+      username: params[:username].downcase,
+      token: params[:token],
+      uid: params[:uid],
+      google_oauth_data: params[:google_oauth_data]
+    )
     respond_to do |format|
       if @user.save
         format.json { render json: @user }
@@ -9,12 +14,6 @@ class UsersController < ApplicationController
         format.json { render text: 'User not created' }
       end
     end
-  end
-
-  def current_user
-    User.find_by token: params[:token]
-    # add user = to above code then process below.
-    # @user_id = user.id
   end
 
   def login
@@ -26,11 +25,5 @@ class UsersController < ApplicationController
       @user.save
       render :json => @user
     end
-  end
-
-  private
-
-  def user_params
-    params.permit(:username.downcase, :token, :uid, :google_oauth_data)
   end
 end

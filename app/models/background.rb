@@ -1,6 +1,6 @@
 class Background < ApplicationRecord
   belongs_to :user
-  belongs_to :scene
+  belongs_to :game
   validates :obj, :tags, :name, presence: true
 
   def self.find_background_by_input(var, params)

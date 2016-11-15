@@ -23,13 +23,13 @@ ActiveRecord::Schema.define(version: 20161115134039) do
   create_table "backgrounds", force: :cascade do |t|
     t.json     "obj"
     t.integer  "user_id"
-    t.integer  "scene_id"
+    t.integer  "game_id"
     t.boolean  "public",     default: true
     t.string   "name"
     t.json     "tags",       default: "",   null: false
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
-    t.index ["scene_id"], name: "index_backgrounds_on_scene_id", using: :btree
+    t.index ["game_id"], name: "index_backgrounds_on_game_id", using: :btree
     t.index ["user_id"], name: "index_backgrounds_on_user_id", using: :btree
   end
 
@@ -45,13 +45,13 @@ ActiveRecord::Schema.define(version: 20161115134039) do
   create_table "entities", force: :cascade do |t|
     t.json     "obj"
     t.integer  "user_id"
-    t.integer  "scene_id"
+    t.integer  "game_id"
     t.string   "name"
     t.boolean  "public"
     t.json     "tags",       default: "", null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-    t.index ["scene_id"], name: "index_entities_on_scene_id", using: :btree
+    t.index ["game_id"], name: "index_entities_on_game_id", using: :btree
     t.index ["user_id"], name: "index_entities_on_user_id", using: :btree
   end
 
@@ -79,13 +79,13 @@ ActiveRecord::Schema.define(version: 20161115134039) do
   create_table "obstacles", force: :cascade do |t|
     t.json     "obj"
     t.integer  "user_id"
-    t.integer  "scene_id"
+    t.integer  "game_id"
     t.string   "name"
     t.boolean  "public"
     t.json     "tags",       default: "", null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-    t.index ["scene_id"], name: "index_obstacles_on_scene_id", using: :btree
+    t.index ["game_id"], name: "index_obstacles_on_game_id", using: :btree
     t.index ["user_id"], name: "index_obstacles_on_user_id", using: :btree
   end
 
@@ -118,15 +118,15 @@ ActiveRecord::Schema.define(version: 20161115134039) do
     t.datetime "updated_at",        null: false
   end
 
-  add_foreign_key "backgrounds", "scenes"
+  add_foreign_key "backgrounds", "games"
   add_foreign_key "backgrounds", "users"
   add_foreign_key "collaborators", "games"
   add_foreign_key "collaborators", "users"
-  add_foreign_key "entities", "scenes"
+  add_foreign_key "entities", "games"
   add_foreign_key "entities", "users"
   add_foreign_key "games", "users"
   add_foreign_key "maps", "games"
-  add_foreign_key "obstacles", "scenes"
+  add_foreign_key "obstacles", "games"
   add_foreign_key "obstacles", "users"
   add_foreign_key "save_games", "games"
   add_foreign_key "save_games", "users"

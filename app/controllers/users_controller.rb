@@ -31,6 +31,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:username, :token, :uid, :google_oauth_data)
+    params.permit(:username.downcase, :token, :uid, :google_oauth_data)
   end
 end

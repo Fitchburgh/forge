@@ -1,6 +1,6 @@
 class Obstacle < ApplicationRecord
   belongs_to :user
-  belongs_to :scene
+  belongs_to :game
   validates :obj, :tags, :name, presence: true
 
   def self.find_obstacle_by_input(var, params)

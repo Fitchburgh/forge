@@ -16,6 +16,7 @@ class Background < ApplicationRecord
     var = self.new_background(options)
     if var.save
       var
+      status(201)
     else
       halt(404)
     end
@@ -23,7 +24,7 @@ class Background < ApplicationRecord
 
   def self.new_background(options)
     Background.new(
-      obj: options['obj'], user_id: options['user_id'],
+      obj: options['obj'].downcase, user_id: options['user_id'],
       game_id: options['game_id'], name: options['name'].downcase,
       tags: options['tags'].downcase
     )

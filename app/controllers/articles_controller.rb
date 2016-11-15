@@ -2,27 +2,20 @@ require 'pry'
 #
 class ArticlesController < ApplicationController
   def index
-    @backgrounds = Background.all
-    @obstacles = Obstacle.all
-    @entities = Entity.all
-
-    @articles = { 'backgrounds' => @backgrounds, 'obstacles' => @obstacles, 'entities' => @entities }
+    @articles = { 'backgrounds' => Background.all, 'obstacles' => Obstacle.all, 'entities' => Entity.all }
     render :json => @articles
   end
 
   def index_backgrounds
-    @backgrounds = Background.all
-    render :json => @backgrounds
+    render :json => Background.all
   end
 
   def index_obstacles
-    @obstacles = Obstacle.all
-    render :json => @obstacles
+    render :json => Obstacle.all
   end
 
   def index_entities
-    @entities = Entity.all
-    render :json => @entities
+    render :json => Entity.all
   end
 
   def create

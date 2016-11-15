@@ -19,23 +19,9 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    @backgrounds = []
-    backgrounds = Background.all
-    backgrounds.each do |t|
-      @backgrounds << t.name if t.tags.include?(params[:tags]) || t.name.include?(params[:tags])
-    end
-
-    @obstacles = []
-    obstacles = Obstacle.all
-    obstacles.each do |t|
-      @obstacles << t.name if t.tags.include?(params[:tags]) || t.name.include?(params[:tags])
-    end
-
-    @entities = []
-    entities = Entity.all
-    entities.each do |t|
-      @entities << t.name if t.tags.include?(params[:tags]) || t.name.include?(params[:tags])
-    end
+    @backgrounds = Background.find_background_by_input(@backgrounds, params[:tags])
+    @obstacles = Obstacle.find_obstacle_by_input(@obstacles, params[:tags])
+    @entities = Entity.find_entity_by_input(@entities, params[:tags])
 
     @articles = { 'backgrounds' => @backgrounds, 'obstacles' => @obstacles, 'entities' => @entities }
     render :json => @articles

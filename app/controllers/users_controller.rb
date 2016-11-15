@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-        format.json { render json: @user.id }
+        format.json { render json: @user }
       else
         format.json { render text: 'User not created' }
       end
@@ -13,6 +13,8 @@ class UsersController < ApplicationController
 
   def current_user
     User.find_by token: params[:token]
+    # add user = to above code then process below.
+    # @user_id = user.id
   end
 
   def login
@@ -22,7 +24,7 @@ class UsersController < ApplicationController
     else
       @user.token = params[:token]
       @user.save
-      render :json => @user.username
+      render :json => @user
     end
   end
 

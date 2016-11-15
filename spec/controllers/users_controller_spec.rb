@@ -32,14 +32,14 @@ RSpec.describe UsersController do
       end
     end
 
-    # describe 'when given an incorrect user token' do
-    #   it 'renders a status 404 error' do
-    #     expect(User.find_by(token: 'as34')).to have_http_status 404
-    #   end
-    # end
+    describe 'when given an incorrect user token' do
+      it 'renders a status 404 error' do
+        expect(User.find_by(token: 'as34')).to have_http_status 404
+      end
+    end
   end
 
   # describe '#login' do
-  #   
+  #
   # end
 end

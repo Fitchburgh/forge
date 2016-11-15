@@ -64,7 +64,11 @@ class GamesController < ApplicationController
 
   def savegame
     # need to automatically populate user_id and game_id fields
-    @savegame = SaveGame.new(savegame_params)
+    @savegame = SaveGame.new(
+      game_id: params[:game_id],
+      user_id: params[:user_id],
+      obj: params[:obj].downcase
+    )
     if @savegame.save
       render :json => @savegame
     else
@@ -74,11 +78,4 @@ class GamesController < ApplicationController
 
   def welcome
   end
-
-  private
-
-  def savegame_params
-    params.permit(:obj)
-  end
-
 end

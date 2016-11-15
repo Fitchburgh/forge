@@ -4,6 +4,7 @@ require 'pry'
 RSpec.describe GamesController do
   before do
     @user = User.create!(username: 'dude', uid: '256807', token: '89jfa8j4983aj')
+    @game = Game.create!(name: 'aarg', tags: '["pirate", "action"]', user_id: @user.id, obj: '{"gre": "qqqq", {"ooo": "pppp"}}')
   end
 
   let(:name) { 'Shark' }
@@ -46,27 +47,25 @@ RSpec.describe GamesController do
   #   end
   # end
 
-  # describe "#search" do
-  #   it "returns an array of games who's tags or game name include the params" do
-  #     Game.create!(name: 'war game', user_id: @user.id, tags: '["battle", "fighting", "strategy"]')
-  #     Game.create!(name: 'pirate matey', user_id: @user.id, tags: '["pirates", "war", "rpg"]')
-  #     Game.create!(name: 'legend of zelda', user_id: @user.id, tags: '["rpg", "adventure"]')
-  #     Game.create!(name: 'game of life', user_id: @user.id, tags: '["strategy", "blob game"]')
-  #
-  #     @games = []
-  #     Game.all.each do |t|
-  #       @games << t.name if t.tags.include?('war') || t.name.include?('war')
-  #     end
-  #
-  #     expect{ @games.count }.to eq 2
-  #     # You must pass an argument rather than a block to use the provided matcher
-  #   end
-  # end
+  describe "#search" do
+    it "returns an array of games who's tags or game name include the params" do
+      Game.create!(name: 'war game', user_id: @user.id, tags: '["battle", "fighting", "strategy"]')
+      Game.create!(name: 'pirate matey', user_id: @user.id, tags: '["pirates", "war", "rpg"]')
+      Game.create!(name: 'legend of zelda', user_id: @user.id, tags: '["rpg", "adventure"]')
+      Game.create!(name: 'game of life', user_id: @user.id, tags: '["strategy", "blob game"]')
 
-  # describe "#savegame" do
-  #   it "returns the json object saved upon success of saving game" do
-  #     expect{ SaveGame.new(obj: '{"as": fajois, {"fs": "{"r": "ppp"}"}}') }.to eq '{"as": fajois, {"fs": "{"r": "ppp"}"}}'
-  #     # You must pass an argument rather than a block to use the provided matcher
-  #   end
-  # end
+      @games = []
+      Game.all.each do |t|
+        @games << t.name if t.tags.include?('war') || t.name.include?('war')
+      end
+
+      expect(@games.count).to eq 2
+    end
+  end
+
+  describe "#savegame" do
+    it "returns the json object saved upon success of saving game" do
+      expect(@save = SaveGame.create!(game_id: @game.id, user_id: @user.id, obj: '{"as": "fajois", {"fs": "{"r": "ppp"}"}}')).to eq @save
+    end
+  end
 end

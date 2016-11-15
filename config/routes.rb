@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  post 'articles/create'
+
+  patch 'articles/update'
+
+  delete 'articles/delete'
+
+  get 'articles/search'
+
   root to: 'games#welcome'
 
   get 'games/index'

@@ -1,29 +1,27 @@
 require 'rails_helper'
+require 'pry'
 
 RSpec.describe GamesController do
-  let(:name) { 'Shark' }
+  before do
+    @user = User.create!(username: 'dude', uid: '256807', token: '89jfa8j4983aj')
+  end
 
-  # describe "#index" do
-  #   it "returns http success" do
-  #     get :index
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
+  let(:name) { 'Shark' }
 
   describe "#create" do
     describe 'with correct params' do
       it 'creates a new game' do
-        expect{ Game.create(name: name) }.to change{ Game.count }.by(1)
+        expect{ Game.create!(name: name, user_id: @user.id) }.to change{ Game.count }.by(1)
       end
     end
 
     describe 'with incorrect params' do
       it 'does not create a new game' do
-        expect{ Game.create(description: 'Harry Potter rpg') }.to change{ Game.count }
+        expect{ Game.create!(description: 'Harry Potter rpg', user_id: @user.id) }.to raise_error{ ActiveRecord::RecordInvalid }
       end
 
       it 'does not create a new game given no name' do
-        expect{ Game.create(name: nil) }.to change{ Game.count }
+        expect{ Game.create!(name: nil, user_id: @user.id) }.to raise_error{ ActiveRecord::RecordInvalid }
       end
     end
   end
@@ -35,11 +33,11 @@ RSpec.describe GamesController do
   #   end
   # end
 
-  describe "#delete" do
-    it 'deletes a game' do
-      expect{ Game.delete(name: name) }.to change{ Game.count }.by(-1)
-    end
-  end
+  # describe "#delete" do
+  #   it 'deletes a game' do
+  #     expect{ Game.delete(name: name) }.to change{ Game.count }.by(-1)
+  #   end
+  # end
 
   # describe "#play" do
   #   it "returns http success" do
@@ -47,18 +45,28 @@ RSpec.describe GamesController do
   #     expect(response).to have_http_status(:success)
   #   end
   # end
-  #
+
   # describe "#search" do
-  #   it "returns http success" do
-  #     get :search
-  #     expect(response).to have_http_status(:success)
+  #   it "returns an array of games who's tags or game name include the params" do
+  #     Game.create!(name: 'war game', user_id: @user.id, tags: '["battle", "fighting", "strategy"]')
+  #     Game.create!(name: 'pirate matey', user_id: @user.id, tags: '["pirates", "war", "rpg"]')
+  #     Game.create!(name: 'legend of zelda', user_id: @user.id, tags: '["rpg", "adventure"]')
+  #     Game.create!(name: 'game of life', user_id: @user.id, tags: '["strategy", "blob game"]')
+  #
+  #     @games = []
+  #     Game.all.each do |t|
+  #       @games << t.name if t.tags.include?('war') || t.name.include?('war')
+  #     end
+  #
+  #     expect{ @games.count }.to eq 2
+  #     # You must pass an argument rather than a block to use the provided matcher
   #   end
   # end
-  #
+
   # describe "#savegame" do
-  #   it "returns http success" do
-  #     get :savegame
-  #     expect(response).to have_http_status(:success)
+  #   it "returns the json object saved upon success of saving game" do
+  #     expect{ SaveGame.new(obj: '{"as": fajois, {"fs": "{"r": "ppp"}"}}') }.to eq '{"as": fajois, {"fs": "{"r": "ppp"}"}}'
+  #     # You must pass an argument rather than a block to use the provided matcher
   #   end
   # end
 end

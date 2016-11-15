@@ -27,13 +27,13 @@ class ArticlesController < ApplicationController
 
   def create
     if params[:category] == 'background'
-      render json: Background.create_background_article(@background, params)
+      render json: Background.create_background_article(@background, params), status: 201
 
     elsif params[:category] == 'obstacle'
-      render json: Obstacle.create_obstacle_article(@obstacle, params)
+      render json: Obstacle.create_obstacle_article(@obstacle, params), status: 201
 
     elsif params[:category] == 'entity'
-      render json: Entity.create_entity_article(@entity, params)
+      render json: Entity.create_entity_article(@entity, params), status: 201
 
     else
       halt(404)

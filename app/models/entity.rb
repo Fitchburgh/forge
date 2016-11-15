@@ -24,7 +24,7 @@ class Entity < ApplicationRecord
     Entity.new(
       obj: options['obj'].to_s, user_id: options['user_id'],
       game_id: options['game_id'], name: options['name'].downcase,
-      tags: options['tags'].downcase.to_s, public: options['public']
+      tags: options['tags'].to_s.downcase, public: options['public']
     )
   end
 end

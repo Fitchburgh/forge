@@ -35,7 +35,7 @@ Scene.create(
 Background.create(
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
-  scene_id: 1,
+  game_id: 1,
   public: true,
   name: 'Sky',
   tags: "['blue', 'sky']"
@@ -44,7 +44,7 @@ Background.create(
 Background.create(
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
-  scene_id: 1,
+  game_id: 1,
   public: true,
   name: 'Potter',
   tags: "['Potter', 'sky']"
@@ -53,7 +53,7 @@ Background.create(
 Obstacle.create(
   obj: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
-  scene_id: 1,
+  game_id: 1,
   public: true,
   name: 'tree',
   tags: '[1, 2, 3, 4]'
@@ -62,7 +62,7 @@ Obstacle.create(
 Obstacle.create(
   obj: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
-  scene_id: 1,
+  game_id: 1,
   public: true,
   name: 'tree',
   tags: '[bob, oak, wood]'
@@ -72,7 +72,7 @@ Obstacle.create(
 Entity.create(
   obj: "{'a': 'b', 'c': 'd' {'e': 'f', 'g' {'fun' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
-  scene_id: 1,
+  game_id: 1,
   public: false,
   name: 'Old Hag',
   tags: "['guns', 'roses']"

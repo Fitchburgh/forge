@@ -1,6 +1,30 @@
 require 'pry'
 #
 class ArticlesController < ApplicationController
+  def index
+    @backgrounds = Background.all
+    @obstacles = Obstacle.all
+    @entities = Entity.all
+
+    @articles = { 'backgrounds' => @backgrounds, 'obstacles' => @obstacles, 'entities' => @entities }
+    render :json => @articles
+  end
+
+  def index_backgrounds
+    @backgrounds = Background.all
+    render :json => @backgrounds
+  end
+
+  def index_obstacles
+    @obstacles = Obstacle.all
+    render :json => @obstacles
+  end
+
+  def index_entities
+    @entities = Entity.all
+    render :json => @entities
+  end
+
   def create
     if params[:category] == 'background'
       render json: Background.create_background_article(@background, params)

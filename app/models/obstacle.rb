@@ -22,8 +22,8 @@ class Obstacle < ApplicationRecord
 
   def self.new_obstacle(options)
     Obstacle.new(
-      obj: options['obj'].downcase, user_id: options['user_id'].downcase,
-      game_id: options['game_id'].downcase, name: options['name'].downcase,
+      obj: options['obj'].downcase, user_id: options['user_id'],
+      game_id: options['game_id'], name: options['name'].downcase,
       tags: options['tags'].downcase
     )
   end

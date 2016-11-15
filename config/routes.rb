@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'articles/index'
+
+  get 'articles/backgrounds' => 'articles#index_backgrounds'
+
+  get 'articles/obstacles' => 'articles#index_obstacles'
+
+  get 'articles/entities' => 'articles#index_entities'
+
   post 'articles/create'
 
   patch 'articles/update'

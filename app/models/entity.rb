@@ -16,7 +16,7 @@ class Entity < ApplicationRecord
     if var.save
       var
     else
-      halt(404)
+      var.errors.full_messages
     end
   end
 

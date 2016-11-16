@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  post 'scenes/create'
+
+  get 'scenes/index'
+
+  get 'scenes/search'
+
+  post 'maps/create'
+
+  get 'maps/index'
+
+  get 'maps/search'
+
   get 'articles/index'
 
   get 'articles/backgrounds' => 'articles#index_backgrounds'

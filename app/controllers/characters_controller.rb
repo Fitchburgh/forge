@@ -1,3 +1,5 @@
+require 'pry'
+
 class CharactersController < ApplicationController
   def index
     @characters = Character.where(user_id: params[:user_id])
@@ -46,6 +48,22 @@ class CharactersController < ApplicationController
       end
     else
       render :json => { error: 'character not detected' }, status: 404
+    end
+  end
+
+  def update_current_character
+    @character = Character.find_by(id: params[:id])
+    if !@character.nil?
+      @characters = Character.where.not(id: params[:id])
+      @characters.each do |char|
+        char.current = false
+        char.save!
+      end
+      @character.current = true
+      @character.save!
+      render json: @character
+    else
+      render :json => { error: 'character does not exist' }, status: 404
     end
   end
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'characters/index'
   get 'characters/current_character'
   post 'characters/create'
+  patch 'characters/update_current_character'
   put 'characters/update'
   delete 'characters/delete'
 

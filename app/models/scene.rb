@@ -13,7 +13,7 @@ class Scene < ApplicationRecord
   end
 
   def self.new_scene(options)
-    Scene.new(
+    Scene.create(
       obj: options['obj'], map_id: options['map_id'], game_id: options['game_id'],
       description: options['description'], name: options['name'].downcase
     )

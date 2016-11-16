@@ -8,7 +8,7 @@ class EntitiesController < ApplicationController
     if @entity.save
       render json: @entity, status: 201
     else
-      render :json => { @entity.errors.full_messages }, status: 400
+      render :json => { errors: @entity.errors.full_messages }, status: 400
     end
   end
 

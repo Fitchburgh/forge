@@ -9,7 +9,7 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(
       name: params[:name].downcase,
-      tags: params[:tags].downcase,
+      tags: params[:tags].to_s.downcase,
       description: params[:description].downcase,
       obj: params[:obj],
       user_id: params[:user_id].downcase

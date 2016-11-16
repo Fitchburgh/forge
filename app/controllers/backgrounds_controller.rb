@@ -8,7 +8,7 @@ class BackgroundsController < ApplicationController
     if @background.save
       render json: @background, status: 201
     else
-      render :json => { @background.errors.full_messages }, status: 400
+      render :json => { errors: @background.errors.full_messages }, status: 400
     end
   end
 

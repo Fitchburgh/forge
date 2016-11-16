@@ -12,9 +12,9 @@ class CharactersController < ApplicationController
   def create
     @character = Character.new character_params
     if @character.save
-      render :json => { @character }, status: 201
+      render json: @character
     else
-      render :json => { @character.errors.full_messages }, status: 400
+      render :json => { errors: @character.errors.full_messages }, status: 400
     end
   end
 

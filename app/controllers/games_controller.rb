@@ -37,10 +37,14 @@ class GamesController < ApplicationController
 
   def delete
     @game = Game.find_by(id: params[:id])
-    if @game.nil?
-      render :json => { error: 'game not detected' }, status: 404
+    if !@game.nil?
+      if @game.user_id == params[:user_id].to_i
+        render :json => { message: 'game deleted' } if @game.delete
+      else
+        render :json => { error: 'only the creator can delete this game' }, status: 400
+      end
     else
-      render :json => { message: 'game deleted' } if @game.delete
+      render :json => { error: 'game not detected' }, status: 404
     end
   end
 

@@ -1,6 +1,9 @@
 require 'pry'
 #
 class GamesController < ApplicationController
+  # Redis for : create, update, delete - set, set, delete
+  # render json: Redis.current.get('keyname') to return
+
   def index
     @all_games = Game.all
     render json: @all_games
@@ -12,10 +15,13 @@ class GamesController < ApplicationController
       tags: params[:tags].to_s.downcase,
       description: params[:description].downcase,
       obj: params[:obj],
-      user_id: params[:user_id].downcase
+      user_id: params[:user_id]
     )
     if @game.save
-      render json: @game
+      binding.pry
+      Redis.current.set(@game.name, @game.attributes.to_json)
+      Redis.expire @game.name 60*60*4*30
+      render :json => { game: [@game.id, @game.name, @game.tags, @game.description, @game.user_id] }
     else
       render :json => { :errors => @game.errors.full_messages }, status: 400
     end
@@ -29,7 +35,7 @@ class GamesController < ApplicationController
     @game.description = params[:description].downcase
     @game.obj = params[:obj]
     if @game.save
-      render json: @game
+      render :json => { game: [@game.id, @game.name, @game.tags, @game.description, @game.user_id] }
     else
       render :json => { :errors => @savegame.errors.full_messages }, status: 404
     end

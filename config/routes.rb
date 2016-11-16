@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   get 'characters/search'
 
-  get 'characters/create'
+  post 'characters/create'
 
-  get 'characters/delete'
+  delete 'characters/delete'
 
-  get 'characters/update'
+  put 'characters/update'
 
   post 'scenes/create'
 

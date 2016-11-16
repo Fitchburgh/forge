@@ -1,71 +1,45 @@
 Rails.application.routes.draw do
-  get 'characters/index'
-
-  get 'characters/current_character'
-
-  post 'characters/create'
-
-  delete 'characters/delete'
-
-  put 'characters/update'
-
-  post 'scenes/create'
-
-  get 'scenes/index'
-
-  get 'scenes/search'
-
-  post 'maps/create'
-
-  get 'maps/index'
-
-  get 'maps/search'
-
   get 'articles/index'
-
   get 'articles/search'
 
   get 'backgrounds/index'
-
-  get 'obstacles/index'
-
-  get 'entities/index'
-
   post 'backgrounds/create'
-
-  post 'obstacles/create'
-
-  post 'entities/create'
-
   put 'backgrounds/update'
-
-  put 'obstacles/update'
-
-  put 'entities/update'
-
   delete 'backgrounds/delete'
 
-  delete 'obstacles/delete'
+  get 'characters/index'
+  get 'characters/current_character'
+  post 'characters/create'
+  put 'characters/update'
+  delete 'characters/delete'
 
+  get 'entities/index'
+  post 'entities/create'
+  put 'entities/update'
   delete 'entities/delete'
 
   root to: 'games#welcome'
-
   get 'games/index'
-
+  get 'games/search'
+  get 'games/user-games' => 'games#find_user_games'
   post 'games/create'
-
+  post 'games/savegame'
   put 'games/update'
-
   delete 'games/delete'
 
-  get 'games/search'
+  get 'maps/index'
+  get 'maps/search'
+  post 'maps/create'
 
-  get 'games/user-games' => 'games#find_user_games'
+  get 'obstacles/index'
+  post 'obstacles/create'
+  put 'obstacles/update'
+  delete 'obstacles/delete'
 
-  post 'games/savegame'
+  get 'scenes/index'
+  get 'scenes/search'
+  post 'scenes/create'
 
   post 'users/create'
-
   patch 'users/login'
 end

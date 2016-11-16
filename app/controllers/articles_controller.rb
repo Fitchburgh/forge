@@ -29,7 +29,7 @@ class ArticlesController < ApplicationController
       render json: Entity.create_entity_article(@entity, params), status: 201
 
     else
-      halt(404)
+      render :json => { message: 'category not found' }, status: 400
     end
   end
 
@@ -50,7 +50,7 @@ class ArticlesController < ApplicationController
           render :json => { :errors => @background.errors.full_messages }, status: 404
         end
       else
-        render :json => { message: 'background is not found' }
+        render :json => { message: 'background is not found' }, status: 400
       end
     elsif params[:category] == 'obstacle'
       @obstacle = Obstacle.find_by(id: params[:id])
@@ -68,7 +68,7 @@ class ArticlesController < ApplicationController
           render :json => { :errors => @obstacle.errors.full_messages }, status: 404
         end
       else
-        render :json => { message: 'obstacle is not found' }
+        render :json => { message: 'obstacle is not found' }, status: 400
       end
     elsif params[:category] == 'entity'
       @entity = Entity.find_by(id: params[:id])
@@ -86,10 +86,10 @@ class ArticlesController < ApplicationController
           render :json => { :errors => @entity.errors.full_messages }, status: 404
         end
       else
-        render :json => { message: 'entity is not found' }
+        render :json => { message: 'entity is not found' }, status: 400
       end
     else
-      render :json => { message: 'category not found' }
+      render :json => { message: 'category not found' }, status: 400
     end
   end
 
@@ -116,7 +116,7 @@ class ArticlesController < ApplicationController
         render :json => { message: 'entity deleted' } if @entity.delete
       end
     else
-      halt(404)
+      render :json => { message: 'category not found' }, status: 400
     end
   end
 

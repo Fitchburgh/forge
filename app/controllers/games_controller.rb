@@ -17,7 +17,7 @@ class GamesController < ApplicationController
     if @game.save
       render :json => @game
     else
-      render :json => { :errors => @game.errors.full_messages }, status: 406
+      render :json => { :errors => @game.errors.full_messages }, status: 400
     end
   end
 

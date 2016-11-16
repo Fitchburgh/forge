@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get 'characters/search'
+  get 'characters/index'
+
+  get 'characters/current_character'
 
   post 'characters/create'
 

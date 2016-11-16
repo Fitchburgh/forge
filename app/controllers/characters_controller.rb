@@ -1,11 +1,12 @@
 class CharactersController < ApplicationController
   def index
     @characters = Character.where(user_id: params[:user_id])
-    render :json => @characters
+    render json: @characters
   end
 
   def current_character
-
+    @current_character = Character.where(user_id: params[:user_id], current: true)
+    render json: @current_character
   end
 
   def create

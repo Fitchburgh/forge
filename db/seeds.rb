@@ -351,6 +351,20 @@ Entity.create!(
 Character.create!(
   user_id: 1,
   obj: '{name: guy, movements {up: {blah}, down: {blah}, swim: {blah}}}',
-  name: 'Tacopies',
+  name: 'tacopies',
   current: true
+)
+
+Character.create!(
+  user_id: 1,
+  obj: '{I am the almighty object}',
+  name: 'churrocakes',
+  current: false
+)
+
+Character.create!(
+  user_id: 1,
+  obj: '{object: {object: key of key}}',
+  name: 'burritobrownies',
+  current: false
 )

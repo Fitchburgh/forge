@@ -20,7 +20,7 @@ class GamesController < ApplicationController
     if @game.save
       binding.pry
       Redis.current.set(@game.name, @game.attributes.to_json)
-      Redis.expire @game.name 60*60*4*30
+      Redis.expire @game.name 60*60*24*30
       render :json => { game: [@game.id, @game.name, @game.tags, @game.description, @game.user_id] }
     else
       render :json => { :errors => @game.errors.full_messages }, status: 400

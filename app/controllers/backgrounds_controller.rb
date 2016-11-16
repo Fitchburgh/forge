@@ -13,39 +13,31 @@ class BackgroundsController < ApplicationController
   end
 
   def update
-    if params[:category] == 'background'
-      @background = Background.find_by(id: params[:id])
-      if !@background.nil?
+    @background = Background.find_by(id: params[:id])
+    if !@background.nil?
 
-        @background.name = params[:name].downcase
-        @background.tags = params[:tags].downcase
-        @background.user_id = params[:user_id]
-        @background.game_id = params[:game_id]
-        @background.obj = params[:obj]
+      @background.name = params[:name].downcase
+      @background.tags = params[:tags].downcase
+      @background.user_id = params[:user_id]
+      @background.game_id = params[:game_id]
+      @background.obj = params[:obj]
 
-        if @background.save
-          render :json => @background
-        else
-          render :json => { :errors => @background.errors.full_messages }, status: 404
-        end
+      if @background.save
+        render :json => @background
       else
-        render :json => { message: 'background is not found' }, status: 400
+        render :json => { :errors => @background.errors.full_messages }, status: 404
       end
     else
-      render :json => { message: 'category not found' }, status: 400
+      render :json => { message: 'background is not found' }, status: 400
     end
   end
 
   def delete
-    if params[:category] == 'background'
-      @background = Background.find_by(id: params[:id])
-      if @background.nil?
-        render :json => { error: 'background not detected' }, status: 404
-      else
-        render :json => { message: 'background deleted' } if @background.delete
-      end
+    @background = Background.find_by(id: params[:id])
+    if @background.nil?
+      render :json => { error: 'background not detected' }, status: 404
     else
-      render :json => { message: 'category not found' }, status: 400
+      render :json => { message: 'background deleted' } if @background.delete
     end
   end
 end

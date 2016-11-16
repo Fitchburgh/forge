@@ -86,6 +86,7 @@ Map.create(
 
 Scene.create(
   map_id: 1,
+  game_id: 1,
   name: 'scene 1',
   description: 'scene for map 1',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -93,6 +94,7 @@ Scene.create(
 
 Scene.create(
   map_id: 1,
+  game_id: 1,
   name: 'scene 2',
   description: 'scene for map 1',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -100,6 +102,7 @@ Scene.create(
 
 Scene.create(
   map_id: 1,
+  game_id: 1,
   name: 'scene 3',
   description: 'scene for map 1',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -107,6 +110,7 @@ Scene.create(
 
 Scene.create(
   map_id: 1,
+  game_id: 1,
   name: 'scene 4',
   description: 'scene for map 1',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -114,6 +118,7 @@ Scene.create(
 
 Scene.create(
   map_id: 1,
+  game_id: 1,
   name: 'scene 5',
   description: 'scene for map 1',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -121,6 +126,7 @@ Scene.create(
 
 Scene.create(
   map_id: 1,
+  game_id: 1,
   name: 'scene 6',
   description: 'scene for map 1',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -128,6 +134,7 @@ Scene.create(
 
 Scene.create(
   map_id: 1,
+  game_id: 1,
   name: 'scene 7',
   description: 'scene for map 1',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -135,6 +142,7 @@ Scene.create(
 
 Scene.create(
   map_id: 1,
+  game_id: 1,
   name: 'scene 8',
   description: 'scene for map 1',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -142,6 +150,7 @@ Scene.create(
 
 Scene.create(
   map_id: 1,
+  game_id: 1,
   name: 'scene 9',
   description: 'scene for map 1',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -149,6 +158,7 @@ Scene.create(
 
 Scene.create(
   map_id: 2,
+  game_id: 1,
   name: 'scene 11',
   description: 'scene for map 2',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -156,6 +166,7 @@ Scene.create(
 
 Scene.create(
   map_id: 2,
+  game_id: 1,
   name: 'scene 12',
   description: 'scene for map 2',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -163,6 +174,7 @@ Scene.create(
 
 Scene.create(
   map_id: 2,
+  game_id: 1,
   name: 'scene 13',
   description: 'scene for map 2',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -170,6 +182,7 @@ Scene.create(
 
 Scene.create(
   map_id: 2,
+  game_id: 1,
   name: 'scene 14',
   description: 'scene for map 2',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -177,6 +190,7 @@ Scene.create(
 
 Scene.create(
   map_id: 2,
+  game_id: 1,
   name: 'scene 15',
   description: 'scene for map 2',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -184,6 +198,7 @@ Scene.create(
 
 Scene.create(
   map_id: 2,
+  game_id: 1,
   name: 'scene 16',
   description: 'scene for map 2',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -191,6 +206,7 @@ Scene.create(
 
 Scene.create(
   map_id: 2,
+  game_id: 1,
   name: 'scene 17',
   description: 'scene for map 2',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -198,6 +214,7 @@ Scene.create(
 
 Scene.create(
   map_id: 2,
+  game_id: 1,
   name: 'scene 18',
   description: 'scene for map 2',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
@@ -205,6 +222,7 @@ Scene.create(
 
 Scene.create(
   map_id: 2,
+  game_id: 1,
   name: 'scene 19',
   description: 'scene for map 2',
   obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",

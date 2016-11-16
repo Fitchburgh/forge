@@ -22,4 +22,12 @@ class Entity < ApplicationRecord
     tags: options[:tags].to_s.downcase, public: options[:public]
     )
   end
+
+  def self.update_entity(var, params)
+    var.name = params[:name].downcase
+    var.tags = params[:tags].downcase
+    var.user_id = params[:user_id]
+    var.game_id = params[:game_id]
+    var.obj = params[:obj]
+  end
 end

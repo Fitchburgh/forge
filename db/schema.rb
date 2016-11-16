@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115134039) do
+ActiveRecord::Schema.define(version: 20161116142449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(version: 20161115134039) do
     t.datetime "updated_at",                null: false
     t.index ["game_id"], name: "index_backgrounds_on_game_id", using: :btree
     t.index ["user_id"], name: "index_backgrounds_on_user_id", using: :btree
+  end
+
+  create_table "characters", force: :cascade do |t|
+    t.integer  "user_id"
+    t.json     "obj"
+    t.string   "name"
+    t.boolean  "current"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_characters_on_user_id", using: :btree
   end
 
   create_table "collaborators", force: :cascade do |t|
@@ -120,6 +130,7 @@ ActiveRecord::Schema.define(version: 20161115134039) do
 
   add_foreign_key "backgrounds", "games"
   add_foreign_key "backgrounds", "users"
+  add_foreign_key "characters", "users"
   add_foreign_key "collaborators", "games"
   add_foreign_key "collaborators", "users"
   add_foreign_key "entities", "games"

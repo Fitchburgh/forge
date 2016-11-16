@@ -347,3 +347,10 @@ Entity.create!(
   name: 'tacopies',
   tags: "[stinky, man, short]"
 )
+
+Character.create!(
+  user_id: 1,
+  obj: '{name: guy, movements {up: {blah}, down: {blah}, swim: {blah}}}',
+  name: 'Tacopies',
+  current: true
+)

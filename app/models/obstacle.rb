@@ -29,5 +29,6 @@ class Obstacle < ApplicationRecord
     var.user_id = params[:user_id]
     var.game_id = params[:game_id]
     var.obj = params[:obj]
+    var.public = params[:public]
   end
 end

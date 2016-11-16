@@ -15,7 +15,7 @@ class ObstaclesController < ApplicationController
   def update
     @obstacle = Obstacle.find_by(id: params[:id])
     if !@obstacle.nil?
-      @obstacle.update_obstacle(@obstacle, params)
+      Obstacle.update_obstacle(@obstacle, params)
       if @obstacle.save
         render :json => @obstacle
       else

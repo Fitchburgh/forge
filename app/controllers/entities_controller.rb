@@ -15,7 +15,7 @@ class EntitiesController < ApplicationController
   def update
     @entity = Entity.find_by(id: params[:id])
     if !@entity.nil?
-      @entity.update_entity(@entity, params)
+      Entity.update_entity(@entity, params)
       if @entity.save
         render :json => @entity
       else

@@ -10,7 +10,7 @@ class CharactersController < ApplicationController
   end
 
   def create
-    @character = Character.new character_params
+    @character = Character.create_character(params)
     if @character.save
       render json: @character
     else
@@ -47,11 +47,5 @@ class CharactersController < ApplicationController
     else
       render :json => { error: 'character not detected' }, status: 404
     end
-  end
-
-  private
-
-  def character_params
-    params.permit(:name, :user_id, :current, :obj)
   end
 end

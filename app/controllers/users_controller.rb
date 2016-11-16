@@ -7,12 +7,10 @@ class UsersController < ApplicationController
       uid: params[:uid],
       google_oauth_data: params[:google_oauth_data]
     )
-    respond_to do |format|
-      if @user.save
-        format.json { render json: @user }
-      else
-        format.json { render text: 'User not created' }
-      end
+    if @user.save
+      render json: @user
+    else
+      render :json => { error: 'User not created' }, status: 400
     end
   end
 

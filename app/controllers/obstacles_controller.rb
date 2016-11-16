@@ -8,7 +8,7 @@ class ObstaclesController < ApplicationController
     if @obstacle.save
       render json: @obstacle, status: 201
     else
-      render json: @obstacle.errors.full_messages, status: 400
+      render :json => { @obstacle.errors.full_messages }, status: 400
     end
   end
 
@@ -19,7 +19,7 @@ class ObstaclesController < ApplicationController
       if @obstacle.save
         render :json => @obstacle
       else
-        render :json => { :errors => @obstacle.errors.full_messages }, status: 404
+        render :json => { errors: @obstacle.errors.full_messages }, status: 404
       end
     else
       render :json => { message: 'obstacle is not found' }, status: 400

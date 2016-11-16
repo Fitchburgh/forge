@@ -10,11 +10,11 @@ class CharactersController < ApplicationController
   end
 
   def create
-    @character = Character.new character_params
+    @character = Character.create_character(params)
     if @character.save
-      render json: @character, status: 201
+      render json: @character
     else
-      render json: @character.errors.full_messages, status: 400
+      render :json => { errors: @character.errors.full_messages }, status: 400
     end
   end
 
@@ -32,11 +32,20 @@ class CharactersController < ApplicationController
   end
 
   def update
-  end
-
-  private
-
-  def character_params
-    params.permit(:name, :user_id, :current, :obj)
+    @character = Character.find_by(id: params[:id])
+    if !@character.nil?
+      if @character.user_id == params[:user_id].to_i
+        Character.update_character(@character, params)
+        if @character.save
+          render json: @character
+        else
+          render :json => { errors: @character.errors.full_messages }, status: 404
+        end
+      else
+        render :json => { message: 'only the creator can edit this character' }, status: 400
+      end
+    else
+      render :json => { error: 'character not detected' }, status: 404
+    end
   end
 end

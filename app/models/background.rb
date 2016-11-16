@@ -18,9 +18,17 @@ class Background < ApplicationRecord
 
   def self.new_background(options)
     Background.new(
-    obj: options['obj'], user_id: options['user_id'],
-    game_id: options['game_id'], name: options['name'].downcase,
-    tags: options['tags'].to_s.downcase, public: options['public']
+    obj: options[:obj], user_id: options[:user_id],
+    game_id: options[:game_id], name: options[:name].downcase,
+    tags: options[:tags].to_s.downcase, public: options[:public]
   )
+  end
+
+  def self.update_background(var, params)
+    var.name = params[:name].downcase
+    var.tags = params[:tags].downcase
+    var.user_id = params[:user_id]
+    var.game_id = params[:game_id]
+    var.obj = params[:obj]
   end
 end

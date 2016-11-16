@@ -15,13 +15,7 @@ class BackgroundsController < ApplicationController
   def update
     @background = Background.find_by(id: params[:id])
     if !@background.nil?
-
-      @background.name = params[:name].downcase
-      @background.tags = params[:tags].downcase
-      @background.user_id = params[:user_id]
-      @background.game_id = params[:game_id]
-      @background.obj = params[:obj]
-
+      @background.update_background(@background, params)
       if @background.save
         render :json => @background
       else

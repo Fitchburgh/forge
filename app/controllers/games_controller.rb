@@ -15,7 +15,7 @@ class GamesController < ApplicationController
       user_id: params[:user_id].downcase
     )
     if @game.save
-      render :json => @game
+      render json: @game
     else
       render :json => { :errors => @game.errors.full_messages }, status: 400
     end
@@ -29,7 +29,7 @@ class GamesController < ApplicationController
     @game.description = params[:description].downcase
     @game.obj = params[:obj]
     if @game.save
-      render :json => @game
+      render json: @game
     else
       render :json => { :errors => @savegame.errors.full_messages }, status: 404
     end
@@ -56,16 +56,16 @@ class GamesController < ApplicationController
         @games << {id: t.id, name: t.name, tags: t.tags, user_id: t.user_id, description: t.description, created_at: t.created_at}
       end
     end
-    render :json => @games
+    render json: @games
   end
 
   def find_user_games
     user_games = Game.where(user_id: params[:user_id])
     if user_games.empty?
-      render :json => []
+      render json: []
       # render :json => { error: 'user has no games' }, status: 404
     else
-      render :json => user_games
+      render json: user_games
     end
   end
 
@@ -77,9 +77,9 @@ class GamesController < ApplicationController
       obj: params[:obj]
     )
     if @savegame.save
-      render :json => @savegame
+      render json: @savegame
     else
-      render :json => { :errors => @savegame.errors.full_messages }
+      render :json => { :errors => @savegame.errors.full_messages }, status: 400
     end
   end
 

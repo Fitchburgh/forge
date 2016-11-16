@@ -8,7 +8,7 @@ class BackgroundsController < ApplicationController
     if @background.save
       render json: @background, status: 201
     else
-      render json: @background.errors.full_messages, status: 400
+      render :json => { @background.errors.full_messages }, status: 400
     end
   end
 
@@ -17,9 +17,9 @@ class BackgroundsController < ApplicationController
     if !@background.nil?
       Background.update_background(@background, params)
       if @background.save
-        render :json => @background
+        render json: @background
       else
-        render :json => { :errors => @background.errors.full_messages }, status: 404
+        render :json => { errors: @background.errors.full_messages }, status: 404
       end
     else
       render :json => { message: 'background is not found' }, status: 400

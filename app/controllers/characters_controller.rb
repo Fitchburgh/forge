@@ -14,7 +14,7 @@ class CharactersController < ApplicationController
   def create
     @character = Character.create_character(params)
     if @character.save
-      render json: @character
+      render js: @character
     else
       render :json => { errors: @character.errors.full_messages }, status: 400
     end

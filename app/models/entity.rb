@@ -13,11 +13,6 @@ class Entity < ApplicationRecord
 
   def self.create_entity_article(var, options)
     var = self.new_entity(options)
-    if var.save
-      var
-    else
-      var.errors.full_messages
-    end
   end
 
   def self.new_entity(options)

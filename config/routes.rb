@@ -13,19 +13,31 @@ Rails.application.routes.draw do
 
   get 'articles/index'
 
-  get 'articles/backgrounds' => 'articles#index_backgrounds'
-
-  get 'articles/obstacles' => 'articles#index_obstacles'
-
-  get 'articles/entities' => 'articles#index_entities'
-
-  post 'articles/create'
-
-  patch 'articles/update'
-
-  delete 'articles/delete'
-
   get 'articles/search'
+
+  get 'backgrounds/index'
+
+  get 'obstacles/index'
+
+  get 'entities/index'
+
+  post 'backgrounds/create'
+
+  post 'obstacles/create'
+
+  post 'entities/create'
+
+  put 'backgrounds/update'
+
+  put 'obstacles/update'
+
+  put 'entities/update'
+
+  delete 'backgrounds/delete'
+
+  delete 'obstacles/delete'
+
+  delete 'entities/delete'
 
   root to: 'games#welcome'
 

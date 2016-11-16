@@ -13,11 +13,6 @@ class Obstacle < ApplicationRecord
 
   def self.create_obstacle_article(var, options)
     var = self.new_obstacle(options)
-    if var.save
-      var
-    else
-      var.errors.full_messages
-    end
   end
 
   def self.new_obstacle(options)

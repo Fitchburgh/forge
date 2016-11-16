@@ -14,11 +14,6 @@ class Background < ApplicationRecord
 
   def self.create_background_article(var, options)
     var = self.new_background(options)
-    if var.save
-      var
-    else
-      var.errors.full_messages
-    end
   end
 
   def self.new_background(options)

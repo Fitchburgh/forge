@@ -17,12 +17,12 @@ class Entity < ApplicationRecord
 
   def self.new_entity(options)
     Entity.new(
-    obj: options[:obj],
-    user_id: options[:user_id],
-    game_id: options[:game_id],
-    public: options[:public],
-    name: options[:name].downcase,
-    tags: options[:tags].to_s.downcase
+      obj: options[:obj],
+      user_id: options[:user_id],
+      game_id: options[:game_id],
+      public: options[:public],
+      name: options[:name].downcase,
+      tags: options[:tags].to_s.downcase
     )
   end
 

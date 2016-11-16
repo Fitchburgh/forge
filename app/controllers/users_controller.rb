@@ -1,4 +1,3 @@
-#
 class UsersController < ApplicationController
   def create
     @user = User.new(
@@ -8,10 +7,17 @@ class UsersController < ApplicationController
       google_oauth_data: params[:google_oauth_data]
     )
     if @user.save
+      User.search_and_save_user(@user)
       render json: @user
     else
       render :json => { error: 'User not created' }, status: 400
     end
+    # if Redis.current.get(@user).nil?
+    #   User.search_and_save_user(@user)
+    # else
+    #   binding.pry
+    #   User.find_user
+    # end
   end
 
   def login

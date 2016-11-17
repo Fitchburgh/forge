@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   put 'entities/update'
   delete 'entities/delete'
 
-  root to: 'games#welcome'
+  root 'games#welcome'
   get 'games/index'
   get 'games/search'
   get 'games/user-games' => 'games#find_user_games'

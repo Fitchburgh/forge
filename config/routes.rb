@@ -20,10 +20,8 @@ Rails.application.routes.draw do
   delete 'entities/delete'
 
   root to: 'games#welcome'
-  get 'games/index'
   get 'games/search'
   get 'games/user-games' => 'games#find_user_games'
-  get 'games/load'
   post 'games/create'
   post 'games/savegame'
   put 'games/update'
@@ -37,6 +35,9 @@ Rails.application.routes.draw do
   post 'obstacles/create'
   put 'obstacles/update'
   delete 'obstacles/delete'
+
+  get 'prelogin_users/index'
+  get 'prelogin_users/load'
 
   get 'scenes/index'
   get 'scenes/search'

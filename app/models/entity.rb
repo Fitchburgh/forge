@@ -15,7 +15,7 @@ class Entity < ApplicationRecord
     var = self.new_entity(options)
   end
 
-  def self.new_entity(options)
+  def self.new_entity(options, auth_id)
     Entity.new(
       obj: options[:obj],
       user_id: auth_id,

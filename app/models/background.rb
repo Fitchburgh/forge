@@ -13,7 +13,7 @@ class Background < ApplicationRecord
   end
 
   def self.create_background_article(var, options, auth_id)
-    var = self.new_background(options)
+    var = self.new_background(options, auth_id)
   end
 
   def self.new_background(options, auth_id)

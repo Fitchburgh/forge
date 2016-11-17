@@ -1,4 +1,6 @@
+require 'pry'
 class UsersController < ApplicationController
+  skip_before_action :check_auth
   def create
     @user = User.new(
       username: params[:username].downcase,

@@ -18,7 +18,6 @@ class GamesController < ApplicationController
       user_id: params[:user_id]
     )
     if @game.save
-      binding.pry
       Redis.current.set(@game.name, @game.attributes.to_json)
       render :json => { game: [@game.id, @game.name, @game.tags, @game.description, @game.user_id] }
     else

@@ -12,7 +12,7 @@ class Entity < ApplicationRecord
   end
 
   def self.create_entity_article(var, options, auth_id)
-    var = self.new_entity(options)
+    var = self.new_entity(options, auth_id)
   end
 
   def self.new_entity(options, auth_id)

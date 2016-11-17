@@ -12,7 +12,7 @@ class CharactersController < ApplicationController
   end
 
   def create
-    @character = Character.create_character(params)
+    @character = Character.create_character(params, request.env['HTTP_USER_ID'].to_i)
     if @character.save
       render json: @character
     else
@@ -37,7 +37,7 @@ class CharactersController < ApplicationController
     @character = Character.find_by(id: params[:id])
     if !@character.nil?
       if @character.user_id == request.env['HTTP_USER_ID'].to_i
-        Character.update_character(@character, params)
+        Character.update_character(@character, params, request.env['HTTP_USER_ID'].to_i )
         if @character.save
           render json: @character
         else

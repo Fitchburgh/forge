@@ -15,11 +15,6 @@ ActiveRecord::Schema.define(version: 20161116142449) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "articles", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "backgrounds", force: :cascade do |t|
     t.json     "obj"
     t.integer  "user_id"
@@ -111,11 +106,13 @@ ActiveRecord::Schema.define(version: 20161116142449) do
 
   create_table "scenes", force: :cascade do |t|
     t.integer  "map_id"
+    t.integer  "game_id"
     t.string   "name"
     t.string   "description"
     t.json     "obj"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["game_id"], name: "index_scenes_on_game_id", using: :btree
     t.index ["map_id"], name: "index_scenes_on_map_id", using: :btree
   end
 
@@ -141,5 +138,6 @@ ActiveRecord::Schema.define(version: 20161116142449) do
   add_foreign_key "obstacles", "users"
   add_foreign_key "save_games", "games"
   add_foreign_key "save_games", "users"
+  add_foreign_key "scenes", "games"
   add_foreign_key "scenes", "maps"
 end

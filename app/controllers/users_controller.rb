@@ -1,4 +1,3 @@
-require 'pry'
 class UsersController < ApplicationController
   skip_before_action :check_auth
   def create

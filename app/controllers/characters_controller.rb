@@ -2,12 +2,12 @@ require 'pry'
 
 class CharactersController < ApplicationController
   def index
-    @characters = Character.where(user_id: request.env['HTTP_USER_ID'])
+    @characters = Character.where(user_id: request.env['HTTP_USER_ID'].to_i)
     render json: @characters
   end
 
   def current_character
-    @current_character = Character.where(user_id: request.env['HTTP_USER_ID'], current: true)
+    @current_character = Character.where(user_id: request.env['HTTP_USER_ID'].to_i, current: true)
     render json: @current_character
   end
 

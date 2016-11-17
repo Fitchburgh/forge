@@ -19,7 +19,7 @@ class Background < ApplicationRecord
   def self.new_background(options)
     Background.new(
       obj: options[:obj],
-      user_id: options[:user_id],
+      user_id: request.env['HTTP_USER_ID'].to_i,
       game_id: options[:game_id],
       public: options[:public],
       name: options[:name].downcase,
@@ -29,7 +29,7 @@ class Background < ApplicationRecord
 
   def self.update_background(var, params)
     var.obj = params[:obj]
-    var.user_id = params[:user_id]
+    var.user_id = request.env['HTTP_USER_ID'].to_i
     var.game_id = params[:game_id]
     var.public = params[:public]
     var.name = params[:name].downcase

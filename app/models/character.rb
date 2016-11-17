@@ -4,7 +4,7 @@ class Character < ApplicationRecord
 
   def self.create_character(params)
     Character.new(
-      user_id: params[:user_id],
+      user_id: request.env['HTTP_USER_ID'].to_i,
       obj: params['obj'],
       name: params[:name].downcase,
       current: FALSE
@@ -12,7 +12,7 @@ class Character < ApplicationRecord
   end
 
   def self.update_character(var, params)
-    var.user_id = params[:user_id]
+    var.user_id = request.env['HTTP_USER_ID'].to_i
     var.obj = params['obj']
     var.name = params[:name].downcase
     var.current = FALSE

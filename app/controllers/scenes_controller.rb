@@ -11,11 +11,7 @@ class ScenesController < ApplicationController
   end
 
   def search
-    @scene = Scene.find_by(name: params[:name])
-    if @scene.nil
-      render json: 'Scene does not exist', status: 404
-    else
-      render json: @scene
-    end
+    @scenes = Scene.find_scene_by_input(@scenes, params[:name])
+    render json: @scenes
   end
 end

@@ -8,6 +8,7 @@ class MapsController < ApplicationController
     render json: @maps, status: 200
   end
 
+  # not currently working (needs exact match)
   def search
     @map = Map.find_by(name: params[:name])
     if @map.nil?

@@ -15,7 +15,7 @@ class GamesController < ApplicationController
       tags: params[:tags].to_s.downcase,
       description: params[:description].downcase,
       obj: params[:obj],
-      user_id: params[:user_id]
+      user_id: request.env['HTTP_USER_ID']
     )
     if @game.save
       Redis.current.set(@game.name, @game.attributes.to_json)
@@ -50,7 +50,31 @@ class GamesController < ApplicationController
   def delete
     @game = Game.find_by(id: params[:id])
     if !@game.nil?
-      if @game.user_id == params[:user_id].to_i
+      if @game.user_id == request.env['HTTP_USER_ID'].to_i
+        @entities = Entity.where(game_id: @game.id)
+        @entities.each do |e|
+          e.game_id = 0
+          e.save
+        end
+
+        @obstacles = Obstacle.where(game_id: @game.id)
+        @obstacles.each do |o|
+          o.game_id = 0
+          o.save
+        end
+
+        @backgrounds = Background.where(game_id: @game.id)
+        @backgrounds.each do |b|
+          b.game_id = 0
+          b.save
+        end
+
+        Collaborator.delete(Collaborator.where(game_id: @game.id))
+
+        Scene.delete(Scene.where(game_id: @game.id))
+
+        Map.delete(Map.where(game_id: @game.id))
+
         if @game.delete
           Redis.current.del(@game.name)
           render :json => { message: 'game deleted' }
@@ -75,7 +99,7 @@ class GamesController < ApplicationController
   end
 
   def find_user_games
-    user_games = Game.where(user_id: params[:user_id])
+    user_games = Game.where(user_id: request.env['HTTP_USER_ID'])
     if user_games.empty?
       render json: []
       # render :json => { error: 'user has no games' }, status: 404
@@ -88,7 +112,7 @@ class GamesController < ApplicationController
     # need to automatically populate user_id and game_id fields
     @savegame = SaveGame.new(
       game_id: params[:game_id],
-      user_id: params[:user_id],
+      user_id: request.env['HTTP_USER_ID'],
       obj: params[:obj]
     )
     if @savegame.save

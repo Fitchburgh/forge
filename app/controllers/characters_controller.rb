@@ -2,12 +2,12 @@ require 'pry'
 
 class CharactersController < ApplicationController
   def index
-    @characters = Character.where(user_id: params[:user_id])
+    @characters = Character.where(user_id: request.env['HTTP_USER_ID'])
     render json: @characters
   end
 
   def current_character
-    @current_character = Character.where(user_id: params[:user_id], current: true)
+    @current_character = Character.where(user_id: request.env['HTTP_USER_ID'], current: true)
     render json: @current_character
   end
 
@@ -23,7 +23,7 @@ class CharactersController < ApplicationController
   def delete
     @character = Character.find_by(id: params[:id])
     if !@character.nil?
-      if @character.user_id == params[:user_id].to_i
+      if @character.user_id == request.env['HTTP_USER_ID'].to_i
         render :json => { message: 'character deleted' } if @character.delete
       else
         render :json => { error: 'only the creator can delete this character' }, status: 400
@@ -36,7 +36,7 @@ class CharactersController < ApplicationController
   def update
     @character = Character.find_by(id: params[:id])
     if !@character.nil?
-      if @character.user_id == params[:user_id].to_i
+      if @character.user_id == request.env['HTTP_USER_ID'].to_i
         Character.update_character(@character, params)
         if @character.save
           render json: @character

@@ -1,4 +1,13 @@
+#
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
-  skip_before_action :verify_authenticity_token
+  before_action :check_auth
+
+  def check_auth
+    current_user = User.find(request.env['HTTP_USER_ID'])
+    if current_user.token == request.env['HTTP_TOKEN']
+      true
+    else
+      render json: "User not logged in", status: 401
+    end
+  end
 end

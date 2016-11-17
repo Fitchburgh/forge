@@ -1,3 +1,4 @@
+require 'pry'
 class Scene < ApplicationRecord
   belongs_to :map
   belongs_to :game
@@ -17,5 +18,13 @@ class Scene < ApplicationRecord
       obj: options['obj'], map_id: options['map_id'], game_id: options['game_id'],
       description: options['description'], name: options['name'].downcase
     )
+  end
+
+  def self.find_scene_by_input(var, params)
+    var = []
+    Scene.all.each do |t|
+      var << { name: t.name, id: t.id, map_id: t.map_id, description: t.description } if t.name.include?(params)
+    end
+    var
   end
 end

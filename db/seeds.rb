@@ -6,6 +6,15 @@ User.create(
 )
 
 Game.create(
+  id: 0,
+  name: 'Orphans',
+  tags: '[]',
+  user_id: 1,
+  description: 'Where all the orphan articles live',
+  obj: "{something: here}"
+)
+
+Game.create(
   name: 'quest',
   tags: '[war, fight, adventure]',
   user_id: 1,

@@ -34,4 +34,15 @@ class ObstaclesController < ApplicationController
       render :json => { message: 'obstacle deleted' } if @obstacle.delete
     end
   end
+
+  def search
+    @obstacles = []
+    obstacles = Obstacle.all
+    obstacles.each do |t|
+      if t.tags.include?(params[:tags].downcase) || t.name.include?(params[:tags].downcase)
+        @obstacles << t
+      end
+    end
+    render json: @obstacles
+  end
 end

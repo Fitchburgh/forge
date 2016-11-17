@@ -34,4 +34,15 @@ class EntitiesController < ApplicationController
       render :json => { message: 'entity deleted' } if @entity.delete
     end
   end
+
+  def search
+    @entities = []
+    entities = Entity.all
+    entities.each do |t|
+      if t.tags.include?(params[:tags].downcase) || t.name.include?(params[:tags].downcase)
+        @entities << t
+      end
+    end
+    render json: @entities
+  end
 end

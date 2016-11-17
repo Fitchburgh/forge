@@ -34,4 +34,15 @@ class BackgroundsController < ApplicationController
       render :json => { message: 'background deleted' } if @background.delete
     end
   end
+
+  def search
+    @backgrounds = []
+    backgrounds = Background.all
+    backgrounds.each do |t|
+      if t.tags.include?(params[:tags].downcase) || t.name.include?(params[:tags].downcase)
+        @backgrounds << t
+      end
+    end
+    render json: @backgrounds
+  end
 end

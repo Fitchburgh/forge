@@ -1,6 +1,6 @@
 #
 class ApplicationController < ActionController::Base
-  # before_action :check_auth
+  before_action :check_auth
 
   def check_auth
     if request.env['HTTP_USER_ID'].to_i == nil

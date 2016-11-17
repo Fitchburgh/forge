@@ -16,6 +16,7 @@ class GamesController < ApplicationController
     )
     if @game.save
       Redis.current.set(@game.name, @game.attributes.to_json)
+      Redis.current.expire(@game.name, 2592000)
       render :json => { game: [@game.id, @game.name, @game.tags, @game.description, @game.user_id] }
     else
       render :json => { :errors => @game.errors.full_messages }, status: 400
@@ -38,6 +39,7 @@ class GamesController < ApplicationController
     if @game.save
       Redis.current.del(old_name) if make_new_key = true
       Redis.current.set(@game.name, @game.attributes.to_json)
+      Redis.current.expire(@game.name, 2592000)
       render :json => { game: [@game.id, @game.name, @game.tags, @game.description, @game.user_id] }
     else
       render :json => { :errors => @savegame.errors.full_messages }, status: 404
@@ -97,10 +99,12 @@ class GamesController < ApplicationController
   def load
     if Redis.current.exists(params[:name])
       render json: Redis.current.get(params[:name])
+      Redis.current.expire(@game.name, 2592000)
     else
       @game = Game.find_by(name: params[:name])
       if !@game.nil?
         Redis.current.set(@game.name, @game.attributes.to_json)
+        Redis.current.expire(@game.name, 2592000)
         render json: @game
       else
         render :json => { errors: 'this game does not exist' }, status: 400

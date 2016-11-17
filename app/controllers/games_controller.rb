@@ -1,9 +1,6 @@
 require 'pry'
 #
 class GamesController < ApplicationController
-  # Redis for : create, update, delete - set, set, delete
-  # render json: Redis.current.get('keyname') to return
-
   def index
     @all_games = Game.all
     render json: @all_games
@@ -19,6 +16,7 @@ class GamesController < ApplicationController
     )
     if @game.save
       Redis.current.set(@game.name, @game.attributes.to_json)
+      Redis.current.expire(@game.name, 2592000)
       render :json => { game: [@game.id, @game.name, @game.tags, @game.description, @game.user_id] }
     else
       render :json => { :errors => @game.errors.full_messages }, status: 400
@@ -41,6 +39,7 @@ class GamesController < ApplicationController
     if @game.save
       Redis.current.del(old_name) if make_new_key = true
       Redis.current.set(@game.name, @game.attributes.to_json)
+      Redis.current.expire(@game.name, 2592000)
       render :json => { game: [@game.id, @game.name, @game.tags, @game.description, @game.user_id] }
     else
       render :json => { :errors => @savegame.errors.full_messages }, status: 404
@@ -77,7 +76,7 @@ class GamesController < ApplicationController
 
         if @game.delete
           Redis.current.del(@game.name)
-          render :json => { message: 'game deleted' }
+          render :json => { message: 'game deleted' }, status: 200
         end
       else
         render :json => { error: 'only the creator can delete this game' }, status: 400
@@ -102,7 +101,6 @@ class GamesController < ApplicationController
     user_games = Game.where(user_id: request.env['HTTP_USER_ID'])
     if user_games.empty?
       render json: []
-      # render :json => { error: 'user has no games' }, status: 404
     else
       render json: user_games
     end
@@ -119,6 +117,22 @@ class GamesController < ApplicationController
       render json: @savegame
     else
       render :json => { :errors => @savegame.errors.full_messages }, status: 400
+    end
+  end
+
+  def load
+    if Redis.current.exists(params[:name])
+      render json: Redis.current.get(params[:name])
+      Redis.current.expire(@game.name, 2592000)
+    else
+      @game = Game.find_by(name: params[:name])
+      if !@game.nil?
+        Redis.current.set(@game.name, @game.attributes.to_json)
+        Redis.current.expire(@game.name, 2592000)
+        render json: @game
+      else
+        render :json => { errors: 'this game does not exist' }, status: 400
+      end
     end
   end
 

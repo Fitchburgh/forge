@@ -25,14 +25,22 @@ class GamesController < ApplicationController
     end
   end
 
-  def update # Redis.current.set after save new game
+  def update
+    make_new_key = false
     @game = Game.find_by(id: params[:id])
+
+    if !(@game.name == params[:name])
+      make_new_key = true
+      old_name = @game.name
+    end
 
     @game.name = params[:name].downcase
     @game.tags = params[:tags].downcase
     @game.description = params[:description].downcase
     @game.obj = params[:obj]
     if @game.save
+      Redis.current.del(old_name) if make_new_key = true
+      Redis.current.set(@game.name, @game.attributes.to_json)
       render :json => { game: [@game.id, @game.name, @game.tags, @game.description, @game.user_id] }
     else
       render :json => { :errors => @savegame.errors.full_messages }, status: 404

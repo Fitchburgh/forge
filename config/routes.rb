@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get 'games/index'
   get 'games/search'
   get 'games/user-games' => 'games#find_user_games'
+  get 'games/load'
   post 'games/create'
   post 'games/savegame'
   put 'games/update'

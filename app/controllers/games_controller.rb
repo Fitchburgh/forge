@@ -1,9 +1,6 @@
 require 'pry'
 #
 class GamesController < ApplicationController
-  # Redis for : create, update, delete - set, set, delete
-  # render json: Redis.current.get('keyname') to return
-
   def index
     @all_games = Game.all
     render json: @all_games
@@ -53,7 +50,7 @@ class GamesController < ApplicationController
       if @game.user_id == params[:user_id].to_i
         if @game.delete
           Redis.current.del(@game.name)
-          render :json => { message: 'game deleted' }
+          render :json => { message: 'game deleted' }, status: 200
         end
       else
         render :json => { error: 'only the creator can delete this game' }, status: 400
@@ -78,7 +75,6 @@ class GamesController < ApplicationController
     user_games = Game.where(user_id: params[:user_id])
     if user_games.empty?
       render json: []
-      # render :json => { error: 'user has no games' }, status: 404
     else
       render json: user_games
     end
@@ -95,6 +91,20 @@ class GamesController < ApplicationController
       render json: @savegame
     else
       render :json => { :errors => @savegame.errors.full_messages }, status: 400
+    end
+  end
+
+  def load
+    if Redis.current.exists(params[:name])
+      render json: Redis.current.get(params[:name])
+    else
+      @game = Game.find_by(name: params[:name])
+      if !@game.nil?
+        Redis.current.set(@game.name, @game.attributes.to_json)
+        render json: @game
+      else
+        render :json => { errors: 'this game does not exist' }, status: 400
+      end
     end
   end
 

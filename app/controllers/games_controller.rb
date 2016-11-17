@@ -51,7 +51,10 @@ class GamesController < ApplicationController
     @game = Game.find_by(id: params[:id])
     if !@game.nil?
       if @game.user_id == params[:user_id].to_i
-        render :json => { message: 'game deleted' } if @game.delete
+        if @game.delete
+          Redis.current.del(@game.name)
+          render :json => { message: 'game deleted' }
+        end
       else
         render :json => { error: 'only the creator can delete this game' }, status: 400
       end

@@ -11,14 +11,14 @@ class Entity < ApplicationRecord
     var
   end
 
-  def self.create_entity_article(var, options)
+  def self.create_entity_article(var, options, auth_id)
     var = self.new_entity(options)
   end
 
   def self.new_entity(options)
     Entity.new(
       obj: options[:obj],
-      user_id: request.env['HTTP_USER_ID'].to_i,
+      user_id: auth_id,
       game_id: options[:game_id],
       public: options[:public],
       name: options[:name].downcase,
@@ -26,9 +26,9 @@ class Entity < ApplicationRecord
     )
   end
 
-  def self.update_entity(var, params)
+  def self.update_entity(var, params, auth_id)
     var.obj = params[:obj]
-    var.user_id = request.env['HTTP_USER_ID'].to_i
+    var.user_id = auth_id
     var.game_id = params[:game_id]
     var.public = params[:public]
     var.name = params[:name].downcase

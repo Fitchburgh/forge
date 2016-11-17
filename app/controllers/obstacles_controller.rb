@@ -4,7 +4,7 @@ class ObstaclesController < ApplicationController
   end
 
   def create
-    @obstacle = Obstacle.create_obstacle_article(@obstacle, params)
+    @obstacle = Obstacle.create_obstacle_article(@obstacle, params, request.env['HTTP_USER_ID'].to_i)
     if @obstacle.save
       render json: @obstacle, status: 201
     else
@@ -15,7 +15,7 @@ class ObstaclesController < ApplicationController
   def update
     @obstacle = Obstacle.find_by(id: params[:id])
     if !@obstacle.nil?
-      Obstacle.update_obstacle(@obstacle, params)
+      Obstacle.update_obstacle(@obstacle, params, request.env['HTTP_USER_ID'].to_i)
       if @obstacle.save
         render :json => @obstacle
       else

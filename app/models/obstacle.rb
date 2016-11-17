@@ -11,14 +11,14 @@ class Obstacle < ApplicationRecord
     var
   end
 
-  def self.create_obstacle_article(var, options)
+  def self.create_obstacle_article(var, options, auth_id)
     var = self.new_obstacle(options)
   end
 
-  def self.new_obstacle(options)
+  def self.new_obstacle(options, auth_id)
     Obstacle.new(
       obj: options[:obj],
-      user_id: request.env['HTTP_USER_ID'].to_i,
+      user_id: auth_id,
       game_id: options[:game_id],
       public: options[:public],
       name: options[:name].downcase,
@@ -26,9 +26,9 @@ class Obstacle < ApplicationRecord
   )
   end
 
-  def self.update_obstacle(var, params)
+  def self.update_obstacle(var, params, auth_id)
     var.obj = params[:obj]
-    var.user_id = request.env['HTTP_USER_ID'].to_i
+    var.user_id = auth_id
     var.game_id = params[:game_id]
     var.public = params[:public]
     var.name = params[:name].downcase

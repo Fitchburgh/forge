@@ -4,7 +4,7 @@ class EntitiesController < ApplicationController
   end
 
   def create
-    @entity = Entity.create_entity_article(@entity, params)
+    @entity = Entity.create_entity_article(@entity, params, request.env['HTTP_USER_ID'].to_i)
     if @entity.save
       render json: @entity, status: 201
     else
@@ -15,7 +15,7 @@ class EntitiesController < ApplicationController
   def update
     @entity = Entity.find_by(id: params[:id])
     if !@entity.nil?
-      Entity.update_entity(@entity, params)
+      Entity.update_entity(@entity, params, request.env['HTTP_USER_ID'].to_i)
       if @entity.save
         render :json => @entity
       else

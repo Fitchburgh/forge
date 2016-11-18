@@ -36,13 +36,7 @@ class ObstaclesController < ApplicationController
   end
 
   def search
-    @obstacles = []
-    obstacles = Obstacle.all
-    obstacles.each do |t|
-      if t.tags.include?(params[:tags].downcase) || t.name.include?(params[:tags].downcase)
-        @obstacles << t
-      end
-    end
+    @obstacles = Obstacle.find_obstacle_by_input(@obstacles, params[:name])
     render json: @obstacles
   end
 end

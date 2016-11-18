@@ -5,8 +5,8 @@ class GamesController < ApplicationController
       tags: params[:tags].to_s.downcase,
       description: params[:description].downcase,
       obj: params[:obj],
-      user_id: request.env['HTTP_USER_ID']
-      public: params[:public],
+      user_id: request.env['HTTP_USER_ID'],
+      public: params[:public]
     )
     if @game.save
       Redis.current.set(@game.name, @game.attributes.to_json)

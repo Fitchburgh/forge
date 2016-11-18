@@ -36,13 +36,7 @@ class EntitiesController < ApplicationController
   end
 
   def search
-    @entities = []
-    entities = Entity.all
-    entities.each do |t|
-      if t.tags.include?(params[:tags].downcase) || t.name.include?(params[:tags].downcase)
-        @entities << t
-      end
-    end
+    @entities = Entity.find_entity_by_input(@entities, params[:name])
     render json: @entities
   end
 end

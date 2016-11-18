@@ -39,7 +39,7 @@ class Background < ApplicationRecord
     var = []
     Background.all.each do |t|
       if t.tags.include?(params.downcase) || t.name.include?(params.downcase)
-        var << t
+        var << { id: t.id, user_id: t.user_id, game_id: t.game_id, public: t.public, name: t.name, tags: t.tags }
       end
     end
     var

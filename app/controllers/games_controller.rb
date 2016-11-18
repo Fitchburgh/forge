@@ -82,13 +82,7 @@ class GamesController < ApplicationController
   end
 
   def search
-    @games = []
-    games = Game.all
-    games.each do |t|
-      if t.tags.include?(params[:tags].downcase) || t.name.include?(params[:tags].downcase)
-        @games << {id: t.id, name: t.name, tags: t.tags, user_id: t.user_id, description: t.description, created_at: t.created_at}
-      end
-    end
+    @games = Game.find_game_by_input(@games, params[:name])
     render json: @games
   end
 

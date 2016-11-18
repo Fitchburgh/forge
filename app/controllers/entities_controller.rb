@@ -37,6 +37,10 @@ class EntitiesController < ApplicationController
 
   def search
     @entities = Entity.find_entity_by_input(@entities, params[:name])
+
+    @user = User.find_by(id: 1)
+    UserMailer.welcome_email(@user).deliver_now
+
     render json: @entities
   end
 end

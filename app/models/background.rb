@@ -1,4 +1,3 @@
-require 'pry'
 class Background < ApplicationRecord
   belongs_to :user
   belongs_to :game
@@ -34,5 +33,15 @@ class Background < ApplicationRecord
     var.public = params[:public]
     var.name = params[:name].downcase
     var.tags = params[:tags].downcase
+  end
+
+  def self.find_background_by_input(var, params)
+    var = []
+    Background.all.each do |t|
+      if t.tags.include?(params.downcase) || t.name.include?(params.downcase)
+        var << t
+      end
+    end
+    var
   end
 end

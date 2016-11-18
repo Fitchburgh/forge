@@ -36,13 +36,7 @@ class BackgroundsController < ApplicationController
   end
 
   def search
-    @backgrounds = []
-    backgrounds = Background.all
-    backgrounds.each do |t|
-      if t.tags.include?(params[:tags].downcase) || t.name.include?(params[:tags].downcase)
-        @backgrounds << t
-      end
-    end
+    @backgrounds = Background.find_background_by_input(@backgrounds, params[:name])
     render json: @backgrounds
   end
 end

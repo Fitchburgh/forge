@@ -10,11 +10,7 @@ class MapsController < ApplicationController
 
   # not currently working (needs exact match)
   def search
-    @map = Map.find_by(name: params[:name])
-    if @map.nil?
-      render json: 'Map does not exist', status: 404
-    else
-      render json: @map
-    end
+    @maps = Map.find_map_by_input(@maps, params[:name])
+    render json: @maps
   end
 end

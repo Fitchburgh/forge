@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'articles/search'
 
   get 'backgrounds/index'
+  get 'backgrounds/search'
   post 'backgrounds/create'
   put 'backgrounds/update'
   delete 'backgrounds/delete'
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
   delete 'characters/delete'
 
   get 'entities/index'
+  get 'entities/search'
   post 'entities/create'
   put 'entities/update'
   delete 'entities/delete'
@@ -34,6 +36,7 @@ Rails.application.routes.draw do
   post 'maps/create'
 
   get 'obstacles/index'
+  get 'obstacles/search'
   post 'obstacles/create'
   put 'obstacles/update'
   delete 'obstacles/delete'

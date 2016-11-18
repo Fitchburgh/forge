@@ -7,7 +7,9 @@ class GamesController < ApplicationController
       tags: params[:tags].to_s.downcase,
       description: params[:description].downcase,
       obj: params[:obj],
+      public: params[:public],
       user_id: request.env['HTTP_USER_ID'].to_i
+
     )
     if @game.save
       Redis.current.set(@game.name, @game.attributes.to_json)
@@ -31,11 +33,12 @@ class GamesController < ApplicationController
     @game.tags = params[:tags].downcase
     @game.description = params[:description].downcase
     @game.obj = params[:obj]
+    @game.public = params[:public]
     if @game.save
       Redis.current.del(old_name) if make_new_key = true
       Redis.current.set(@game.name, @game.attributes.to_json)
       Redis.current.expire(@game.name, 2592000)
-      render :json => { game: [@game.id, @game.name, @game.tags, @game.description, @game.user_id] }
+      render :json => { game: [@game.id, @game.name, @game.tags, @game.description, @game.user_id, @game.public] }
     else
       render :json => { :errors => @savegame.errors.full_messages }, status: 404
     end
@@ -102,7 +105,6 @@ class GamesController < ApplicationController
   end
 
   def savegame
-    # need to automatically populate user_id and game_id fields
     @savegame = SaveGame.new(
       game_id: params[:game_id],
       user_id: request.env['HTTP_USER_ID'].to_i,

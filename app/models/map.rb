@@ -18,4 +18,12 @@ class Map < ApplicationRecord
       description: options['description'], name: options['name'].downcase
     )
   end
+
+  def self.find_map_by_input(var, params)
+    var = []
+    Map.all.each do |map|
+      var << {  id: map.id, game_id: map.game_id, name: map.name, description: map.description } if map.name.include?(params)
+    end
+    var
+  end
 end

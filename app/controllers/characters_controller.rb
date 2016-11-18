@@ -1,18 +1,16 @@
-require 'pry'
-
 class CharactersController < ApplicationController
   def index
-    @characters = Character.where(user_id: request.env['HTTP_USER_ID'].to_i)
+    @characters = Character.where(user_id: request.env['HTTP_USER_ID'])
     render json: @characters
   end
 
   def current_character
-    @current_character = Character.where(user_id: request.env['HTTP_USER_ID'].to_i, current: true)
+    @current_character = Character.where(user_id: request.env['HTTP_USER_ID'], current: true)
     render json: @current_character
   end
 
   def create
-    @character = Character.create_character(params, request.env['HTTP_USER_ID'].to_i)
+    @character = Character.create_character(params, request.env['HTTP_USER_ID'])
     if @character.save
       render json: @character
     else
@@ -23,7 +21,7 @@ class CharactersController < ApplicationController
   def delete
     @character = Character.find_by(id: params[:id])
     if !@character.nil?
-      if @character.user_id == request.env['HTTP_USER_ID'].to_i
+      if @character.user_id == request.env['HTTP_USER_ID']
         render :json => { message: 'character deleted' } if @character.delete
       else
         render :json => { error: 'only the creator can delete this character' }, status: 400
@@ -36,8 +34,8 @@ class CharactersController < ApplicationController
   def update
     @character = Character.find_by(id: params[:id])
     if !@character.nil?
-      if @character.user_id == request.env['HTTP_USER_ID'].to_i
-        Character.update_character(@character, params, request.env['HTTP_USER_ID'].to_i )
+      if @character.user_id == request.env['HTTP_USER_ID']
+        Character.update_character(@character, params, request.env['HTTP_USER_ID'] )
         if @character.save
           render json: @character
         else

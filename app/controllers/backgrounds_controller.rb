@@ -4,7 +4,7 @@ class BackgroundsController < ApplicationController
   end
 
   def create
-    @background = Background.create_background_article(@background, params, request.env['HTTP_USER_ID'].to_i)
+    @background = Background.create_background_article(@background, params, request.env['HTTP_USER_ID'])
     if @background.save
       render json: @background, status: 201
     else
@@ -15,7 +15,7 @@ class BackgroundsController < ApplicationController
   def update
     @background = Background.find_by(id: params[:id])
     if !@background.nil?
-      Background.update_background(@background, params, request.env['HTTP_USER_ID'].to_i)
+      Background.update_background(@background, params, request.env['HTTP_USER_ID'])
       if @background.save
         render json: @background
       else

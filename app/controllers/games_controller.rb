@@ -1,5 +1,3 @@
-require 'pry'
-#
 class GamesController < ApplicationController
   def create
     @game = Game.new(
@@ -7,7 +5,7 @@ class GamesController < ApplicationController
       tags: params[:tags].to_s.downcase,
       description: params[:description].downcase,
       obj: params[:obj],
-      user_id: request.env['HTTP_USER_ID'].to_i
+      user_id: request.env['HTTP_USER_ID']
     )
     if @game.save
       Redis.current.set(@game.name, @game.attributes.to_json)
@@ -44,7 +42,7 @@ class GamesController < ApplicationController
   def delete
     @game = Game.find_by(id: params[:id])
     if !@game.nil?
-      if @game.user_id == request.env['HTTP_USER_ID'].to_i
+      if @game.user_id == request.env['HTTP_USER_ID']
         @entities = Entity.where(game_id: @game.id)
         @entities.each do |e|
           e.game_id = 0
@@ -93,7 +91,7 @@ class GamesController < ApplicationController
   end
 
   def find_user_games
-    user_games = Game.where(user_id: request.env['HTTP_USER_ID'].to_i)
+    user_games = Game.where(user_id: request.env['HTTP_USER_ID'])
     if user_games.empty?
       render json: []
     else
@@ -105,7 +103,7 @@ class GamesController < ApplicationController
     # need to automatically populate user_id and game_id fields
     @savegame = SaveGame.new(
       game_id: params[:game_id],
-      user_id: request.env['HTTP_USER_ID'].to_i,
+      user_id: request.env['HTTP_USER_ID'],
       obj: params[:obj]
     )
     if @savegame.save

@@ -71,7 +71,8 @@ Game.create(
       {'sometimes': 'its', 'really'
         {'complicated'
           {[1, 2, 3, 4, 5]}}}
-  }"
+  }",
+  public: true
 )
 
 Collaborator.create(

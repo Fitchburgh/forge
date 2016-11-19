@@ -11,18 +11,18 @@ class Background < ApplicationRecord
     var
   end
 
-  def self.create_background_article(var, options, auth_id)
-    var = self.new_background(options, auth_id)
+  def self.create_background_article(var, params, auth_id)
+    var = self.new_background(params, auth_id)
   end
 
-  def self.new_background(options, auth_id)
+  def self.new_background(params, auth_id)
     Background.new(
-      obj: options[:obj],
+      obj: params[:obj],
       user_id: auth_id,
-      game_id: options[:game_id],
-      public: options[:public],
-      name: options[:name].downcase,
-      tags: options[:tags].to_s.downcase
+      game_id: params[:game_id],
+      public: params[:public],
+      name: params[:name].downcase,
+      tags: params[:tags].to_s.downcase
   )
   end
 

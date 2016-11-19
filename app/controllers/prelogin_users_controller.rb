@@ -2,7 +2,7 @@ class PreloginUsersController < ApplicationController
   skip_before_action :check_auth
 
   def index
-    @all_games = Game.all
+    @all_games = Game.where(archived: false)
     render json: @all_games[1..-1]
   end
 

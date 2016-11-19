@@ -2,12 +2,7 @@ class UsersController < ApplicationController
   skip_before_action :check_auth
 
   def create
-    @user = User.new(
-      username: params[:username].downcase,
-      token: params[:token],
-      uid: params[:uid],
-      google_oauth_data: params[:google_oauth_data]
-    )
+    @user = User.create_new_user(@user, params)
     if @user.save
       render json: @user
     else

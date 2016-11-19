@@ -27,7 +27,7 @@ class GamesController < ApplicationController
     end
 
     @game.name = params[:name].downcase
-    @game.tags = params[:tags].downcase
+    @game.tags = params[:tags].to_s.downcase
     @game.description = params[:description].downcase
     @game.obj = params[:obj]
     @game.public = params[:public]

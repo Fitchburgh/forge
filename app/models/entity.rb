@@ -32,7 +32,7 @@ class Entity < ApplicationRecord
     var.game_id = params[:game_id]
     var.public = params[:public]
     var.name = params[:name].downcase
-    var.tags = params[:tags].downcase
+    var.tags = params[:tags].to_s.downcase
   end
 
   def self.find_entity_by_input(var, params)

@@ -3,6 +3,11 @@ class Background < ApplicationRecord
   belongs_to :game
   validates :info, :tags, :name, presence: true
 
+
+  def self.create_background_article(var, options, auth_id)
+    var = self.new_background(options, auth_id)
+  end
+
   def self.find_background_by_input(var, params)
     var = []
     Background.all.each do |t|

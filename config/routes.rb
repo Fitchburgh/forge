@@ -2,20 +2,20 @@ Rails.application.routes.draw do
   get 'articles/index'
   get 'articles/search'
 
-  get 'backgrounds/index'
+  get 'backgrounds/all' => 'backgrounds#index'
   get 'backgrounds/search'
   post 'backgrounds/create'
   put 'backgrounds/update'
   delete 'backgrounds/delete'
 
-  get 'characters/index'
+  get 'characters/all' => 'characters#index'
   get 'characters/current_character'
   post 'characters/create'
   patch 'characters/update' => 'characters#update_current_character'
   put 'characters/update'
   delete 'characters/delete'
 
-  get 'entities/index'
+  get 'entities/all' => 'entities#index'
   get 'entities/search'
   post 'entities/create'
   put 'entities/update'
@@ -33,17 +33,17 @@ Rails.application.routes.draw do
   put 'games/update'
   delete 'games/archive' => 'games#delete'
 
-  get 'maps/index'
+  get 'maps/all' => 'maps#index'
   get 'maps/search'
   post 'maps/create'
 
-  get 'obstacles/index'
+  get 'obstacles/all' => 'obstacles#index'
   get 'obstacles/search'
   post 'obstacles/create'
   put 'obstacles/update'
   delete 'obstacles/delete'
 
-  get 'scenes/index'
+  get 'scenes/all' => 'scenes#index'
   get 'scenes/search'
   post 'scenes/create'
 

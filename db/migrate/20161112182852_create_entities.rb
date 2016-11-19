@@ -5,7 +5,7 @@ class CreateEntities < ActiveRecord::Migration[5.0]
       t.references :user, foreign_key: true
       t.references :game, foreign_key: true
       t.string :name
-      t.boolean :public
+      t.boolean :published, default: false
       t.json :tags, default: '', null: false
 
       t.timestamps

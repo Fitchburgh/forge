@@ -72,7 +72,7 @@ Game.create(
         {'complicated'
           {[1, 2, 3, 4, 5]}}}
   }",
-  public: true
+  published: true
 )
 
 Collaborator.create(
@@ -242,7 +242,7 @@ Background.create!(
   info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'sky',
   tags: "['blue', 'sky']"
 )
@@ -251,7 +251,7 @@ Background.create!(
   info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'potter',
   tags: "['potter', 'sky']"
 )
@@ -260,7 +260,7 @@ Obstacle.create!(
   info: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'tree',
   tags: '[1, 2, 3, 4]'
 )
@@ -269,7 +269,7 @@ Obstacle.create!(
   info: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'tree',
   tags: '[bob, oak, wood]'
 )
@@ -279,7 +279,7 @@ Entity.create!(
   info: "{'a': 'b', 'c': 'd' {'e': 'f', 'g' {'fun' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'old hag',
   tags: "['guns', 'roses']"
 )
@@ -288,7 +288,7 @@ Background.create!(
   info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'grass',
   tags: "['green', 'short']"
 )
@@ -297,7 +297,7 @@ Background.create!(
   info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'pond',
   tags: "[water, small]"
 )
@@ -306,7 +306,7 @@ Obstacle.create!(
   info: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'rock',
   tags: '[big, grey, mossy]'
 )
@@ -315,7 +315,7 @@ Obstacle.create!(
   info: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'hollow tree',
   tags: '[birch, wood]'
 )
@@ -325,7 +325,7 @@ Entity.create!(
   info: "{'a': 'b', 'c': 'd' {'e': 'f', 'g' {'fun' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'Tall MAN',
   tags: "['pie', 'thing']"
 )
@@ -334,7 +334,7 @@ Background.create!(
   info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'red sky',
   tags: "['red', 'sky']"
 )
@@ -343,7 +343,7 @@ Background.create!(
   info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'church',
   tags: "[steeple, stained glass, brick]"
 )
@@ -352,7 +352,7 @@ Obstacle.create!(
   info: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: false,
+  published: false,
   name: 'tree',
   tags: '[1, 2, 3, 4]'
 )
@@ -361,7 +361,7 @@ Obstacle.create!(
   info: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'shrub',
   tags: '[green, short, stubby]'
 )
@@ -371,7 +371,7 @@ Entity.create!(
   info: "{'a': 'b', 'c': 'd' {'e': 'f', 'g' {'fun' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'tacopies',
   tags: "[stinky, man, short]"
 )

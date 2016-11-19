@@ -3,8 +3,8 @@ class Map < ApplicationRecord
   belongs_to :game
   validates :name, presence: true, uniqueness: { scope: :game }
 
-  def self.create_map(var, options)
-    var = self.new_map(options)
+  def self.create_map(var, params)
+    var = self.new_map(params)
     if var.save
       var
     else
@@ -12,10 +12,10 @@ class Map < ApplicationRecord
     end
   end
 
-  def self.new_map(options)
+  def self.new_map(params)
     Map.create(
-      info: options['info'], game_id: options['game_id'],
-      description: options['description'], name: options['name'].downcase
+      info: params[:info], game_id: params[:game_id],
+      description: params[:description], name: params[:name].downcase
     )
   end
 

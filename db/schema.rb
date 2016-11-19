@@ -16,21 +16,21 @@ ActiveRecord::Schema.define(version: 20161116142449) do
   enable_extension "plpgsql"
 
   create_table "backgrounds", force: :cascade do |t|
-    t.json     "obj"
+    t.json     "info"
     t.integer  "user_id"
     t.integer  "game_id"
-    t.boolean  "public",     default: true
+    t.boolean  "published",  default: false
     t.string   "name"
-    t.json     "tags",       default: "",   null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.json     "tags",       default: "",    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["game_id"], name: "index_backgrounds_on_game_id", using: :btree
     t.index ["user_id"], name: "index_backgrounds_on_user_id", using: :btree
   end
 
   create_table "characters", force: :cascade do |t|
     t.integer  "user_id"
-    t.json     "obj"
+    t.json     "info"
     t.string   "name"
     t.boolean  "current"
     t.datetime "created_at", null: false
@@ -48,14 +48,14 @@ ActiveRecord::Schema.define(version: 20161116142449) do
   end
 
   create_table "entities", force: :cascade do |t|
-    t.json     "obj"
+    t.json     "info"
     t.integer  "user_id"
     t.integer  "game_id"
     t.string   "name"
-    t.boolean  "public"
-    t.json     "tags",       default: "", null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.boolean  "published",  default: false
+    t.json     "tags",       default: "",    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["game_id"], name: "index_entities_on_game_id", using: :btree
     t.index ["user_id"], name: "index_entities_on_user_id", using: :btree
   end
@@ -65,8 +65,8 @@ ActiveRecord::Schema.define(version: 20161116142449) do
     t.json     "tags"
     t.integer  "user_id"
     t.string   "description"
-    t.json     "obj"
-    t.boolean  "public",      default: false
+    t.json     "info"
+    t.boolean  "published",   default: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.index ["user_id"], name: "index_games_on_user_id", using: :btree
@@ -76,21 +76,21 @@ ActiveRecord::Schema.define(version: 20161116142449) do
     t.integer  "game_id"
     t.string   "name"
     t.string   "description"
-    t.json     "obj"
+    t.json     "info"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["game_id"], name: "index_maps_on_game_id", using: :btree
   end
 
   create_table "obstacles", force: :cascade do |t|
-    t.json     "obj"
+    t.json     "info"
     t.integer  "user_id"
     t.integer  "game_id"
     t.string   "name"
-    t.boolean  "public"
-    t.json     "tags",       default: "", null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.boolean  "published",  default: false
+    t.json     "tags",       default: "",    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["game_id"], name: "index_obstacles_on_game_id", using: :btree
     t.index ["user_id"], name: "index_obstacles_on_user_id", using: :btree
   end
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20161116142449) do
   create_table "save_games", force: :cascade do |t|
     t.integer  "game_id"
     t.integer  "user_id"
-    t.json     "obj"
+    t.json     "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_save_games_on_game_id", using: :btree
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 20161116142449) do
     t.integer  "game_id"
     t.string   "name"
     t.string   "description"
-    t.json     "obj"
+    t.json     "info"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["game_id"], name: "index_scenes_on_game_id", using: :btree

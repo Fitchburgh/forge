@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 20161116142449) do
     t.string   "description"
     t.json     "info"
     t.boolean  "published",   default: false
+    t.boolean  "archived",    default: false
+    t.string   "archived_at"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.index ["user_id"], name: "index_games_on_user_id", using: :btree

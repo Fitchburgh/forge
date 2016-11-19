@@ -11,7 +11,8 @@ Game.create(
   tags: '[]',
   user_id: 1,
   description: 'Where all the orphan articles live',
-  info: "{something: here}"
+  info: "{something: here}",
+  archived: false
 )
 
 Game.create(
@@ -72,7 +73,8 @@ Game.create(
         {'complicated'
           {[1, 2, 3, 4, 5]}}}
   }",
-  published: true
+  published: true,
+  archived: false
 )
 
 Collaborator.create(

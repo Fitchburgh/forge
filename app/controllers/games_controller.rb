@@ -1,3 +1,5 @@
+require 'pry'
+
 class GamesController < ApplicationController
   def create
     @game = Game.create_new_game(@game, params, request.env['HTTP_USER_ID'])
@@ -35,35 +37,11 @@ class GamesController < ApplicationController
   def delete
     @game = Game.find_by(id: params[:id])
     if !@game.nil?
-      if @game.user_id == request.env['HTTP_USER_ID']
-        @entities = Entity.where(game_id: @game.id)
-        @entities.each do |e|
-          e.game_id = 0
-          e.save
-        end
-
-        @obstacles = Obstacle.where(game_id: @game.id)
-        @obstacles.each do |o|
-          o.game_id = 0
-          o.save
-        end
-
-        @backgrounds = Background.where(game_id: @game.id)
-        @backgrounds.each do |b|
-          b.game_id = 0
-          b.save
-        end
-
-        Collaborator.delete(Collaborator.where(game_id: @game.id))
-
-        Scene.delete(Scene.where(game_id: @game.id))
-
-        Map.delete(Map.where(game_id: @game.id))
-
-        if @game.delete
-          Redis.current.del(@game.name)
-          render :json => { message: 'game deleted' }, status: 200
-        end
+      if @game.user_id == request.env['HTTP_USER_ID'].to_i
+        @game.archived = true
+        @game.archived_at = Time.now.strftime '%Y-%m-%d %H:%M:%S'
+        @game.save!
+        render :json => { message: 'game archived' }, status: 200
       else
         render :json => { error: 'only the creator can delete this game' }, status: 400
       end

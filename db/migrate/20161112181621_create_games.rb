@@ -7,6 +7,8 @@ class CreateGames < ActiveRecord::Migration[5.0]
       t.string :description
       t.json :info
       t.boolean :published, default: false
+      t.boolean :archived, default: false
+      t.string :archived_at
 
       t.timestamps
     end

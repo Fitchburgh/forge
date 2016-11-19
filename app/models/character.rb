@@ -17,4 +17,14 @@ class Character < ApplicationRecord
     var.name = params[:name].downcase
     var.current = FALSE
   end
+
+  def self.update_current_user_character(var, params)
+    @characters = Character.where.not(id: params)
+    @characters.each do |char|
+      char.current = false
+      char.save!
+    end
+    var.current = true
+    var.save!
+  end
 end

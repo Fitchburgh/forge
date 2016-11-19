@@ -11,18 +11,18 @@ class Obstacle < ApplicationRecord
     var
   end
 
-  def self.create_obstacle_article(var, options, auth_id)
-    var = self.new_obstacle(options, auth_id)
+  def self.create_obstacle_article(var, params, auth_id)
+    var = self.new_obstacle(params, auth_id)
   end
 
-  def self.new_obstacle(options, auth_id)
+  def self.new_obstacle(params, auth_id)
     Obstacle.new(
-      obj: options[:obj],
+      obj: params[:obj],
       user_id: auth_id,
-      game_id: options[:game_id],
-      public: options[:public],
-      name: options[:name].downcase,
-      tags: options[:tags].to_s.downcase
+      game_id: params[:game_id],
+      public: params[:public],
+      name: params[:name].downcase,
+      tags: params[:tags].to_s.downcase
   )
   end
 

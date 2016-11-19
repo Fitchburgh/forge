@@ -11,7 +11,7 @@ Game.create(
   tags: '[]',
   user_id: 1,
   description: 'Where all the orphan articles live',
-  obj: "{something: here}"
+  info: "{something: here}"
 )
 
 Game.create(
@@ -19,7 +19,7 @@ Game.create(
   tags: '[war, fight, adventure]',
   user_id: 1,
   description: 'test descript',
-  obj: "{'some': 'text', 'goes': 'here'
+  info: "{'some': 'text', 'goes': 'here'
       {'sometimes': 'its', 'really'
         {'complicated'
           {[1, 2, 3, 4, 5]}}},
@@ -72,7 +72,7 @@ Game.create(
         {'complicated'
           {[1, 2, 3, 4, 5]}}}
   }",
-  public: true
+  published: true
 )
 
 Collaborator.create(
@@ -84,14 +84,14 @@ Map.create(
   game_id: 1,
   name: 'map 1',
   description: 'map for quest game',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Map.create(
   game_id: 1,
   name: 'map 2',
   description: 'map for quest game',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -99,7 +99,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 1',
   description: 'scene for map 1',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -107,7 +107,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 2',
   description: 'scene for map 1',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -115,7 +115,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 3',
   description: 'scene for map 1',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -123,7 +123,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 4',
   description: 'scene for map 1',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -131,7 +131,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 5',
   description: 'scene for map 1',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -139,7 +139,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 6',
   description: 'scene for map 1',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -147,7 +147,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 7',
   description: 'scene for map 1',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -155,7 +155,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 8',
   description: 'scene for map 1',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -163,7 +163,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 9',
   description: 'scene for map 1',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -171,7 +171,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 11',
   description: 'scene for map 2',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -179,7 +179,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 12',
   description: 'scene for map 2',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -187,7 +187,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 13',
   description: 'scene for map 2',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -195,7 +195,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 14',
   description: 'scene for map 2',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -203,7 +203,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 15',
   description: 'scene for map 2',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -211,7 +211,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 16',
   description: 'scene for map 2',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -219,7 +219,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 17',
   description: 'scene for map 2',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -227,7 +227,7 @@ Scene.create(
   game_id: 1,
   name: 'scene 18',
   description: 'scene for map 2',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Scene.create(
@@ -235,164 +235,164 @@ Scene.create(
   game_id: 1,
   name: 'scene 19',
   description: 'scene for map 2',
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
 Background.create!(
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'sky',
   tags: "['blue', 'sky']"
 )
 
 Background.create!(
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'potter',
   tags: "['potter', 'sky']"
 )
 
 Obstacle.create!(
-  obj: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'tree',
   tags: '[1, 2, 3, 4]'
 )
 
 Obstacle.create!(
-  obj: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'tree',
   tags: '[bob, oak, wood]'
 )
 
 
 Entity.create!(
-  obj: "{'a': 'b', 'c': 'd' {'e': 'f', 'g' {'fun' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'a': 'b', 'c': 'd' {'e': 'f', 'g' {'fun' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'old hag',
   tags: "['guns', 'roses']"
 )
 
 Background.create!(
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'grass',
   tags: "['green', 'short']"
 )
 
 Background.create!(
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'pond',
   tags: "[water, small]"
 )
 
 Obstacle.create!(
-  obj: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'rock',
   tags: '[big, grey, mossy]'
 )
 
 Obstacle.create!(
-  obj: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'hollow tree',
   tags: '[birch, wood]'
 )
 
 
 Entity.create!(
-  obj: "{'a': 'b', 'c': 'd' {'e': 'f', 'g' {'fun' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'a': 'b', 'c': 'd' {'e': 'f', 'g' {'fun' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'Tall MAN',
   tags: "['pie', 'thing']"
 )
 
 Background.create!(
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'red sky',
   tags: "['red', 'sky']"
 )
 
 Background.create!(
-  obj: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'church',
   tags: "[steeple, stained glass, brick]"
 )
 
 Obstacle.create!(
-  obj: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: false,
+  published: false,
   name: 'tree',
   tags: '[1, 2, 3, 4]'
 )
 
 Obstacle.create!(
-  obj: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'foo': 'bar', 'taco': 'pie' {'hi': 'mom', 'please' {'help' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'shrub',
   tags: '[green, short, stubby]'
 )
 
 
 Entity.create!(
-  obj: "{'a': 'b', 'c': 'd' {'e': 'f', 'g' {'fun' {[1, 2, 3, 4, 5]}}}}",
+  info: "{'a': 'b', 'c': 'd' {'e': 'f', 'g' {'fun' {[1, 2, 3, 4, 5]}}}}",
   user_id: 1,
   game_id: 1,
-  public: true,
+  published: true,
   name: 'tacopies',
   tags: "[stinky, man, short]"
 )
 
 Character.create!(
   user_id: 1,
-  obj: '{name: guy, movements {up: {blah}, down: {blah}, swim: {blah}}}',
+  info: '{name: guy, movements {up: {blah}, down: {blah}, swim: {blah}}}',
   name: 'tacopies',
   current: true
 )
 
 Character.create!(
   user_id: 1,
-  obj: '{I am the almighty object}',
+  info: '{I am the almighty object}',
   name: 'churrocakes',
   current: false
 )
 
 Character.create!(
   user_id: 1,
-  obj: '{object: {object: key of key}}',
+  info: '{infostuff: {info: key of key}}',
   name: 'burritobrownies',
   current: false
 )

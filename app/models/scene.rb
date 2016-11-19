@@ -4,8 +4,8 @@ class Scene < ApplicationRecord
   belongs_to :game
   validates :name, presence: true, uniqueness: { scope: [:map, :game] }
 
-  def self.create_scene(var, options)
-    var = self.new_scene(options)
+  def self.create_scene(var, params)
+    var = self.new_scene(params)
     if var.save
       var
     else
@@ -13,10 +13,10 @@ class Scene < ApplicationRecord
     end
   end
 
-  def self.new_scene(options)
+  def self.new_scene(params)
     Scene.create(
-      obj: options['obj'], map_id: options['map_id'], game_id: options['game_id'],
-      description: options['description'], name: options['name'].downcase
+      info: params[:info], map_id: params[:map_id], game_id: params[:game_id],
+      description: params[:description], name: params[:name].downcase
     )
   end
 

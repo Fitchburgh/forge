@@ -1,7 +1,7 @@
 class Obstacle < ApplicationRecord
   belongs_to :user
   belongs_to :game
-  validates :obj, :tags, :name, presence: true
+  validates :info, :tags, :name, presence: true
 
   def self.find_obstacle_by_input(var, params)
     var = []
@@ -11,35 +11,35 @@ class Obstacle < ApplicationRecord
     var
   end
 
-  def self.create_obstacle_article(var, options, auth_id)
-    var = self.new_obstacle(options, auth_id)
+  def self.create_obstacle_article(var, params, auth_id)
+    var = self.new_obstacle(params, auth_id)
   end
 
-  def self.new_obstacle(options, auth_id)
+  def self.new_obstacle(params, auth_id)
     Obstacle.new(
-      obj: options[:obj],
+      info: params[:info],
       user_id: auth_id,
-      game_id: options[:game_id],
-      public: options[:public],
-      name: options[:name].downcase,
-      tags: options[:tags].to_s.downcase
+      game_id: params[:game_id],
+      published: params[:published],
+      name: params[:name].downcase,
+      tags: params[:tags].to_s.downcase
   )
   end
 
   def self.update_obstacle(var, params, auth_id)
-    var.obj = params[:obj]
+    var.info = params[:info]
     var.user_id = auth_id
     var.game_id = params[:game_id]
-    var.public = params[:public]
+    var.published = params[:published]
     var.name = params[:name].downcase
-    var.tags = params[:tags].downcase
+    var.tags = params[:tags].to_s.downcase
   end
 
   def self.find_obstacle_by_input(var, params)
     var = []
     Obstacle.all.each do |t|
       if t.tags.include?(params.downcase) || t.name.include?(params.downcase)
-        var << { id: t.id, user_id: t.user_id, game_id: t.game_id, public: t.public, name: t.name, tags: t.tags }
+        var << { id: t.id, user_id: t.user_id, game_id: t.game_id, published: t.published, name: t.name, tags: t.tags }
       end
     end
     var

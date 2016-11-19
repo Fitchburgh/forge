@@ -5,8 +5,8 @@ class CreateGames < ActiveRecord::Migration[5.0]
       t.json :tags
       t.references :user, foreign_key: true
       t.string :description
-      t.json :obj
-      t.boolean :public, default: false
+      t.json :info
+      t.boolean :published, default: false
 
       t.timestamps
     end

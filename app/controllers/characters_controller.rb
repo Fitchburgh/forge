@@ -52,13 +52,7 @@ class CharactersController < ApplicationController
   def update_current_character
     @character = Character.find_by(id: params[:id])
     if !@character.nil?
-      @characters = Character.where.not(id: params[:id])
-      @characters.each do |char|
-        char.current = false
-        char.save!
-      end
-      @character.current = true
-      @character.save!
+      Character.update_current_user_character(@character, params)
       render json: @character
     else
       render :json => { error: 'character does not exist' }, status: 404

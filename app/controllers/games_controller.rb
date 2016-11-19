@@ -11,19 +11,17 @@ class GamesController < ApplicationController
   end
 
   def update
-    make_new_key = false
     @game = Game.find_by(id: params[:id])
 
+    # I'd like to make this a model method, but we need to return two things:
+    # true or false, and if true the name of the game before we update it
+    make_new_key = false
     if !(@game.name == params[:name])
       make_new_key = true
       old_name = @game.name
     end
 
-    @game.name = params[:name].downcase
-    @game.tags = params[:tags].to_s.downcase
-    @game.description = params[:description].downcase
-    @game.info = params[:info]
-    @game.published = params[:published]
+    Game.update_game(@game, params)
     if @game.save
       Redis.current.del(old_name) if make_new_key = true
       Redis.current.set(@game.name, @game.attributes.to_json)

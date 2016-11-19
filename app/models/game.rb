@@ -26,4 +26,12 @@ class Game < ApplicationRecord
     end
     var
   end
+
+  def self.update_game(var, params)
+    var.name = params[:name].downcase
+    var.tags = params[:tags].to_s.downcase
+    var.description = params[:description].downcase
+    var.info = params[:info]
+    var.published = params[:published]
+  end
 end

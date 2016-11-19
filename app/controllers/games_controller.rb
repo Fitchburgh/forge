@@ -1,13 +1,6 @@
 class GamesController < ApplicationController
   def create
-    @game = Game.new(
-      name: params[:name].downcase,
-      tags: params[:tags].to_s.downcase,
-      description: params[:description].downcase,
-      info: params[:info],
-      user_id: request.env['HTTP_USER_ID'],
-      published: params[:published]
-    )
+    @game = Game.create_new_game(@game, params, request.env['HTTP_USER_ID'])
     if @game.save
       Redis.current.set(@game.name, @game.attributes.to_json)
       Redis.current.expire(@game.name, 2592000)

@@ -4,8 +4,8 @@ class Background < ApplicationRecord
   validates :info, :tags, :name, presence: true
 
 
-  def self.create_background_article(var, options, auth_id)
-    var = self.new_background(options, auth_id)
+  def self.create_background_article(var, params, auth_id)
+    var = self.new_background(params, auth_id)
   end
 
   def self.find_background_by_input(var, params)

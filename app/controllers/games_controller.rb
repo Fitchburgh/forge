@@ -1,5 +1,3 @@
-require 'pry'
-
 class GamesController < ApplicationController
   def create
     @game = Game.create_new_game(@game, params, request.env['HTTP_USER_ID'])

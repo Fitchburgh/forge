@@ -1,7 +1,7 @@
 class CreateEntities < ActiveRecord::Migration[5.0]
   def change
     create_table :entities do |t|
-      t.json :obj
+      t.json :info
       t.references :user, foreign_key: true
       t.references :game, foreign_key: true
       t.string :name

@@ -1,4 +1,4 @@
-# This will really only be needed if loading game JSON obj is too slow
+# This will really only be needed if loading game JSON info is too slow
 class Map < ApplicationRecord
   belongs_to :game
   validates :name, presence: true, uniqueness: { scope: :game }
@@ -14,7 +14,7 @@ class Map < ApplicationRecord
 
   def self.new_map(options)
     Map.create(
-      obj: options['obj'], game_id: options['game_id'],
+      info: options['info'], game_id: options['game_id'],
       description: options['description'], name: options['name'].downcase
     )
   end

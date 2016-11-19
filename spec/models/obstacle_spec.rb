@@ -10,7 +10,7 @@ RSpec.describe Obstacle do
 
     it "should not save if the obstacle does not have a name" do
       expect {
-        Obstacle.create!(user_id: 1, scene_id: 1, obj: "{stuff}", tags: "['oak', 'tall tree']")
+        Obstacle.create!(user_id: 1, scene_id: 1, info: "{stuff}", tags: "['oak', 'tall tree']")
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end

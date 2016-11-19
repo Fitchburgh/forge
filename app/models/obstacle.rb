@@ -1,7 +1,7 @@
 class Obstacle < ApplicationRecord
   belongs_to :user
   belongs_to :game
-  validates :obj, :tags, :name, presence: true
+  validates :info, :tags, :name, presence: true
 
   def self.find_obstacle_by_input(var, params)
     var = []
@@ -17,7 +17,7 @@ class Obstacle < ApplicationRecord
 
   def self.new_obstacle(params, auth_id)
     Obstacle.new(
-      obj: params[:obj],
+      info: params[:info],
       user_id: auth_id,
       game_id: params[:game_id],
       public: params[:public],
@@ -27,7 +27,7 @@ class Obstacle < ApplicationRecord
   end
 
   def self.update_obstacle(var, params, auth_id)
-    var.obj = params[:obj]
+    var.info = params[:info]
     var.user_id = auth_id
     var.game_id = params[:game_id]
     var.public = params[:public]

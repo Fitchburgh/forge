@@ -4,9 +4,9 @@ class GamesController < ApplicationController
       name: params[:name].downcase,
       tags: params[:tags].to_s.downcase,
       description: params[:description].downcase,
-      obj: params[:obj],
+      info: params[:info],
       user_id: request.env['HTTP_USER_ID'],
-      public: params[:public]
+      published: params[:published]
     )
     if @game.save
       Redis.current.set(@game.name, @game.attributes.to_json)
@@ -29,13 +29,13 @@ class GamesController < ApplicationController
     @game.name = params[:name].downcase
     @game.tags = params[:tags].to_s.downcase
     @game.description = params[:description].downcase
-    @game.obj = params[:obj]
-    @game.public = params[:public]
+    @game.info = params[:info]
+    @game.published = params[:published]
     if @game.save
       Redis.current.del(old_name) if make_new_key = true
       Redis.current.set(@game.name, @game.attributes.to_json)
       Redis.current.expire(@game.name, 2592000)
-      render :json => { game: [@game.id, @game.name, @game.tags, @game.description, @game.user_id, @game.public] }
+      render :json => { game: [@game.id, @game.name, @game.tags, @game.description, @game.user_id, @game.published] }
     else
       render :json => { :errors => @savegame.errors.full_messages }, status: 404
     end
@@ -99,7 +99,7 @@ class GamesController < ApplicationController
     @savegame = SaveGame.new(
       game_id: params[:game_id],
       user_id: request.env['HTTP_USER_ID'],
-      obj: params[:obj]
+      info: params[:info]
     )
     if @savegame.save
       render json: @savegame

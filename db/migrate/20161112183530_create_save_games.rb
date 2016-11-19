@@ -3,7 +3,7 @@ class CreateSaveGames < ActiveRecord::Migration[5.0]
     create_table :save_games do |t|
       t.references :game, foreign_key: true
       t.references :user, foreign_key: true
-      t.json :obj
+      t.json :info
 
       t.timestamps
     end

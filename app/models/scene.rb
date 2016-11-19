@@ -15,7 +15,7 @@ class Scene < ApplicationRecord
 
   def self.new_scene(options)
     Scene.create(
-      obj: options['obj'], map_id: options['map_id'], game_id: options['game_id'],
+      info: options['info'], map_id: options['map_id'], game_id: options['game_id'],
       description: options['description'], name: options['name'].downcase
     )
   end

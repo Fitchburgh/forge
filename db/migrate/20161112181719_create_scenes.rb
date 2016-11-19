@@ -5,7 +5,7 @@ class CreateScenes < ActiveRecord::Migration[5.0]
       t.references :game, foreign_key: true
       t.string :name
       t.string :description
-      t.json :obj
+      t.json :info
 
       t.timestamps
     end

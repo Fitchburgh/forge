@@ -13,6 +13,6 @@ class Article < ApplicationRecord
 
   def asset_params
     # only permitting user and scene ID's here for testing.  these will come from front end
-    params.permit(:name, :obj, :user_id, :scene_id, :tags, :public)
+    params.permit(:name, :info, :user_id, :scene_id, :tags, :public)
   end
 end

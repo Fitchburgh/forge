@@ -11,7 +11,7 @@ class GamesController < ApplicationController
     if @game.save
       Redis.current.set(@game.name, @game.attributes.to_json)
       Redis.current.expire(@game.name, 2592000)
-      render :json => { game: [id: @game.id, name: @game.name, tags: @game.tags, description: @game.description, user_id: @game.user_id] }
+      render :json => { id: @game.id, name: @game.name, tags: @game.tags, description: @game.description, user_id: @game.user_id }
     else
       render :json => { :errors => @game.errors.full_messages }, status: 400
     end
@@ -35,7 +35,7 @@ class GamesController < ApplicationController
       Redis.current.del(old_name) if make_new_key = true
       Redis.current.set(@game.name, @game.attributes.to_json)
       Redis.current.expire(@game.name, 2592000)
-      render :json => { game: [id: @game.id, name: @game.name, tags: @game.tags, description: @game.description, user_id: @game.user_id, published: @game.published] }
+      render :json => { id: @game.id, name: @game.name, tags: @game.tags, description: @game.description, user_id: @game.user_id, published: @game.published }
     else
       render :json => { :errors => @savegame.errors.full_messages }, status: 404
     end

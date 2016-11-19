@@ -26,6 +26,8 @@ Rails.application.routes.draw do
 
   get 'games/search'
   get 'games/user-games' => 'games#find_user_games'
+  get 'games/index' => 'prelogin_users#index'
+  get 'games/load' => 'prelogin_users#load'
   post 'games/create'
   post 'games/savegame'
   put 'games/update'
@@ -40,9 +42,6 @@ Rails.application.routes.draw do
   post 'obstacles/create'
   put 'obstacles/update'
   delete 'obstacles/delete'
-
-  get 'prelogin_users/index'
-  get 'prelogin_users/load'
 
   get 'scenes/index'
   get 'scenes/search'

@@ -3,7 +3,11 @@ class PreloginUsersController < ApplicationController
 
   def index
     @all_games = Game.where(archived: false)
-    render json: @all_games[1..-1]
+    games = []
+    @all_games[1..-1].each do |game|
+      games << { id: game.id, name: game.name, tags: game.tags, user_id: game.user_id, description: game.description, published: game.published, plays: game.plays }
+    end
+    render json: games
   end
 
   def load
@@ -21,5 +25,13 @@ class PreloginUsersController < ApplicationController
         render :json => { errors: 'this game does not exist' }, status: 400
       end
     end
+  end
+
+  # call this immediately after every load action called
+  def count
+    @game = Game.find_by(id: params[:id])
+    @game.plays = @game.plays + 1
+    @game.save!
+    render json: { id: @game.id, name: @game.name, tags: @game.tags, user_id: @game.user_id, description: @game.description, published: @game.published, plays: @game.plays }
   end
 end

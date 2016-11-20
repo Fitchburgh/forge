@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  get 'sessions/new'
+
+  get 'sessions/create'
+
+  get 'sessions/destroy'
+
   get 'articles/index'
   get 'articles/search'
   get 'articles/game/all' => 'articles#find_game_articles'
@@ -50,4 +57,11 @@ Rails.application.routes.draw do
 
   post 'users/create'
   patch 'users/login'
+
+  # rails routes for internal API views
+  resources :admins
+
+  get 'login' => 'sessions#new'
+  post 'api/login' => 'sessions#create'
+  get 'logout' => 'sessions#destroy'
 end

@@ -138,7 +138,6 @@ class GamesController < ApplicationController
   end
 
   # call this immediately after every load action
-  # number of times a user plays a certain game
   def check_user_play
     @play = GamePlay.where("game_id = ? AND user_id = ?", params[:game_id], request.env['HTTP_USER_ID'])
     if @play.empty?
@@ -165,6 +164,15 @@ class GamesController < ApplicationController
       @play.plays += 1
       @play.save!
       render json: @play
+    end
+  end
+
+  def count_user_game_plays
+    @play = GamePlay.find_by("game_id = ? AND user_id = ?", params[:game_id], request.env['HTTP_USER_ID'])
+    if !@play.nil?
+      render json: { userGamePlays: @play.plays }
+    else
+      render :json => { errors: @play.errors.full_messages }, status: 400
     end
   end
 end

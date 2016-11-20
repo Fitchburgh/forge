@@ -61,6 +61,7 @@ Rails.application.routes.draw do
 
   get 'users/total' => 'games#count_users'
   get 'users/plays' => 'games#check_user_play'
+  get 'users/plays/count' => 'games#count_user_game_plays'
   post 'users/plays' => 'games#add_user_play'
   post 'users/create'
   patch 'users/login'

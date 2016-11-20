@@ -3,7 +3,7 @@ require 'pry'
 class ArticlesController < ApplicationController
   def index
     @articles = { 'backgrounds' => Background.all, 'obstacles' => Obstacle.all, 'entities' => Entity.all }
-    render :json => @articles
+    render json: @articles
   end
 
   def search
@@ -12,6 +12,6 @@ class ArticlesController < ApplicationController
     @entities = Entity.find_entity_by_input(@entities, params[:tags])
 
     @articles = { 'backgrounds' => @backgrounds, 'obstacles' => @obstacles, 'entities' => @entities }
-    render :json => @articles
+    render json: @articles
   end
 end

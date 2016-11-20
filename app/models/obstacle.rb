@@ -6,7 +6,9 @@ class Obstacle < ApplicationRecord
   def self.find_obstacle_by_input(var, params)
     var = []
     Obstacle.all.each do |t|
-      var << t if t.tags.include?(params) || t.name.include?(params)
+      if t.tags.include?(params.downcase) || t.name.include?(params.downcase)
+        var << { id: t.id, user_id: t.user_id, game_id: t.game_id, published: t.published, name: t.name, tags: t.tags }
+      end
     end
     var
   end
@@ -33,15 +35,5 @@ class Obstacle < ApplicationRecord
     var.published = params[:published]
     var.name = params[:name].downcase
     var.tags = params[:tags].to_s.downcase
-  end
-
-  def self.find_obstacle_by_input(var, params)
-    var = []
-    Obstacle.all.each do |t|
-      if t.tags.include?(params.downcase) || t.name.include?(params.downcase)
-        var << { id: t.id, user_id: t.user_id, game_id: t.game_id, published: t.published, name: t.name, tags: t.tags }
-      end
-    end
-    var
   end
 end

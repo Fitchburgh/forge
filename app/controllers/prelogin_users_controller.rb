@@ -22,4 +22,7 @@ class PreloginUsersController < ApplicationController
       end
     end
   end
+
+  def welcome
+  end
 end

@@ -90,6 +90,40 @@ class GamesController < ApplicationController
     render json: { totalGamePlays: count }
   end
 
+  def count_total_articles
+    count = Background.all.count + Obstacle.all.count + Entity.all.count
+    render json: { totalArticlesCount: count }
+  end
+
+  def count_total_backgrounds
+    render json: { totalBackgroundsCount: Background.all.count }
+  end
+
+  def count_total_obstacles
+    render json: { totalObstacleCount: Obstacle.all.count }
+  end
+
+  def count_total_entities
+    render json: { totalEntityCount: Entity.all.count }
+  end
+
+  def count_articles_by_game
+    count = Background.where(game_id: params[:game_id]).count + Obstacle.where(game_id: params[:game_id]).count + Entity.where(game_id: params[:game_id]).count
+    render json: { articlesByGameCount: count }
+  end
+
+  def count_backgrounds_by_game
+    render json: { backgroundsByGameCount: Background.where(game_id: params[:game_id]).count }
+  end
+
+  def count_obstacles_by_game
+    render json: { obstaclesByGameCount: Obstacle.where(game_id: params[:game_id]).count }
+  end
+
+  def count_entities_by_game
+    render json: { entitiesByGameCount: Entity.where(game_id: params[:game_id]).count }
+  end
+
   def savegame
     @savegame = SaveGame.new(
       game_id: params[:game_id],

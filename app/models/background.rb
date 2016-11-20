@@ -44,7 +44,7 @@ class Background < ApplicationRecord
   def self.find_background_by_game(var, params)
     var = []
     Background.where(game_id: params).each do |t|
-      var << { id: t.id, user_id: t.user_id, published: t.published, name: t.name, tags: t.tags }
+      var << t
     end
     var
   end

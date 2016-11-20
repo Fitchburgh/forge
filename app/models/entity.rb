@@ -40,7 +40,7 @@ class Entity < ApplicationRecord
   def self.find_entity_by_game(var, params)
     var = []
     Entity.where(game_id: params).each do |t|
-      var << { id: t.id, user_id: t.user_id, published: t.published, name: t.name, tags: t.tags }
+      var << t
     end
     var
   end

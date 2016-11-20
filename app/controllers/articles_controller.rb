@@ -16,11 +16,12 @@ class ArticlesController < ApplicationController
   end
 
   def find_game_articles
+    @game = Game.find_by(id: params[:game_id])
     @backgrounds = Background.find_background_by_game(@backgrounds, params[:game_id])
     @obstacles = Obstacle.find_obstacle_by_game(@obstacles, params[:game_id])
     @entities = Entity.find_entity_by_game(@entities, params[:game_id])
 
-    @articles = { 'backgrounds' => @backgrounds, 'obstacles' => @obstacles, 'entities' => @entities }
+    @articles = { 'gameName' => @game.name, 'availableBackgrounds' => @backgrounds, 'availableObstacles' => @obstacles, 'availableEntities' => @entities }
     render json: @articles
   end
 end

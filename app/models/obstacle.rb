@@ -36,4 +36,12 @@ class Obstacle < ApplicationRecord
     var.name = params[:name].downcase
     var.tags = params[:tags].to_s.downcase
   end
+
+  def self.find_obstacle_by_game(var, params)
+    var = []
+    Obstacle.where(game_id: params).each do |t|
+      var << { id: t.id, user_id: t.user_id, published: t.published, name: t.name, tags: t.tags }
+    end
+    var
+  end
 end

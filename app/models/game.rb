@@ -14,7 +14,8 @@ class Game < ApplicationRecord
       description: params[:description].downcase,
       info: params[:info],
       user_id: auth_id,
-      published: params[:published]
+      published: params[:published],
+      plays: 0
     )
   end
 
@@ -23,7 +24,7 @@ class Game < ApplicationRecord
     Game.all[1..-1].each do |t|
       if t.tags.include?(params.downcase) || t.name.include?(params.downcase)
         binding.pry
-        var << {id: t.id, name: t.name, tags: t.tags, user_id: t.user_id, description: t.description, published: t.published}
+        var << {id: t.id, name: t.name, tags: t.tags, user_id: t.user_id, description: t.description, published: t.published, plays: t.plays}
       end
     end
     var

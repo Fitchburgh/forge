@@ -4,7 +4,7 @@ class GamesController < ApplicationController
     if @game.save
       Redis.current.set(@game.name, @game.attributes.to_json)
       Redis.current.expire(@game.name, 2592000)
-      render :json => { id: @game.id, name: @game.name, tags: @game.tags, description: @game.description, user_id: @game.user_id }
+      render :json => { id: @game.id, name: @game.name, tags: @game.tags, description: @game.description, user_id: @game.user_id, published: @game.published, plays: @game.plays }
     else
       render :json => { :errors => @game.errors.full_messages }, status: 400
     end
@@ -26,7 +26,7 @@ class GamesController < ApplicationController
       Redis.current.del(old_name) if make_new_key = true
       Redis.current.set(@game.name, @game.attributes.to_json)
       Redis.current.expire(@game.name, 2592000)
-      render :json => { id: @game.id, name: @game.name, tags: @game.tags, description: @game.description, user_id: @game.user_id, published: @game.published }
+      render :json => { id: @game.id, name: @game.name, tags: @game.tags, description: @game.description, user_id: @game.user_id, published: @game.published, plays: @game.plays }
     else
       render :json => { :errors => @savegame.errors.full_messages }, status: 404
     end
@@ -58,8 +58,70 @@ class GamesController < ApplicationController
     if user_games.empty?
       render json: []
     else
-      render json: user_games
+      games = []
+      user_games.each do |game|
+        if game.id > 0
+          games << { id: game.id, name: game.name, tags: game.tags, user_id: game.user_id, description: game.description, published: game.published, plays: game.plays }
+        end
+      end
+      render json: games
     end
+  end
+
+  def find_user_games_count
+    user_games = Game.where(user_id: request.env['HTTP_USER_ID'])
+    if user_games.empty?
+      render json: []
+    else
+      render json: { count: user_games.count }
+    end
+  end
+
+  def count_users
+    render json: { totalUsersCount: User.all.count }
+  end
+
+  def count_total_plays
+    @games = Game.where(published: true)
+    count = 0
+    @games.each do |game|
+      count += game.plays
+    end
+    render json: { totalGamePlays: count }
+  end
+
+  def count_total_articles
+    count = Background.all.count + Obstacle.all.count + Entity.all.count
+    render json: { totalArticlesCount: count }
+  end
+
+  def count_total_backgrounds
+    render json: { totalBackgroundsCount: Background.all.count }
+  end
+
+  def count_total_obstacles
+    render json: { totalObstacleCount: Obstacle.all.count }
+  end
+
+  def count_total_entities
+    render json: { totalEntityCount: Entity.all.count }
+  end
+
+  def count_articles_by_game
+    count = Background.where(game_id: params[:game_id]).count + Obstacle.where(game_id: params[:game_id]).count + Entity.where(game_id: params[:game_id]).count
+    render json: { articlesByGameCount: count }
+  end
+
+  def count_backgrounds_by_game
+    render json: { backgroundsByGameCount: Background.where(game_id: params[:game_id]).count }
+  end
+
+  def count_obstacles_by_game
+    render json: { obstaclesByGameCount: Obstacle.where(game_id: params[:game_id]).count }
+  end
+
+  def count_entities_by_game
+    render json: { entitiesByGameCount: Entity.where(game_id: params[:game_id]).count }
   end
 
   def savegame
@@ -71,7 +133,51 @@ class GamesController < ApplicationController
     if @savegame.save
       render json: @savegame
     else
-      render :json => { :errors => @savegame.errors.full_messages }, status: 400
+      render :json => { errors: @savegame.errors.full_messages }, status: 400
     end
+  end
+
+  # call this immediately after every load action
+  def check_user_play
+    @play = GamePlay.where("game_id = ? AND user_id = ?", params[:game_id], request.env['HTTP_USER_ID'])
+    if @play.empty?
+      render json: { message: 'need to add play' }
+    else
+      render json: { message: 'need to update play' }
+    end
+  end
+
+  def add_user_play
+    @play = GamePlay.add_game_play(@play, params, request.env['HTTP_USER_ID'])
+    if @play.save
+      render json: @play
+    else
+      render :json => { errors: @play.errors.full_messages }, status: 400
+    end
+  end
+
+  def update_user_play
+    @play = GamePlay.find_by("game_id = ? AND user_id = ?", params[:game_id], request.env['HTTP_USER_ID'])
+    if @play.nil?
+      render :json => { errors: @play.errors.full_messages }, status: 400
+    else
+      @play.plays += 1
+      @play.save!
+      render json: @play
+    end
+  end
+
+  def count_user_game_plays
+    @play = GamePlay.find_by("game_id = ? AND user_id = ?", params[:game_id], request.env['HTTP_USER_ID'])
+    if !@play.nil?
+      render json: { userGamePlays: @play.plays }
+    else
+      render :json => { errors: @play.errors.full_messages }, status: 400
+    end
+  end
+
+  def count_game_users
+    count = GamePlay.where(game_id: params[:game_id]).count
+    render json: { gameUsersCount: count }
   end
 end

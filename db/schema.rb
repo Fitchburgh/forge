@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116142449) do
+ActiveRecord::Schema.define(version: 20161120211756) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admins", force: :cascade do |t|
+    t.string   "username"
+    t.string   "first"
+    t.string   "last"
+    t.boolean  "active",          default: true
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "api_key"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
 
   create_table "backgrounds", force: :cascade do |t|
     t.json     "info"
@@ -60,6 +73,16 @@ ActiveRecord::Schema.define(version: 20161116142449) do
     t.index ["user_id"], name: "index_entities_on_user_id", using: :btree
   end
 
+  create_table "game_plays", force: :cascade do |t|
+    t.integer  "game_id"
+    t.integer  "user_id"
+    t.integer  "plays"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_game_plays_on_game_id", using: :btree
+    t.index ["user_id"], name: "index_game_plays_on_user_id", using: :btree
+  end
+
   create_table "games", force: :cascade do |t|
     t.string   "name"
     t.json     "tags"
@@ -71,6 +94,7 @@ ActiveRecord::Schema.define(version: 20161116142449) do
     t.string   "archived_at"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.integer  "plays"
     t.index ["user_id"], name: "index_games_on_user_id", using: :btree
   end
 
@@ -135,6 +159,8 @@ ActiveRecord::Schema.define(version: 20161116142449) do
   add_foreign_key "collaborators", "users"
   add_foreign_key "entities", "games"
   add_foreign_key "entities", "users"
+  add_foreign_key "game_plays", "games"
+  add_foreign_key "game_plays", "users"
   add_foreign_key "games", "users"
   add_foreign_key "maps", "games"
   add_foreign_key "obstacles", "games"

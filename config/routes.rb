@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   get 'games/obstacles/count' => 'games#count_obstacles_by_game'
   get 'games/entities/count' => 'games#count_entities_by_game'
   get 'games/articles/count' => 'games#count_articles_by_game'
+  get 'games/users/total' => 'games#count_game_users'
   post 'games/create'
   post 'games/savegame'
   patch 'games/plays' => 'prelogin_users#count'

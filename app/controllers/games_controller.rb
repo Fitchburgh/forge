@@ -175,4 +175,9 @@ class GamesController < ApplicationController
       render :json => { errors: @play.errors.full_messages }, status: 400
     end
   end
+
+  def count_game_users
+    count = GamePlay.where(game_id: params[:game_id]).count
+    render json: { gameUsersCount: count }
+  end
 end

@@ -27,7 +27,7 @@ class PreloginUsersController < ApplicationController
     end
   end
 
-  # call this immediately after every load action called
+  # call this immediately after every load action
   def count
     @game = Game.find_by(id: params[:id])
     @game.plays = @game.plays + 1

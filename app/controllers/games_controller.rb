@@ -133,7 +133,38 @@ class GamesController < ApplicationController
     if @savegame.save
       render json: @savegame
     else
-      render :json => { :errors => @savegame.errors.full_messages }, status: 400
+      render :json => { errors: @savegame.errors.full_messages }, status: 400
+    end
+  end
+
+  # call this immediately after every load action
+  # number of times a user plays a certain game
+  def check_user_play
+    @play = GamePlay.where("game_id = ? AND user_id = ?", params[:game_id], request.env['HTTP_USER_ID'])
+    if @play.empty?
+      render json: { message: 'need to add play' }
+    else
+      render json: { message: 'need to update play' }
+    end
+  end
+
+  def add_user_play
+    @play = GamePlay.add_game_play(@play, params, request.env['HTTP_USER_ID'])
+    if @play.save
+      render json: @play
+    else
+      render :json => { errors: @play.errors.full_messages }, status: 400
+    end
+  end
+
+  def update_user_play
+    @play = GamePlay.find_by("game_id = ? AND user_id = ?", params[:game_id], request.env['HTTP_USER_ID'])
+    if @play.nil?
+      render :json => { errors: @play.errors.full_messages }, status: 400
+    else
+      @play.plays += 1
+      @play.save!
+      render json: @play
     end
   end
 end

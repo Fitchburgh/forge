@@ -60,6 +60,9 @@ Rails.application.routes.draw do
   post 'scenes/create'
 
   get 'users/total' => 'games#count_users'
+  get 'users/plays' => 'games#check_user_play'
+  post 'users/plays' => 'games#add_user_play'
   post 'users/create'
   patch 'users/login'
+  patch 'users/plays' => 'games#update_user_play'
 end

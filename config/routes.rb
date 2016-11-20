@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   put 'entities/update'
   delete 'entities/delete'
 
-  root 'games#welcome'
+  root 'prelogin_users#welcome'
   get 'games/index'
 
   get 'games/search'

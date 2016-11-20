@@ -102,7 +102,4 @@ class GamesController < ApplicationController
       render :json => { :errors => @savegame.errors.full_messages }, status: 400
     end
   end
-
-  def welcome
-  end
 end

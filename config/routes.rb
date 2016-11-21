@@ -16,15 +16,15 @@ Rails.application.routes.draw do
   put 'characters/update'
   delete 'characters/delete'
 
-  get 'collaborators/existence' => 'collaborators#check_collab_existence' # does collab exist in table
-  get 'collaborators/game/collaborators-and-requesters' => 'collaborators#find_game_requesters_and_collaborators' # returns collabs and requesters for a game_id where requested true
-  get 'collaborators/game/requesters' => 'collaborators#find_game_requesters' # returns requesters for a game_id where requested true, accepted false
-  get 'collaborators/game/collaborators' => 'collaborators#find_game_collaborators'# returns collabs for a game_id where requested true, accepted true
-  get 'collaborators/user/collaborators' => 'collaborators#find_user_collaborators' # returns all collabs for all user's games
-  get 'collaborators/user/requesters' => 'collaborators#find_user_requesters' # returns all requesters for all user's games
-  post 'collaborators/create' # create new collab
-  patch 'collaborators/update/requested' => 'collaborators#update_requested_status' # flip requested value (t -> f f -> t)
-  patch 'collaborators/update/accepted' => 'collaborators#make_collaborator' # flip accepted value (t -> f f -> t)
+  get 'collaborators/existence' => 'collaborators#check_collab_existence'
+  get 'collaborators/game/collaborators-and-requesters' => 'collaborators#find_game_requesters_and_collaborators'
+  get 'collaborators/game/requesters' => 'collaborators#find_game_requesters'
+  get 'collaborators/game/collaborators' => 'collaborators#find_game_collaborators'
+  get 'collaborators/user/collaborators' => 'collaborators#find_user_collaborators'
+  get 'collaborators/user/requesters' => 'collaborators#find_user_requesters'
+  post 'collaborators/create'
+  patch 'collaborators/update/requested' => 'collaborators#update_requested_status'
+  patch 'collaborators/update/accepted' => 'collaborators#make_collaborator'
 
   get 'entities/all' => 'entities#index'
   get 'entities/search'
@@ -81,7 +81,6 @@ Rails.application.routes.draw do
   patch 'update/current/play' => 'users#update_current_play'
   patch 'update/current/edit' => 'users#update_current_edit'
 
-  # add to api docs
   get 'users/current/play' => 'users#current_play'
   get 'users/current/edit' => 'users#current_edit'
 

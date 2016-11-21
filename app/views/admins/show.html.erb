@@ -64,10 +64,45 @@
     </tr>
 
     <tr>
-      <td>characters/current_character</td>
+      <td>collaborators/existence</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>does collab exist for a game</td>
+    </tr>
+
+    <tr>
+      <td>collaborators/game/collaborators-and-requesters</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>returns collabs and requesters for a game_id where requested is true</td>
+    </tr>
+
+    <tr>
+      <td>collaborators/game/requesters</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>returns requesters for a game_id where requested true, accepted false</td>
+    </tr>
+
+    <tr>
+      <td>collaborators/game/collaborators</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>returns collabs for a game_id where requested true, accepted true</td>
+    </tr>
+
+    <tr>
+      <td>collaborators/user/collaborators</td>
       <td>n/a</td>
       <td>user_id, token</td>
-      <td>finds avatar based on current user and active truthiness</td>
+      <td>returns all collabs for all user's games</td>
+    </tr>
+
+    <tr>
+      <td>collaborators/user/requesters</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns all requesters for all user's games</td>
     </tr>
 
     <tr>
@@ -310,6 +345,14 @@
     </tr>
 
     <tr>
+      <td>collaborators/create</td>
+      <td>
+        game_id
+      </td>
+      <td>user_id, token</td>
+      <td>create new collaborator</td>
+    </tr>
+    <tr>
       <td>entities/create</td>
       <td>info
         game_id
@@ -404,6 +447,42 @@
     </tr>
 
     <tr>
+      <td>characters/update</td>
+      <td>
+        user_id,
+        info,
+        name</td>
+      <td>user_id, token</td>
+      <td>updates current active avatar</td>
+    </tr>
+
+
+    <tr>
+      <td>collaborators/update/requested</td>
+      <td>
+        game_id
+      </td>
+      <td>user_id, token</td>
+      <td>flips requested to true or keeps it false.</td>
+    </tr>
+
+    <tr>
+      <td>collaborators/update/accepted</td>
+      <td>
+        game_id
+      </td>
+      <td>user_id, token</td>
+      <td>flips accepted to true if currently false and flips back to false if true</td>
+    </tr>
+
+    <tr>
+      <td>games/plays</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>adds a count to game plays total count - call after every game loads****</td>
+    </tr>
+
+    <tr>
       <td>update/current/play</td>
       <td>game_id</td>
       <td>user_id, token</td>
@@ -417,22 +496,6 @@
       <td>patches the current game being edited with ID for a user - on get req return the game</td>
     </tr>
 
-    <tr>
-      <td>characters/update</td>
-      <td>
-        user_id,
-        info,
-        name</td>
-      <td>user_id, token</td>
-      <td>updates current active avatar</td>
-    </tr>
-
-    <tr>
-      <td>games/plays</td>
-      <td>game_id</td>
-      <td>user_id, token</td>
-      <td>adds a count to game plays total count - call after every game loads****</td>
-    </tr>
 
     <tr>
       <td>users/login</td>
@@ -544,7 +607,7 @@
 
     <tr>
       <td>games/archive</td>
-      <td>game_id</td>
+      <td>id</td>
       <td>user_id, token</td>
       <td>"deletes" aka archives a game</td>
     </tr>

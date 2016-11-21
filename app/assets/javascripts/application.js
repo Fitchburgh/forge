@@ -35,8 +35,13 @@ $(document).ready(function () {
 
   var apiBtn = $('.apiBtn');
   var logoutBtn = $('.logoutBtn');
+  var apiLoginBtn = $('.apiLoginBtn');
 
   apiBtn.click(function(){
+    window.location.href="https://forge-api.herokuapp.com/admins/new";
+  });
+
+  apiLoginBtn.click(function(){
     window.location.href="https://forge-api.herokuapp.com/login";
   });
 

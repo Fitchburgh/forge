@@ -53,8 +53,10 @@ ActiveRecord::Schema.define(version: 20161120211756) do
   create_table "collaborators", force: :cascade do |t|
     t.integer  "game_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "requested",  default: true
+    t.boolean  "accepted",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["game_id"], name: "index_collaborators_on_game_id", using: :btree
     t.index ["user_id"], name: "index_collaborators_on_user_id", using: :btree
   end
@@ -91,6 +93,7 @@ ActiveRecord::Schema.define(version: 20161120211756) do
     t.boolean  "published",   default: false
     t.boolean  "archived",    default: false
     t.string   "archived_at"
+    t.integer  "score",       default: 0
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "plays"

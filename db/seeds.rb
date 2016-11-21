@@ -3,6 +3,8 @@ User.create(
   token: 'asoidaiosdjgas8235hy09130t1h3tQahg8123450176304',
   uid: "12498720913851029",
   google_oauth_data: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  playing_game: 1,
+  editing_game: 1
 )
 
 # These seeds needs to exist in production
@@ -14,7 +16,7 @@ Game.create(
   tags: '[]',
   user_id: 1,
   description: 'Where all the orphan articles live',
-  info: "{}",
+  info: "{Orphan: game}",
   archived: false,
   plays: 0,
   score: 150

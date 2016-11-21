@@ -5,6 +5,8 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :token
       t.string :uid
       t.json :google_oauth_data
+      t.integer :playing_game
+      t.integer :editing_game
 
       t.timestamps
     end

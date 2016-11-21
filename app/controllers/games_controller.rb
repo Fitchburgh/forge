@@ -161,8 +161,7 @@ class GamesController < ApplicationController
     if @play.nil?
       render :json => { errors: @play.errors.full_messages }, status: 400
     else
-      @play.plays += 1
-      @play.save!
+      @play.increment!(:plays)#.plays += 1
       render json: @play
     end
   end

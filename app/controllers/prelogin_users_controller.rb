@@ -2,7 +2,7 @@ class PreloginUsersController < ApplicationController
   skip_before_action :check_auth
 
   def index
-    @all_games = Game.where(archived: false)
+    @all_games = Game.where("archived = ? AND published = ?", false, true)
     games = []
     @all_games[1..-1].each do |game|
       games << { id: game.id, name: game.name, tags: game.tags, user_id: game.user_id, description: game.description, published: game.published, plays: game.plays }

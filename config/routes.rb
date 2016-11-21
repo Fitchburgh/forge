@@ -75,8 +75,7 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
 
-  get 'login' => 'api#login'
   get 'login' => 'sessions#new'
   post 'api/login' => 'sessions#create'
-  delete 'logout' => 'sessions#destroy'
+  get 'logout' => 'sessions#destroy'
 end

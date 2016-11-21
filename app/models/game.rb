@@ -38,4 +38,14 @@ class Game < ApplicationRecord
     var.published = params[:published]
     var.score = params[:score]
   end
+
+  def self.find_game_ids_by_creator(var, params)
+    var = Game.where(user_id: params[:user_id])
+    ids = []
+    var.each do |game|
+      ids << game.id
+    end
+    ids.shift if ids.include? 0
+    ids
+  end
 end

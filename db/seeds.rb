@@ -7,6 +7,27 @@ User.create(
   editing_game: 1
 )
 
+User.create(
+  username: 'natedawg',
+  token: 'alksdjfffi43mfl3k43m4kl3l4mr34f90sjc',
+  uid: "8675309",
+  google_oauth_data: "{'this guy': 'such a cool dude'}",
+)
+
+User.create(
+  username: 'bignate',
+  token: 'a000aaa0a0a0a00aaa00a0a0a0a00a0a0a00a0a',
+  uid: "123456789987654321",
+  google_oauth_data: "{'best attributes': ['rad', 'cool', 'handsome']}",
+)
+
+User.create(
+  username: 'chewy',
+  token: '22222222222222222222222llllllllllllllllll',
+  uid: "99999988888888777777766666666",
+  google_oauth_data: "{'ggggrrrrrrr': 'grrrrrr'}",
+)
+
 # These seeds needs to exist in production
 ###################################
 
@@ -90,7 +111,30 @@ Game.create(
 
 Collaborator.create(
   game_id: 1,
-  user_id: 1
+  user_id: 1,
+  requested: true,
+  accepted: true,
+)
+
+Collaborator.create(
+  game_id: 1,
+  user_id: 2,
+  requested: true,
+  accepted: true,
+)
+
+Collaborator.create(
+  game_id: 1,
+  user_id: 3,
+  requested: true,
+  accepted: false,
+)
+
+Collaborator.create(
+  game_id: 1,
+  user_id: 4,
+  requested: true,
+  accepted: true,
 )
 
 Map.create(

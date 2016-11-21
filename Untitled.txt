@@ -1,7 +1,0 @@
-
-# click on game to request to be a collab.
-# request to collaborate.  Make a request to true per user per game
-# request
-# access columns
-# collab toggle for can or cant collab
-# collab toggle for toggling request to false

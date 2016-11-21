@@ -1,2 +1,546 @@
-<p><%= @admin.first %></p>
-<p><%= @admin.email %></p>
+<button class="logoutBtn"><h2>LOGOUT</h2></button>
+<h1><p>Welcome, <%= @admin.first %>!</p></h1>
+<br />
+<h3><p>Below you will find API information</p></h3>
+<br /><br /><br />
+<div>
+  <button class="getCallsBtn"><h2>GET Calls</h2></button>
+  <button class="postCallsBtn"><h2>POST Calls</h2></button>
+  <button class="patchCallsBtn"><h2>PATCH Calls</h2></button>
+  <button class="putCallsBtn"><h2>PUT Calls</h2></button>
+  <button class="deleteCallsBtn"><h2>DELETE Calls</h2></button>
+</div>
+
+<div>
+  <br /><br /><br />
+  <table class="getCalls" style="width:100%">
+    <caption><button class="hideGetBtn hide"><h2 class="title">GET Calls</h2></button></caption>
+    <tr>
+      <th>endpoint</th>
+      <th>req data</th>
+      <th>req headers</th>
+      <th>exp result</th>
+    </tr>
+    <tr>
+      <td>articles/index</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>all assets (background/obj/ent)</td>
+    </tr>
+
+    <tr>
+      <td>articles/search</td>
+      <td>tags</td>
+      <td>user_id, token</td>
+      <td>all assets based on search word (included in name or tags)</td>
+    </tr>
+
+    <tr>
+      <td>articles/game/all</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>all game assets based on searched ID #</td>
+    </tr>
+
+    <tr>
+      <td>backgrounds/all</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>all backgrounds</td>
+    </tr>
+
+    <tr>
+      <td>backgrounds/search</td>
+      <td>tags</td>
+      <td>user_id, token</td>
+      <td>all backgrounds based on searched word</td>
+    </tr>
+
+    <tr>
+      <td>characters/all</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>uses ID from header to return all avatars a user has</td>
+    </tr>
+
+    <tr>
+      <td>characters/current_character</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>finds avatar based on current user and active truthiness</td>
+    </tr>
+
+    <tr>
+      <td>entities/all</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns all entities</td>
+    </tr>
+
+    <tr>
+      <td>entities/search</td>
+      <td>tags</td>
+      <td>user_id, token</td>
+      <td>returns entities that have a searched word in name/tags</td>
+    </tr>
+
+    <tr>
+      <td>games/index</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>get's all games!</td>
+    </tr>
+
+    <tr>
+      <td>games/search</td>
+      <td>name</td>
+      <td>user_id, token</td>
+      <td>searches name and tags for games based on search word</td>
+    </tr>
+
+    <tr>
+      <td>games/user-games</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns games based on user_id in header</td>
+    </tr>
+
+    <tr>
+      <td>games/all</td>
+      <td>n/a</td>
+      <td>n/a</td>
+      <td>returns all games able to play pre_login</td>
+    </tr>
+
+    <tr>
+      <td>games/load</td>
+      <td>name</td>
+      <td>n/a</td>
+      <td>loads up the selected game pre_login - Play Feature</td>
+    </tr>
+
+    <tr>
+      <td>games/user-games/count</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>number of games the current user has played</td>
+    </tr>
+
+    <tr>
+      <td>games/all/plays</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns all published game plays</td>
+    </tr>
+
+    <tr>
+      <td>games/backgrounds/total</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns number of backgrounds created</td>
+    </tr>
+
+    <tr>
+      <td>games/entities/total</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns number of entities created</td>
+    </tr>
+
+    <tr>
+      <td>games/obstacles/total</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns number of obstacles created</td>
+    </tr>
+
+    <tr>
+      <td>games/articles/total</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns number of articles created</td>
+    </tr>
+
+    <tr>
+      <td>games/backgrounds/count</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>returns number of backgrounds per game_id</td>
+    </tr>
+
+    <tr>
+      <td>games/obstacles/count</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>returns number of obstacles per game_id</td>
+    </tr>
+
+    <tr>
+      <td>games/entities/count</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>returns number of entities per game_id</td>
+    </tr>
+
+    <tr>
+      <td>games/articles/count</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>returns number of articles per game_id</td>
+    </tr>
+
+    <tr>
+      <td>games/users/total</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>counts users per game</td>
+    </tr>
+
+    <tr>
+      <td>maps/all</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns all maps</td>
+    </tr>
+
+    <tr>
+      <td>maps/search</td>
+      <td>name</td>
+      <td>user_id, token</td>
+      <td>returns map with name of searched word</td>
+    </tr>
+
+    <tr>
+      <td>obstacles/all</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns all obstacles</td>
+    </tr>
+
+    <tr>
+      <td>obstacles/search</td>
+      <td>tags</td>
+      <td>user_id, token</td>
+      <td>returns obstacles based on searched word (name or in tags)</td>
+    </tr>
+
+    <tr>
+      <td>scenes/all</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns all scenes</td>
+    </tr>
+
+    <tr>
+      <td>scenes/search</td>
+      <td>name</td>
+      <td>user_id, token</td>
+      <td>returns scenes based on name</td>
+    </tr>
+
+    <tr>
+      <td>users/total</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns total number of users</td>
+    </tr>
+
+    <tr>
+      <td>users/plays</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>returns user plays per game -- Call after every load of a game to play****</td>
+    </tr>
+
+    <tr>
+      <td>users/plays/count</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>returns plays per logged in user</td>
+    </tr>
+  </table>
+</div>
+
+
+<div>
+
+  <table class="postCalls" style="width:100%">
+
+    <caption><button class="hidePostBtn hide"><h2 class="title">POST Calls</h2></button></caption>
+    <tr>
+      <th>endpoint</th>
+      <th>req data</th>
+      <th>req headers</th>
+      <th>exp result</th>
+    </tr>
+    <tr>
+      <td>backgrounds/create</td>
+      <td>
+        info,
+        game_id,
+        published,
+        name,
+        tags</td>
+      <td>user_id, token</td>
+      <td>create a background</td>
+    </tr>
+
+    <tr>
+      <td>characters/create</td>
+      <td>
+        info,
+        name,
+        current</td>
+      <td>user_id, token</td>
+      <td>create an avatar</td>
+    </tr>
+
+    <tr>
+      <td>entities/create</td>
+      <td>info
+        game_id
+        published
+        name
+        tags</td>
+      <td>user_id, token</td>
+      <td>creates an entity</td>
+    </tr>
+
+    <tr>
+      <td>games/create</td>
+      <td>name,
+        tags,
+        description,
+        info,
+        published</td>
+      <td>user_id, token</td>
+      <td>creates a new game!</td>
+    </tr>
+
+    <tr>
+      <td>games/savegame</td>
+      <td>game_id,
+        info</td>
+      <td>user_id, token</td>
+      <td>saves the game STATE (playing)</td>
+    </tr>
+
+    <tr>
+      <td>maps/create</td>
+      <td>info,
+        game_id,
+        description,
+        name</td>
+      <td>user_id, token</td>
+      <td>creates a new map</td>
+    </tr>
+
+    <tr>
+      <td>obstacles/create</td>
+      <td>info,
+        game_id,
+        published,
+        name,
+        tags</td>
+      <td>user_id, token</td>
+      <td>creates a new obstacle</td>
+    </tr>
+
+    <tr>
+      <td>scenes/create</td>
+      <td>info,
+        map_id,
+        game_id,
+        description,
+        name</td>
+      <td>user_id, token</td>
+      <td>create a scene!</td>
+    </tr>
+
+    <tr>
+      <td>users/plays</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>adds a game play for a user for a game</td>
+    </tr>
+
+    <tr>
+      <td>users/create</td>
+      <td>username,
+        token,
+        uid,
+        google_oauth_data</td>
+      <td>user_id, token</td>
+      <td>create a new user</td>
+    </tr>
+  </table>
+</div>
+
+
+
+
+<div>
+
+  <table class="patchCalls" style="width:100%">
+    <caption><button class="hidePatchBtn hide"><h2 class="title">PATCH Calls</h2></button></caption>
+    <tr>
+      <th>endpoint</th>
+      <th>req data</th>
+      <th>req headers</th>
+      <th>exp result</th>
+    </tr>
+    <tr>
+      <td>characters/update</td>
+      <td>
+        user_id,
+        info,
+        name</td>
+      <td>user_id, token</td>
+      <td>updates current active avatar</td>
+    </tr>
+
+    <tr>
+      <td>games/plays</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>adds a count to game plays total count - call after every game loads****</td>
+    </tr>
+
+    <tr>
+      <td>users/login</td>
+      <td>uid</td>
+      <td>user_id, token</td>
+      <td>creates a new user session</td>
+    </tr>
+
+    <tr>
+      <td>users/plays</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>adds a game play to a game, for statistical stuff!</td>
+    </tr>
+  </table>
+</div>
+
+<div>
+
+  <table class="putCalls" style="width:100%">
+    <caption><button class="hidePutBtn hide"><h2 class="title">PUT Calls</h2></button></caption>
+    <tr>
+      <th>endpoint</th>
+      <th>req data</th>
+      <th>req headers</th>
+      <th>exp result</th>
+    </tr>
+    <tr>
+      <td>backgrounds/update</td>
+      <td>background ID</td>
+      <td>user_id, token</td>
+      <td>updates background</td>
+    </tr>
+
+    <tr>
+      <td>characters/update</td>
+      <td>
+        info,
+        name</td>
+      <td>user_id, token</td>
+      <td>updates an existing avatar</td>
+    </tr>
+
+    <tr>
+      <td>entities/update</td>
+      <td>info,
+        game_id,
+        published,
+        name,
+        tags</td>
+      <td>user_id, token</td>
+      <td>updates an existing entity</td>
+    </tr>
+
+    <tr>
+      <td>games/update</td>
+      <td>name,
+        tags,
+        game_id,
+        description,
+        info,
+        published</td>
+      <td>user_id, token</td>
+      <td>updates a game in the creator mode</td>
+    </tr>
+
+    <tr>
+      <td>obstacles/update</td>
+      <td>info,
+        game_id,
+        published,
+        name,
+        tags</td>
+      <td>user_id, token</td>
+      <td>updates an obstacles</td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <table class="deleteCalls" style="width:100%">
+    <caption><button class="hideDeleteBtn hide"><h2>DELETE Calls</h2></button></caption>
+    <tr>
+      <th>endpoint</th>
+      <th>req data</th>
+      <th>req headers</th>
+      <th>exp result</th>
+    </tr>
+    <tr>
+      <td>backgrounds/delete</td>
+      <td>id</td>
+      <td>user_id, token</td>
+      <td>deletes the background</td>
+    </tr>
+
+    <tr>
+      <td>characters/delete</td>
+      <td>id</td>
+      <td>user_id, token</td>
+      <td>deletes an avatar</td>
+    </tr>
+
+    <tr>
+      <td>entities/delete</td>
+      <td>id</td>
+      <td>user_id, token</td>
+      <td>deletes an entity</td>
+    </tr>
+
+    <tr>
+      <td>games/archive</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>"deletes" aka archives a game</td>
+    </tr>
+
+    <tr>
+      <td>obstacles/delete</td>
+      <td>id</td>
+      <td>user_id, token</td>
+      <td>deletes an obstacle</td>
+    </tr>
+  </table>
+</div>
+<!--
+Use this template to add new routes.
+
+
+
+<tr>
+  <td></td>
+  <td></td>
+  <td>user_id, token</td>
+  <td></td>
+</tr>
+
+
+
+-->

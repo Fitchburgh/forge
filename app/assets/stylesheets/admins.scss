@@ -1,3 +1,36 @@
 // Place all the styles related to the Admins controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px;
+}
+
+th, td {
+    text-align: left;
+}
+
+table {
+    border-spacing: 5px;
+}
+
+.getCalls, .postCalls, .patchCalls, .putCalls, .deleteCalls {
+  display: none;
+}
+
+.getCallsBtn, .postCallsBtn, .patchCallsBtn, .putCallsBtn, .deleteCallsBtn {
+  width: 150px;
+}
+
+.title {
+  color: rgba(62, 146, 202, 1);
+}
+
+.hide {
+  width: 150px;
+}

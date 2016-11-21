@@ -139,7 +139,7 @@ class GamesController < ApplicationController
 
   # call this immediately after every load action
   def check_user_play
-    @play = GamePlay.where("game_id = ? AND user_id = ?", params[:game_id], request.env['HTTP_USER_ID'])
+    @play = GamePlay.where('game_id = ? AND user_id = ?', params[:game_id], request.env['HTTP_USER_ID'])
     if @play.empty?
       render json: { message: 'need to add play' }
     else
@@ -157,7 +157,7 @@ class GamesController < ApplicationController
   end
 
   def update_user_play
-    @play = GamePlay.find_by("game_id = ? AND user_id = ?", params[:game_id], request.env['HTTP_USER_ID'])
+    @play = GamePlay.find_by('game_id = ? AND user_id = ?', params[:game_id], request.env['HTTP_USER_ID'])
     if @play.nil?
       render :json => { errors: @play.errors.full_messages }, status: 400
     else
@@ -168,7 +168,7 @@ class GamesController < ApplicationController
   end
 
   def count_user_game_plays
-    @play = GamePlay.find_by("game_id = ? AND user_id = ?", params[:game_id], request.env['HTTP_USER_ID'])
+    @play = GamePlay.find_by('game_id = ? AND user_id = ?', params[:game_id], request.env['HTTP_USER_ID'])
     if !@play.nil?
       render json: { userGamePlays: @play.plays }
     else
@@ -179,5 +179,15 @@ class GamesController < ApplicationController
   def count_game_users
     count = GamePlay.where(game_id: params[:game_id]).count
     render json: { gameUsersCount: count }
+  end
+
+  def update_game_score
+    @game = Game.find_by(game_id: params[:game_id])
+    @game.score = params[:score]
+    if @game.save
+      render json: @game
+    else
+      render :json => { errors: @game.errors.full_messages }, status: 400
+    end
   end
 end

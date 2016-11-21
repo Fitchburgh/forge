@@ -9,6 +9,7 @@ class CreateGames < ActiveRecord::Migration[5.0]
       t.boolean :published, default: false
       t.boolean :archived, default: false
       t.string :archived_at
+      t.integer :score, default: 0
 
       t.timestamps
     end

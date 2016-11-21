@@ -5,16 +5,22 @@ User.create(
   google_oauth_data: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
 )
 
+# These seeds needs to exist in production
+###################################
+
 Game.create(
   id: 0,
   name: 'Orphans',
   tags: '[]',
   user_id: 1,
   description: 'Where all the orphan articles live',
-  info: "{something: here}",
+  info: "{}",
   archived: false,
-  plays: 0
+  plays: 0,
+  score: 150
 )
+
+###################################
 
 Game.create(
   name: 'quest',
@@ -76,7 +82,8 @@ Game.create(
   }",
   published: true,
   archived: false,
-  plays: 10
+  plays: 10,
+  score: 100
 )
 
 Collaborator.create(

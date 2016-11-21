@@ -58,7 +58,7 @@ class GamesController < ApplicationController
   end
 
   def find_user_games
-    user_games = Game.where(user_id: request.env['HTTP_USER_ID'])
+    user_games = Game.where('user_id = ? AND archived = ?', request.env['HTTP_USER_ID'], false)
     if user_games.empty?
       render json: []
     else

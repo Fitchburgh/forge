@@ -258,6 +258,20 @@
       <td>user_id, token</td>
       <td>returns plays per logged in user</td>
     </tr>
+
+    <tr>
+      <td>users/current/play</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns full game that was last played (based on when you use the patch)</td>
+    </tr>
+
+    <tr>
+      <td>users/current/edit</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns full game that was last edited(?) (based on when you use the patch)</td>
+    </tr>
   </table>
 </div>
 
@@ -380,7 +394,6 @@
 
 
 <div>
-
   <table class="patchCalls" style="width:100%">
     <caption><button class="hidePatchBtn hide"><h2 class="title">PATCH Calls</h2></button></caption>
     <tr>
@@ -389,6 +402,21 @@
       <th>req headers</th>
       <th>exp result</th>
     </tr>
+
+    <tr>
+      <td>update/current/play</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>patches the current game being played with ID for a user - on get request return the game</td>
+    </tr>
+
+    <tr>
+      <td>update/current/edit</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>patches the current game being edited with ID for a user - on get req return the game</td>
+    </tr>
+
     <tr>
       <td>characters/update</td>
       <td>

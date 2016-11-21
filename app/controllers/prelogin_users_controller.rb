@@ -5,7 +5,16 @@ class PreloginUsersController < ApplicationController
     @all_games = Game.where("archived = ? AND published = ?", false, true)
     games = []
     @all_games[1..-1].each do |game|
-      games << { id: game.id, name: game.name, tags: game.tags, user_id: game.user_id, description: game.description, published: game.published, plays: game.plays }
+      # need to return username where game_id contains user_id
+      games << {
+        id: game.id,
+        name: game.name,
+        tags: game.tags,
+        user_id: game.user_id,
+        description: game.description,
+        published: game.published,
+        plays: game.plays
+      }
     end
     render json: games
   end
@@ -27,12 +36,40 @@ class PreloginUsersController < ApplicationController
     end
   end
 
+  def create
+    @user = User.create_new_user(@user, params)
+    if @user.save
+      render json: @user
+    else
+      render :json => { error: 'User not created' }, status: 400
+    end
+  end
+
+  def login
+    @user = User.find_by uid: params[:uid]
+    if @user.nil?
+      render :json => 'User does not exist', :status => 404
+    else
+      @user.token = params[:token]
+      @user.save
+      render json: @user
+    end
+  end
+
   # call this immediately after every load action
   def count
     @game = Game.find_by(id: params[:id])
     @game.plays = @game.plays + 1
     @game.save!
-    render json: { id: @game.id, name: @game.name, tags: @game.tags, user_id: @game.user_id, description: @game.description, published: @game.published, plays: @game.plays }
+    render json: {
+      id: @game.id,
+      name: @game.name,
+      tags: @game.tags,
+      user_id: @game.user_id,
+      description: @game.description,
+      published: @game.published,
+      plays: @game.plays
+    }
   end
 
   def welcome

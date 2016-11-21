@@ -3,6 +3,8 @@ User.create(
   token: 'asoidaiosdjgas8235hy09130t1h3tQahg8123450176304',
   uid: "12498720913851029",
   google_oauth_data: "{'some': 'text', 'goes': 'here' {'sometimes': 'its', 'really' {'complicated' {[1, 2, 3, 4, 5]}}}}",
+  playing_game: 1,
+  editing_game: 1
 )
 
 User.create(
@@ -10,6 +12,8 @@ User.create(
   token: 'alksdjfffi43mfl3k43m4kl3l4mr34f90sjc',
   uid: "8675309",
   google_oauth_data: "{'this guy': 'such a cool dude'}",
+  playing_game: 1,
+  editing_game: 1
 )
 
 User.create(
@@ -17,6 +21,8 @@ User.create(
   token: 'a000aaa0a0a0a00aaa00a0a0a0a00a0a0a00a0a',
   uid: "123456789987654321",
   google_oauth_data: "{'best attributes': ['rad', 'cool', 'handsome']}",
+  playing_game: 1,
+  editing_game: 1
 )
 
 User.create(
@@ -24,6 +30,8 @@ User.create(
   token: '22222222222222222222222llllllllllllllllll',
   uid: "99999988888888777777766666666",
   google_oauth_data: "{'ggggrrrrrrr': 'grrrrrr'}",
+  playing_game: 1,
+  editing_game: 1
 )
 
 # These seeds needs to exist in production
@@ -35,7 +43,7 @@ Game.create(
   tags: '[]',
   user_id: 1,
   description: 'Where all the orphan articles live',
-  info: "{}",
+  info: "{Orphan: game}",
   archived: false,
   plays: 0,
   score: 150

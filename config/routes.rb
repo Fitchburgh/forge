@@ -74,9 +74,16 @@ Rails.application.routes.draw do
   get 'users/plays' => 'games#check_user_play'
   get 'users/plays/count' => 'games#count_user_game_plays'
   post 'users/plays' => 'games#add_user_play'
-  post 'users/create'
-  patch 'users/login'
+  post 'users/create' => 'prelogin_users#create'
+  patch 'users/login' => 'prelogin_users#login'
   patch 'users/plays' => 'games#update_user_play'
+
+  patch 'update/current/play' => 'users#update_current_play'
+  patch 'update/current/edit' => 'users#update_current_edit'
+
+  # add to api docs
+  get 'users/current/play' => 'users#current_play'
+  get 'users/current/edit' => 'users#current_edit'
 
   # rails routes for internal API views
   resources :admins

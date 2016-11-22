@@ -18,6 +18,7 @@ class CollaboratorsController < ApplicationController
   end
 
   def update_requested_status
+    # have header user id be creator, have param of requester id that is the user being changed
     @collaborator = Collaborator.find_by('game_id = ? AND user_id = ?', params[:game_id], request.env['HTTP_USER_ID'])
     if !@collaborator.nil?
       Collaborator.flip_requested_value(@collaborator)
@@ -29,6 +30,7 @@ class CollaboratorsController < ApplicationController
   end
 
   def make_collaborator
+    # have header user id be creator, have param of requester id that is the user being changed
     @collaborator = Collaborator.find_by('game_id = ? AND user_id = ?', params[:game_id], request.env['HTTP_USER_ID'])
     if !@collaborator.nil?
       Collaborator.flip_accepted_value(@collaborator)
@@ -44,7 +46,7 @@ class CollaboratorsController < ApplicationController
     if !@collaborators.empty?
       render json: @collaborators
     else
-      render :json => { errors: @collaborators.errors.full_messages }, status: 400
+      render :json => { message: 'no requesters or collaborators for this game' }, status: 400
     end
   end
 
@@ -53,7 +55,7 @@ class CollaboratorsController < ApplicationController
     if !@collaborators.empty?
       render json: @collaborators
     else
-      render :json => { errors: @collaborators.errors.full_messages }, status: 400
+      render :json => { message: 'no requesters for this game' }, status: 400
     end
   end
 
@@ -62,30 +64,28 @@ class CollaboratorsController < ApplicationController
     if !@collaborators.empty?
       render json: @collaborators
     else
-      render :json => { errors: @collaborators.errors.full_messages }, status: 400
+      render :json => { message: 'no collaborators for this game' }, status: 400
     end
   end
 
   def find_user_collaborators
-    ids = Game.find_game_ids_by_creator(@games, params)
-    collaborators = []
-    ids.each do |id|
-      @collaborators = Collaborator.where('game_id = ? AND requested = ? AND accepted = ?', id, true, true)
-      collaborators << @collaborators
-    end
-    render json: collaborators[0]
+    ids = Game.find_game_ids_by_creator(@games, request.env['HTTP_USER_ID'])
+    collaborators = Collaborator.find_collaborators_by_game(@collaborators, ids)
+    user_collaborators = User.find_username_for_collaborators(collaborators)
+    render json: user_collaborators
   end
 
   def find_user_requesters
-    ids = Game.find_game_ids_by_creator(@games, params)
-    requesters = Collaborator.find_requesters_by_game_id(ids)
-    render json: requesters[0]
+    ids = Game.find_game_ids_by_creator(@games, request.env['HTTP_USER_ID'])
+    requesters = Collaborator.find_requesters_by_game(@requesters, ids)
+    user_requesters = User.find_username_for_requesters(requesters)
+    render json: user_requesters
   end
 
-  def find_collaborations_by_user
+  def find_collaborations_by_user # only return games not created (create collab for user 1 to test)
     game_ids = Collaborator.find_collaborations_by_user(request.env['HTTP_USER_ID'])
     games = Game.find_game_ids(game_ids)
-    users = User.find_username_by_id(games)
+    users = User.find_username_by_game_creator_id(games)
     result = Collaborator.return_user_collaborations(games, users)
     render json: result
   end

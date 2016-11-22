@@ -14,12 +14,42 @@ class User < ApplicationRecord
     )
   end
 
-  def self.find_username_by_id(games)
+  def self.find_username_by_game_creator_id(games)
     users = []
     games.each do |g|
       @user = User.find_by(id: g.user_id)
       users << @user.username
     end
     users
+  end
+
+  def self.find_username_for_collaborators(collaborators)
+    c = []
+    collaborators.each do |t|
+      username = User.find(t.user_id).username
+      c.push({
+        id: t.id,
+        game_id: t.game_id,
+        username: username,
+        requested: true,
+        accepted: true
+        })
+    end
+    c
+  end
+
+  def self.find_username_for_requesters(requesters)
+    c = []
+    requesters.each do |t|
+      username = User.find(t.user_id).username
+      c.push({
+        id: t.id,
+        game_id: t.game_id,
+        username: username,
+        requested: true,
+        accepted: false
+        })
+    end
+    c
   end
 end

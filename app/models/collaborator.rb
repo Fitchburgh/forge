@@ -39,7 +39,7 @@ class Collaborator < ApplicationRecord
       @requesters = Collaborator.where('game_id = ? AND requested = ? AND accepted = ?', id, true, false)
       requesters << @requesters
     end
-    requesters
+    requesters.uniq
   end
 
   def self.find_collaborations_by_user(auth_id)
@@ -59,5 +59,23 @@ class Collaborator < ApplicationRecord
       end
     end
     result.uniq
+  end
+
+  def self.find_collaborators_by_game(var, ids)
+    collaborators = []
+    ids.each do |id|
+      var = Collaborator.where('game_id = ? AND requested = ? AND accepted = ?', id, true, true)
+      collaborators.concat(var)
+    end
+    collaborators
+  end
+
+  def self.find_requesters_by_game(var, ids)
+    requesters = []
+    ids.each do |id|
+      var = Collaborator.where('game_id = ? AND requested = ? AND accepted = ?', id, true, false)
+      requesters.concat(var)
+    end
+    requesters
   end
 end

@@ -39,8 +39,8 @@ class Game < ApplicationRecord
     var.score = params[:score]
   end
 
-  def self.find_game_ids_by_creator(var, params)
-    var = Game.where(user_id: params[:user_id])
+  def self.find_game_ids_by_creator(var, auth_id)
+    var = Game.where(user_id: auth_id)
     ids = []
     var.each do |game|
       ids << game.id

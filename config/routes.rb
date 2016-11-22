@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get 'collaborators/game/collaborators-and-requesters' => 'collaborators#find_game_requesters_and_collaborators' # returns collabs and requesters for a game_id where requested true
   get 'collaborators/game/requesters' => 'collaborators#find_game_requesters' # returns requesters for a game_id where requested true, accepted false
   get 'collaborators/game/collaborators' => 'collaborators#find_game_collaborators'# returns collabs for a game_id where requested true, accepted true
-  get 'collaborators/user/collaborators' => 'collaborators#find_user_collaborators' # returns all collabs for all user's games
+  get 'collaborators/user/collaborators' => 'collaborators#find_user_collaborators' # returns all collaborators for all of a user's games
   get 'collaborators/user/requesters' => 'collaborators#find_user_requesters' # returns all requesters for all user's games
   post 'collaborators/create' # create new collab
   patch 'collaborators/update/requested' => 'collaborators#update_requested_status' # flip requested value (t -> f f -> t)

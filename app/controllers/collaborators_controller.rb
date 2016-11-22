@@ -18,14 +18,18 @@ class CollaboratorsController < ApplicationController
   end
 
   def update_requested_status
-    # have header user id be creator, have param of requester id that is the user being changed
-    @collaborator = Collaborator.find_by('game_id = ? AND user_id = ?', params[:game_id], request.env['HTTP_USER_ID'])
-    if !@collaborator.nil?
-      Collaborator.flip_requested_value(@collaborator)
-      @collaborator.save!
-      render json: @collaborator
+    @game = Game.find(params[:game_id])
+    if @game.user_id == request.env['HTTP_USER_ID'].to_i
+      @collaborator = Collaborator.find_by('game_id = ? AND user_id = ?', params[:game_id], params[:requester_id])
+      if !@collaborator.nil?
+        Collaborator.flip_requested_value(@collaborator)
+        @collaborator.save!
+        render json: @collaborator
+      else
+        render :json => { errors: @collaborators.errors.full_messages }, status: 400
+      end
     else
-      render :json => { errors: @collaborators.errors.full_messages }, status: 400
+      render :json => { message: 'only the game\'s creator can update this status' }, status: 400
     end
   end
 

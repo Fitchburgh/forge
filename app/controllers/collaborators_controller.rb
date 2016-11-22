@@ -18,26 +18,34 @@ class CollaboratorsController < ApplicationController
   end
 
   def update_requested_status
-    # have header user id be creator, have param of requester id that is the user being changed
-    @collaborator = Collaborator.find_by('game_id = ? AND user_id = ?', params[:game_id], request.env['HTTP_USER_ID'])
-    if !@collaborator.nil?
-      Collaborator.flip_requested_value(@collaborator)
-      @collaborator.save!
-      render json: @collaborator
+    @game = Game.find(params[:game_id])
+    if @game.user_id == request.env['HTTP_USER_ID'].to_i
+      @collaborator = Collaborator.find_by('game_id = ? AND user_id = ?', params[:game_id], params[:requester_id])
+      if !@collaborator.nil?
+        Collaborator.flip_requested_value(@collaborator)
+        @collaborator.save!
+        render json: @collaborator
+      else
+        render :json => { errors: @collaborators.errors.full_messages }, status: 400
+      end
     else
-      render :json => { errors: @collaborators.errors.full_messages }, status: 400
+      render :json => { message: 'only the game\'s creator can update this status' }, status: 400
     end
   end
 
   def make_collaborator
-    # have header user id be creator, have param of requester id that is the user being changed
-    @collaborator = Collaborator.find_by('game_id = ? AND user_id = ?', params[:game_id], request.env['HTTP_USER_ID'])
-    if !@collaborator.nil?
-      Collaborator.flip_accepted_value(@collaborator)
-      @collaborator.save!
-      render json: @collaborator
+    @game = Game.find(params[:game_id])
+    if @game.user_id == request.env['HTTP_USER_ID'].to_i
+      @collaborator = Collaborator.find_by('game_id = ? AND user_id = ?', params[:game_id], params[:requester_id])
+      if !@collaborator.nil?
+        Collaborator.flip_accepted_value(@collaborator)
+        @collaborator.save!
+        render json: @collaborator
+      else
+        render :json => { errors: @collaborators.errors.full_messages }, status: 400
+      end
     else
-      render :json => { errors: @collaborators.errors.full_messages }, status: 400
+      render :json => { message: 'only the game\'s creator can update this status' }, status: 400
     end
   end
 
@@ -82,9 +90,9 @@ class CollaboratorsController < ApplicationController
     render json: user_requesters
   end
 
-  def find_collaborations_by_user # only return games not created (create collab for user 1 to test)
+  def find_collaborations_by_user
     game_ids = Collaborator.find_collaborations_by_user(request.env['HTTP_USER_ID'])
-    games = Game.find_game_ids(game_ids)
+    games = Game.find_game_ids(game_ids, request.env['HTTP_USER_ID'])
     users = User.find_username_by_game_creator_id(games)
     result = Collaborator.return_user_collaborations(games, users)
     render json: result

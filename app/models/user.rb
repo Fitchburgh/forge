@@ -24,7 +24,7 @@ class User < ApplicationRecord
   end
 
   def self.find_username_for_collaborators(collaborators)
-    c = []
+    result = []
     collaborators.each do |t|
       username = User.find(t.user_id).username
       c.push({
@@ -35,11 +35,11 @@ class User < ApplicationRecord
         accepted: true
         })
     end
-    c
+    result
   end
 
   def self.find_username_for_requesters(requesters)
-    c = []
+    result = []
     requesters.each do |t|
       username = User.find(t.user_id).username
       c.push({
@@ -50,6 +50,6 @@ class User < ApplicationRecord
         accepted: false
         })
     end
-    c
+    result
   end
 end

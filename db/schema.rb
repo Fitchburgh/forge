@@ -33,10 +33,9 @@ ActiveRecord::Schema.define(version: 20161122154642) do
     t.integer  "game_id"
     t.boolean  "published",  default: false
     t.string   "name"
-    t.json     "tags",       default: "",         null: false
-    t.text     "thumbnail",  default: "No thumb"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.json     "tags",       default: "",    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["game_id"], name: "index_backgrounds_on_game_id", using: :btree
     t.index ["user_id"], name: "index_backgrounds_on_user_id", using: :btree
   end
@@ -68,10 +67,9 @@ ActiveRecord::Schema.define(version: 20161122154642) do
     t.integer  "game_id"
     t.string   "name"
     t.boolean  "published",  default: false
-    t.json     "tags",       default: "",         null: false
-    t.text     "thumbnail",  default: "No thumb"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.json     "tags",       default: "",    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["game_id"], name: "index_entities_on_game_id", using: :btree
     t.index ["user_id"], name: "index_entities_on_user_id", using: :btree
   end
@@ -132,10 +130,9 @@ ActiveRecord::Schema.define(version: 20161122154642) do
     t.integer  "game_id"
     t.string   "name"
     t.boolean  "published",  default: false
-    t.json     "tags",       default: "",         null: false
-    t.text     "thumbnail",  default: "No thumb"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.json     "tags",       default: "",    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["game_id"], name: "index_obstacles_on_game_id", using: :btree
     t.index ["user_id"], name: "index_obstacles_on_user_id", using: :btree
   end
@@ -167,8 +164,6 @@ ActiveRecord::Schema.define(version: 20161122154642) do
     t.string   "token"
     t.string   "uid"
     t.json     "google_oauth_data"
-    t.integer  "playing_game"
-    t.integer  "editing_game"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end

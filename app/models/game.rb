@@ -22,9 +22,10 @@ class Game < ApplicationRecord
 
   def self.find_game_by_input(var, params)
     var = []
-    Game.all[1..-1].each do |t|
+    Game.where("archived = ? AND published = ?", false, true).each do |t|
       if t.tags.include?(params.downcase) || t.name.include?(params.downcase)
-        var << { id: t.id, name: t.name, tags: t.tags, user_id: t.user_id, description: t.description, published: t.published, plays: t.plays, score: t.score }
+        username = User.find(t.user_id).username
+        var << { id: t.id, name: t.name, tags: t.tags, username: username, description: t.description, published: t.published, plays: t.plays, score: t.score, created_at: t.created_at }
       end
     end
     var
@@ -49,11 +50,12 @@ class Game < ApplicationRecord
     ids
   end
 
-  def self.find_game_ids(game_ids)
+  def self.find_game_ids(game_ids, auth_id)
     games = []
     game_ids.each do |id|
       @game = Game.find_by(id: id)
-      games << @game
+      binding.pry
+      games << @game if @game.user_id != auth_id.to_i
     end
     games
   end

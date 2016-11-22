@@ -4,15 +4,16 @@ class PreloginUsersController < ApplicationController
   def index
     @all_games = Game.where("archived = ? AND published = ?", false, true)
     games = []
-    @all_games[1..-1].each do |game|
-      # need to return username where game_id contains user_id
+    @all_games.each do |game|
+      username = User.find(game.user_id).username
       games << {
         id: game.id,
         name: game.name,
         tags: game.tags,
-        user_id: game.user_id,
+        username: username,
         description: game.description,
         published: game.published,
+        score: game.score,
         plays: game.plays,
         created_at: game.created_at
       }
@@ -73,7 +74,7 @@ class PreloginUsersController < ApplicationController
     }
   end
 
-  def search # return username in place of user id for a search (see index action)
+  def search
     @games = Game.find_game_by_input(@games, params[:name])
     render json: @games
   end

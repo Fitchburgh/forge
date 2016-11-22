@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'articles/index'
   get 'articles/search'
   get 'articles/game/all' => 'articles#find_game_articles'
@@ -31,6 +32,12 @@ Rails.application.routes.draw do
   post 'entities/create'
   put 'entities/update'
   delete 'entities/delete'
+
+  get 'events/index'
+  get 'events/search'
+  post 'events/create'
+  put 'events/update'
+  delete 'events/delete'
 
   root 'prelogin_users#welcome'
   get 'games/index'

@@ -120,6 +120,20 @@
     </tr>
 
     <tr>
+      <td>events/all</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns all events/scripts</td>
+    </tr>
+
+    <tr>
+      <td>events/search</td>
+      <td>name</td>
+      <td>user_id, token</td>
+      <td>returns events that have a searched word in name/tags</td>
+    </tr>
+
+    <tr>
       <td>games/index</td>
       <td>n/a</td>
       <td>user_id, token</td>
@@ -364,6 +378,18 @@
     </tr>
 
     <tr>
+      <td>events/create</td>
+      <td>info,
+        game_id,
+        published,
+        name,
+        tags,
+      category</td>
+      <td>user_id, token</td>
+      <td>creates an event</td>
+    </tr>
+
+    <tr>
       <td>games/create</td>
       <td>name,
         tags,
@@ -551,6 +577,18 @@
     </tr>
 
     <tr>
+      <td>events/update</td>
+      <td>info,
+        game_id,
+        published,
+        name,
+        tags,
+        category</td>
+      <td>user_id, token</td>
+      <td>updates an existing event</td>
+    </tr>
+
+    <tr>
       <td>games/update</td>
       <td>name,
         tags,
@@ -603,6 +641,13 @@
       <td>id</td>
       <td>user_id, token</td>
       <td>deletes an entity</td>
+    </tr>
+
+    <tr>
+      <td>events/delete</td>
+      <td>id</td>
+      <td>user_id, token</td>
+      <td>deletes an event</td>
     </tr>
 
     <tr>

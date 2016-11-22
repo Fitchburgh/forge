@@ -73,7 +73,7 @@ class PreloginUsersController < ApplicationController
     }
   end
 
-  def search # return username in place of user id for a search (see index action)
+  def search
     @games = Game.find_game_by_input(@games, params[:name])
     render json: @games
   end

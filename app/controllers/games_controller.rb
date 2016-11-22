@@ -65,7 +65,7 @@ class GamesController < ApplicationController
       games = []
       user_games.each do |game|
         if game.id > 0
-          games << { id: game.id, name: game.name, tags: game.tags, user_id: game.user_id, description: game.description, published: game.published, plays: game.plays }
+          games << { id: game.id, name: game.name, tags: game.tags, user_id: game.user_id, description: game.description, published: game.published, plays: game.plays, created_at: game.created_at }
         end
       end
       render json: games

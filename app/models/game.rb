@@ -48,4 +48,13 @@ class Game < ApplicationRecord
     ids.shift if ids.include? 0
     ids
   end
+
+  def self.find_game_ids(game_ids)
+    games = []
+    game_ids.each do |id|
+      @game = Game.find_by(id: id)
+      games << @game
+    end
+    games
+  end
 end

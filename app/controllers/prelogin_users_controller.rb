@@ -4,13 +4,13 @@ class PreloginUsersController < ApplicationController
   def index
     @all_games = Game.where("archived = ? AND published = ?", false, true)
     games = []
-    @all_games[1..-1].each do |game|
-      # need to return username where game_id contains user_id
+    @all_games.each do |game|
+      username = User.find(game.user_id).username
       games << {
         id: game.id,
         name: game.name,
         tags: game.tags,
-        user_id: game.user_id,
+        username: username,
         description: game.description,
         published: game.published,
         plays: game.plays,

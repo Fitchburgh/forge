@@ -53,20 +53,15 @@ class GamesController < ApplicationController
     end
   end
 
-  def search
-    @games = Game.find_game_by_input(@games, params[:name])
-    render json: @games
-  end
-
   def find_user_games
-    user_games = Game.where(user_id: request.env['HTTP_USER_ID'])
+    user_games = Game.where('user_id = ? AND archived = ?', request.env['HTTP_USER_ID'], false)
     if user_games.empty?
       render json: []
     else
       games = []
       user_games.each do |game|
         if game.id > 0
-          games << { id: game.id, name: game.name, tags: game.tags, user_id: game.user_id, description: game.description, published: game.published, plays: game.plays }
+          games << { id: game.id, name: game.name, tags: game.tags, user_id: game.user_id, description: game.description, published: game.published, plays: game.plays, created_at: game.created_at }
         end
       end
       render json: games

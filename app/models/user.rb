@@ -13,4 +13,13 @@ class User < ApplicationRecord
       google_oauth_data: params[:google_oauth_data]
     )
   end
+
+  def self.find_username_by_id(games)
+    users = []
+    games.each do |g|
+      @user = User.find_by(id: g.user_id)
+      users << @user.username
+    end
+    users
+  end
 end

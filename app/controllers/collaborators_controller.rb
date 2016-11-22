@@ -78,11 +78,15 @@ class CollaboratorsController < ApplicationController
 
   def find_user_requesters
     ids = Game.find_game_ids_by_creator(@games, params)
-    requesters = []
-    ids.each do |id|
-      @requesters = Collaborator.where('game_id = ? AND requested = ? AND accepted = ?', id, true, false)
-      requesters << @requesters
-    end
+    requesters = Collaborator.find_requesters_by_game_id(ids)
     render json: requesters[0]
+  end
+
+  def find_collaborations_by_user
+    game_ids = Collaborator.find_collaborations_by_user(request.env['HTTP_USER_ID'])
+    games = Game.find_game_ids(game_ids)
+    users = User.find_username_by_id(games)
+    result = Collaborator.return_user_collaborations(games, users)
+    render json: result
   end
 end

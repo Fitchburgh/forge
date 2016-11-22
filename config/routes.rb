@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   root 'prelogin_users#welcome'
   get 'games/index'
 
-  get 'games/search'
+  get 'games/search' => 'prelogin_users#search' # moved to prelogin controller
   get 'games/user-games' => 'games#find_user_games'
   get 'games/all' => 'prelogin_users#index'
   get 'games/load' => 'prelogin_users#load'
@@ -73,6 +73,7 @@ Rails.application.routes.draw do
   get 'users/total' => 'games#count_users'
   get 'users/plays' => 'games#check_user_play'
   get 'users/plays/count' => 'games#count_user_game_plays'
+  get 'users/collaborations' => 'collaborators#find_collaborations_by_user' # finds all of a user's collaborations
   post 'users/plays' => 'games#add_user_play'
   post 'users/create' => 'prelogin_users#create'
   patch 'users/login' => 'prelogin_users#login'

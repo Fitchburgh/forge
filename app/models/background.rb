@@ -11,7 +11,7 @@ class Background < ApplicationRecord
     var = []
     Background.all.each do |t|
       if t.tags.include?(params.downcase) || t.name.include?(params.downcase)
-        var << { id: t.id, user_id: t.user_id, game_id: t.game_id, published: t.published, name: t.name, tags: t.tags }
+        var << { thumbnail: t.thumbnail, id: t.id, user_id: t.user_id, game_id: t.game_id, published: t.published, name: t.name, tags: t.tags }
       end
     end
     var
@@ -28,7 +28,8 @@ class Background < ApplicationRecord
       game_id: params[:game_id],
       published: params[:published],
       name: params[:name].downcase,
-      tags: params[:tags].to_s.downcase
+      tags: params[:tags].to_s.downcase,
+      thumbnail: params[:thumbnail]
   )
   end
 
@@ -39,6 +40,7 @@ class Background < ApplicationRecord
     var.published = params[:published]
     var.name = params[:name].downcase
     var.tags = params[:tags].to_s.downcase
+    var.thumbnail = params[:thumbnail]
   end
 
   def self.find_background_by_game(var, params)

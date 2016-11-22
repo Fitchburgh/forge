@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161120211756) do
+ActiveRecord::Schema.define(version: 20161122154642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,9 +33,10 @@ ActiveRecord::Schema.define(version: 20161120211756) do
     t.integer  "game_id"
     t.boolean  "published",  default: false
     t.string   "name"
-    t.json     "tags",       default: "",    null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.json     "tags",       default: "",         null: false
+    t.text     "thumbnail",  default: "No thumb"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.index ["game_id"], name: "index_backgrounds_on_game_id", using: :btree
     t.index ["user_id"], name: "index_backgrounds_on_user_id", using: :btree
   end
@@ -67,11 +68,26 @@ ActiveRecord::Schema.define(version: 20161120211756) do
     t.integer  "game_id"
     t.string   "name"
     t.boolean  "published",  default: false
+    t.json     "tags",       default: "",         null: false
+    t.text     "thumbnail",  default: "No thumb"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["game_id"], name: "index_entities_on_game_id", using: :btree
+    t.index ["user_id"], name: "index_entities_on_user_id", using: :btree
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.json     "info"
+    t.integer  "game_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "category"
+    t.boolean  "published",  default: false
     t.json     "tags",       default: "",    null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.index ["game_id"], name: "index_entities_on_game_id", using: :btree
-    t.index ["user_id"], name: "index_entities_on_user_id", using: :btree
+    t.index ["game_id"], name: "index_events_on_game_id", using: :btree
+    t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
 
   create_table "game_plays", force: :cascade do |t|
@@ -116,9 +132,10 @@ ActiveRecord::Schema.define(version: 20161120211756) do
     t.integer  "game_id"
     t.string   "name"
     t.boolean  "published",  default: false
-    t.json     "tags",       default: "",    null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.json     "tags",       default: "",         null: false
+    t.text     "thumbnail",  default: "No thumb"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.index ["game_id"], name: "index_obstacles_on_game_id", using: :btree
     t.index ["user_id"], name: "index_obstacles_on_user_id", using: :btree
   end
@@ -163,6 +180,8 @@ ActiveRecord::Schema.define(version: 20161120211756) do
   add_foreign_key "collaborators", "users"
   add_foreign_key "entities", "games"
   add_foreign_key "entities", "users"
+  add_foreign_key "events", "games"
+  add_foreign_key "events", "users"
   add_foreign_key "game_plays", "games"
   add_foreign_key "game_plays", "users"
   add_foreign_key "games", "users"

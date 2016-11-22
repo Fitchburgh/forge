@@ -7,6 +7,7 @@ class CreateBackgrounds < ActiveRecord::Migration[5.0]
       t.boolean :published, default: false
       t.string :name
       t.json :tags, default: '', null: false
+      t.text :thumbnail, default: 'No thumb'
 
       t.timestamps
     end

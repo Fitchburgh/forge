@@ -307,7 +307,9 @@ Background.create!(
   game_id: 1,
   published: true,
   name: 'sky',
-  tags: "['blue', 'sky']"
+  tags: "['blue', 'sky']",
+  thumbnail: "big long text string"
+
 )
 
 Background.create!(

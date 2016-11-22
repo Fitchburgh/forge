@@ -7,6 +7,7 @@ class CreateObstacles < ActiveRecord::Migration[5.0]
       t.string :name
       t.boolean :published, default: false
       t.json :tags, default: '', null: false
+      t.text :thumbnail, default: 'No thumb'
 
       t.timestamps
     end

@@ -13,6 +13,7 @@ class PreloginUsersController < ApplicationController
         username: username,
         description: game.description,
         published: game.published,
+        score: game.score,
         plays: game.plays,
         created_at: game.created_at
       }

@@ -25,7 +25,7 @@ class Game < ApplicationRecord
     Game.where("archived = ? AND published = ?", false, true).each do |t|
       if t.tags.include?(params.downcase) || t.name.include?(params.downcase)
         username = User.find(t.user_id).username
-        var << { id: t.id, name: t.name, tags: t.tags, username: username, description: t.description, published: t.published, plays: t.plays, score: t.score }
+        var << { id: t.id, name: t.name, tags: t.tags, username: username, description: t.description, published: t.published, plays: t.plays, score: t.score, created_at: t.created_at }
       end
     end
     var

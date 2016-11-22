@@ -52,11 +52,6 @@ class GamesController < ApplicationController
     end
   end
 
-  def search
-    @games = Game.find_game_by_input(@games, params[:name])
-    render json: @games
-  end
-
   def find_user_games
     user_games = Game.where('user_id = ? AND archived = ?', request.env['HTTP_USER_ID'], false)
     if user_games.empty?

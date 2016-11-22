@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   root 'prelogin_users#welcome'
   get 'games/index'
 
-  get 'games/search'
+  get 'games/search' => 'prelogin_users#search' # moved to prelogin controller
   get 'games/user-games' => 'games#find_user_games'
   get 'games/all' => 'prelogin_users#index'
   get 'games/load' => 'prelogin_users#load'

@@ -49,11 +49,12 @@ class Game < ApplicationRecord
     ids
   end
 
-  def self.find_game_ids(game_ids)
+  def self.find_game_ids(game_ids, auth_id)
     games = []
     game_ids.each do |id|
       @game = Game.find_by(id: id)
-      games << @game
+      binding.pry
+      games << @game if @game.user_id != auth_id.to_i
     end
     games
   end

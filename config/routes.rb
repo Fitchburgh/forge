@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   post 'collaborators/self' => 'collaborators#make_user_collaborator_for_own_game' # make a user a collab for their own game
   patch 'collaborators/update/requested' => 'collaborators#update_requested_status' # flip requested value (t -> f f -> t)
   patch 'collaborators/update/accepted' => 'collaborators#make_collaborator' # flip accepted value (t -> f f -> t)
+  patch 'collaborators/rerequest' => 'collaborators#remake_collaboration_request' # allow a user to re-submit a request for collaboration for a game
 
   get 'entities/all' => 'entities#index'
   get 'entities/search'

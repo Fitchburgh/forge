@@ -15,7 +15,11 @@ class Collaborator < ApplicationRecord
     )
   end
 
-  def make_user_collaborator(params, auth_id)
+  def self.make_user_collaborator(var, params, auth_id)
+    var = self.user_collaborator(params, auth_id)
+  end
+
+  def self.user_collaborator(params, auth_id)
     Collaborator.new(
       game_id: params[:game_id],
       user_id: auth_id,

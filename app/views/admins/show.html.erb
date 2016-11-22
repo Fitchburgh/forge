@@ -64,10 +64,45 @@
     </tr>
 
     <tr>
-      <td>characters/current_character</td>
+      <td>collaborators/existence</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>does collab exist for a game</td>
+    </tr>
+
+    <tr>
+      <td>collaborators/game/collaborators-and-requesters</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>returns collabs and requesters for a game_id where requested is true</td>
+    </tr>
+
+    <tr>
+      <td>collaborators/game/requesters</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>returns requesters for a game_id where requested true, accepted false</td>
+    </tr>
+
+    <tr>
+      <td>collaborators/game/collaborators</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>returns collabs for a game_id where requested true, accepted true</td>
+    </tr>
+
+    <tr>
+      <td>collaborators/user/collaborators</td>
       <td>n/a</td>
       <td>user_id, token</td>
-      <td>finds avatar based on current user and active truthiness</td>
+      <td>returns all collabs for all user's games</td>
+    </tr>
+
+    <tr>
+      <td>collaborators/user/requesters</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns all requesters for all user's games</td>
     </tr>
 
     <tr>
@@ -82,6 +117,20 @@
       <td>name</td>
       <td>user_id, token</td>
       <td>returns entities that have a searched word in name/tags</td>
+    </tr>
+
+    <tr>
+      <td>events/all</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns all events/scripts</td>
+    </tr>
+
+    <tr>
+      <td>events/search</td>
+      <td>name</td>
+      <td>user_id, token</td>
+      <td>returns events that have a searched word in name/tags</td>
     </tr>
 
     <tr>
@@ -310,6 +359,14 @@
     </tr>
 
     <tr>
+      <td>collaborators/create</td>
+      <td>
+        game_id
+      </td>
+      <td>user_id, token</td>
+      <td>create new collaborator</td>
+    </tr>
+    <tr>
       <td>entities/create</td>
       <td>info
         game_id
@@ -318,6 +375,18 @@
         tags</td>
       <td>user_id, token</td>
       <td>creates an entity</td>
+    </tr>
+
+    <tr>
+      <td>events/create</td>
+      <td>info,
+        game_id,
+        published,
+        name,
+        tags,
+      category</td>
+      <td>user_id, token</td>
+      <td>creates an event</td>
     </tr>
 
     <tr>
@@ -404,6 +473,42 @@
     </tr>
 
     <tr>
+      <td>characters/update</td>
+      <td>
+        user_id,
+        info,
+        name</td>
+      <td>user_id, token</td>
+      <td>updates current active avatar</td>
+    </tr>
+
+
+    <tr>
+      <td>collaborators/update/requested</td>
+      <td>
+        game_id
+      </td>
+      <td>user_id, token</td>
+      <td>flips requested to true or keeps it false.</td>
+    </tr>
+
+    <tr>
+      <td>collaborators/update/accepted</td>
+      <td>
+        game_id
+      </td>
+      <td>user_id, token</td>
+      <td>flips accepted to true if currently false and flips back to false if true</td>
+    </tr>
+
+    <tr>
+      <td>games/plays</td>
+      <td>game_id</td>
+      <td>user_id, token</td>
+      <td>adds a count to game plays total count - call after every game loads****</td>
+    </tr>
+
+    <tr>
       <td>update/current/play</td>
       <td>game_id</td>
       <td>user_id, token</td>
@@ -417,22 +522,6 @@
       <td>patches the current game being edited with ID for a user - on get req return the game</td>
     </tr>
 
-    <tr>
-      <td>characters/update</td>
-      <td>
-        user_id,
-        info,
-        name</td>
-      <td>user_id, token</td>
-      <td>updates current active avatar</td>
-    </tr>
-
-    <tr>
-      <td>games/plays</td>
-      <td>game_id</td>
-      <td>user_id, token</td>
-      <td>adds a count to game plays total count - call after every game loads****</td>
-    </tr>
 
     <tr>
       <td>users/login</td>
@@ -462,7 +551,12 @@
     </tr>
     <tr>
       <td>backgrounds/update</td>
-      <td>background ID</td>
+      <td>info,
+        game_id,
+        published,
+        name,
+        tags,
+        thumbnail</td>
       <td>user_id, token</td>
       <td>updates background</td>
     </tr>
@@ -482,9 +576,22 @@
         game_id,
         published,
         name,
-        tags</td>
+        tags,
+        thumbnail</td>
       <td>user_id, token</td>
       <td>updates an existing entity</td>
+    </tr>
+
+    <tr>
+      <td>events/update</td>
+      <td>info,
+        game_id,
+        published,
+        name,
+        tags,
+        category</td>
+      <td>user_id, token</td>
+      <td>updates an existing event</td>
     </tr>
 
     <tr>
@@ -505,7 +612,8 @@
         game_id,
         published,
         name,
-        tags</td>
+        tags,
+        thumbnail</td>
       <td>user_id, token</td>
       <td>updates an obstacles</td>
     </tr>
@@ -543,8 +651,15 @@
     </tr>
 
     <tr>
+      <td>events/delete</td>
+      <td>id</td>
+      <td>user_id, token</td>
+      <td>deletes an event</td>
+    </tr>
+
+    <tr>
       <td>games/archive</td>
-      <td>game_id</td>
+      <td>id</td>
       <td>user_id, token</td>
       <td>"deletes" aka archives a game</td>
     </tr>

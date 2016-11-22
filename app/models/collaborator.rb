@@ -15,6 +15,7 @@ class Collaborator < ApplicationRecord
     )
   end
 
+  # this can prob be refactored to using toggle! helper
   def self.flip_requested_value(var)
     if var.requested == false
       var.requested = true
@@ -24,6 +25,7 @@ class Collaborator < ApplicationRecord
     var
   end
 
+  # this can prob be refactored to using toggle! helper
   def self.flip_accepted_value(var)
     if var.accepted == false
       var.accepted = true

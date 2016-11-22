@@ -15,6 +15,15 @@ class Collaborator < ApplicationRecord
     )
   end
 
+  def make_user_collaborator(params, auth_id)
+    Collaborator.new(
+      game_id: params[:game_id],
+      user_id: auth_id,
+      requested: true,
+      accepted: true
+    )
+  end
+
   # this can prob be refactored to using toggle! helper
   def self.flip_requested_value(var)
     if var.requested == false

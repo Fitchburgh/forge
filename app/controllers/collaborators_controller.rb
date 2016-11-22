@@ -17,6 +17,15 @@ class CollaboratorsController < ApplicationController
     end
   end
 
+  def make_user_collaborator_for_own_game
+    @collaborator = Collaborator.make_user_collaborator(@collaborator, params, request.env['HTTP_USER_ID'])
+    if @collaborator.save
+      render json: @collaborator
+    else
+      render :json => { :errors => @collaborator.errors.full_messages }, status: 400
+    end
+  end
+
   def update_requested_status
     @game = Game.find(params[:game_id])
     if @game.user_id == request.env['HTTP_USER_ID'].to_i

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get 'collaborators/user/collaborators' => 'collaborators#find_user_collaborators' # returns all collaborators for all of a user's games
   get 'collaborators/user/requesters' => 'collaborators#find_user_requesters' # returns all requesters for all user's games
   post 'collaborators/create' # create new collab
+  post 'collaborators/self' => 'collaborators#make_user_collaborator_for_own_game' # make a user a collab for their own game
   patch 'collaborators/update/requested' => 'collaborators#update_requested_status' # flip requested value (t -> f f -> t)
   patch 'collaborators/update/accepted' => 'collaborators#make_collaborator' # flip accepted value (t -> f f -> t)
 

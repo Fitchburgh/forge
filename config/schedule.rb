@@ -20,6 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every 1.day do
-  system 'heroku pg:backups capture'
-  system 'curl -o latest.dump `heroku pg:backups public-url`'
+  exec # run the ruby program
 end

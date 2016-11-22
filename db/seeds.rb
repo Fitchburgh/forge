@@ -20,7 +20,7 @@ Game.create(
   archived: false,
   published: false,
   plays: 0,
-  score: 87612349843761
+  score: 0
 )
 
 ##########################################

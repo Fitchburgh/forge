@@ -16,7 +16,8 @@ class Game < ApplicationRecord
       user_id: auth_id,
       published: params[:published],
       plays: 0,
-      score: 0
+      score: 0,
+      thumbnail: params[:thumbnail]
     )
   end
 
@@ -25,7 +26,7 @@ class Game < ApplicationRecord
     Game.where("archived = ? AND published = ?", false, true).each do |t|
       if t.tags.include?(params.downcase) || t.name.include?(params.downcase)
         username = User.find(t.user_id).username
-        var << { id: t.id, name: t.name, tags: t.tags, username: username, description: t.description, published: t.published, plays: t.plays, score: t.score, created_at: t.created_at }
+        var << { id: t.id, name: t.name, tags: t.tags, username: username, description: t.description, published: t.published, plays: t.plays, score: t.score, created_at: t.created_at, thumbnails: t.thumbnail }
       end
     end
     var
@@ -38,6 +39,7 @@ class Game < ApplicationRecord
     var.info = params[:info]
     var.published = params[:published]
     var.score = params[:score]
+    var.thumbnail = params[:thumbnail]
   end
 
   def self.find_game_ids_by_creator(var, auth_id)

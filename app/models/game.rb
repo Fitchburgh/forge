@@ -54,7 +54,6 @@ class Game < ApplicationRecord
     games = []
     game_ids.each do |id|
       @game = Game.find_by(id: id)
-      binding.pry
       games << @game if @game.user_id != auth_id.to_i
     end
     games

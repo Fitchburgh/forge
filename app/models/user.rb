@@ -27,7 +27,7 @@ class User < ApplicationRecord
     result = []
     collaborators.each do |t|
       username = User.find(t.user_id).username
-      c.push({
+      result.push({
         id: t.id,
         game_id: t.game_id,
         username: username,
@@ -42,7 +42,7 @@ class User < ApplicationRecord
     result = []
     requesters.each do |t|
       username = User.find(t.user_id).username
-      c.push({
+      result.push({
         id: t.id,
         game_id: t.game_id,
         username: username,

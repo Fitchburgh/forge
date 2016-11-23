@@ -30,6 +30,7 @@ class User < ApplicationRecord
       result.push({
         id: t.id,
         game_id: t.game_id,
+        user_id: t.user_id,
         username: username,
         requested: true,
         accepted: true
@@ -45,6 +46,7 @@ class User < ApplicationRecord
       result.push({
         id: t.id,
         game_id: t.game_id,
+        user_id: t.user_id,
         username: username,
         requested: true,
         accepted: false

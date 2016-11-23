@@ -33,7 +33,7 @@ class CollaboratorsController < ApplicationController
       @collaborator.save!
       render json: @collaborator
     else
-      render :json => { errors: @collaborators.errors.full_messages }, status: 400
+      render :json => { message: 'collaborator not found with that game ID and user ID' }, status: 400
     end
   end
 
@@ -46,7 +46,7 @@ class CollaboratorsController < ApplicationController
         @collaborator.save!
         render json: @collaborator
       else
-        render :json => { errors: @collaborators.errors.full_messages }, status: 400
+        render :json => { message: 'collaborator not found with that game ID and requester ID' }, status: 400
       end
     else
       render :json => { message: 'only the game\'s creator can update this status' }, status: 400
@@ -62,7 +62,7 @@ class CollaboratorsController < ApplicationController
         @collaborator.save!
         render json: @collaborator
       else
-        render :json => { errors: @collaborators.errors.full_messages }, status: 400
+        render :json => { message: 'collaborator not found with that game ID and requester ID' }, status: 400
       end
     else
       render :json => { message: 'only the game\'s creator can update this status' }, status: 400

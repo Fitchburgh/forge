@@ -1,24 +1,8 @@
-# Use this file to easily define all of your cron jobs.
-#
-# It's helpful, but not entirely necessary to understand cron before proceeding.
-# http://en.wikipedia.org/wiki/Cron
-
-# Example:
-#
-# set :output, "/path/to/my/cron_log.log"
-#
-# every 2.hours do
-#   command "/usr/bin/some_great_command"
-#   runner "MyModel.some_method"
-#   rake "some:great:rake:task"
-# end
-#
-# every 4.days do
-#   runner "AnotherModel.prune_old_records"
-# end
-
-# Learn more: http://github.com/javan/whenever
-
 every 1.day do
-  exec # run the ruby program
+  system 'heroku pg:backups capture'
+  system 'curl -o latest.dump `heroku pg:backups public-url`'
+
+  system 'aws s3 cp s3://yazuapgbackup/latest.dump ../forge_backup/' if system 'pg_restore --verbose --clean --no-acl --no-owner -h localhost -U Fitchburgh -d forge_test latest.dump'
+
+  system 'aws s3 cp latest.dump s3://yazuapgbackup/'
 end

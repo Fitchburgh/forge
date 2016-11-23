@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122154642) do
+ActiveRecord::Schema.define(version: 20161123173324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,9 +33,10 @@ ActiveRecord::Schema.define(version: 20161122154642) do
     t.integer  "game_id"
     t.boolean  "published",  default: false
     t.string   "name"
-    t.json     "tags",       default: "",    null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.json     "tags",       default: "",         null: false
+    t.text     "thumbnail",  default: "No thumb"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.index ["game_id"], name: "index_backgrounds_on_game_id", using: :btree
     t.index ["user_id"], name: "index_backgrounds_on_user_id", using: :btree
   end
@@ -67,9 +68,10 @@ ActiveRecord::Schema.define(version: 20161122154642) do
     t.integer  "game_id"
     t.string   "name"
     t.boolean  "published",  default: false
-    t.json     "tags",       default: "",    null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.json     "tags",       default: "",         null: false
+    t.text     "thumbnail",  default: "No thumb"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.index ["game_id"], name: "index_entities_on_game_id", using: :btree
     t.index ["user_id"], name: "index_entities_on_user_id", using: :btree
   end
@@ -111,6 +113,7 @@ ActiveRecord::Schema.define(version: 20161122154642) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "plays"
+    t.text     "thumbnail"
     t.index ["user_id"], name: "index_games_on_user_id", using: :btree
   end
 
@@ -130,9 +133,10 @@ ActiveRecord::Schema.define(version: 20161122154642) do
     t.integer  "game_id"
     t.string   "name"
     t.boolean  "published",  default: false
-    t.json     "tags",       default: "",    null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.json     "tags",       default: "",         null: false
+    t.text     "thumbnail",  default: "No thumb"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.index ["game_id"], name: "index_obstacles_on_game_id", using: :btree
     t.index ["user_id"], name: "index_obstacles_on_user_id", using: :btree
   end
@@ -164,6 +168,8 @@ ActiveRecord::Schema.define(version: 20161122154642) do
     t.string   "token"
     t.string   "uid"
     t.json     "google_oauth_data"
+    t.integer  "playing_game"
+    t.integer  "editing_game"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end

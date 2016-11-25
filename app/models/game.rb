@@ -56,7 +56,9 @@ class Game < ApplicationRecord
     games = []
     game_ids.each do |id|
       @game = Game.find_by(id: id)
-      games << @game if @game.user_id != auth_id.to_i
+      if @game.user_id != auth_id.to_i
+        games << { id: @game.id, name: @game.name, tags: @game.tags, user_id: @game.user_id, description: @game.description, published: @game.published, score: @game.score, plays: @game.plays, created_at: @game.created_at, }
+      end
     end
     games
   end

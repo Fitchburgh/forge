@@ -67,13 +67,14 @@ class Collaborator < ApplicationRecord
   end
 
   def self.return_user_collaborations(games, users)
+    length = users.length
+    a = 0
     result = []
-    users.each do |t|
-      games.each do |g|
-        result << { id: g.id, name: g.name, tags: g.tags, username: t, description: g.description, published: g.published, archived: g.archived, score: g.score, created_at: g.created_at}
-      end
+    length.times do
+      result << { id: games[a][:id], name: games[a][:name], tags: games[a][:tags], username: users[a], description: games[a][:description], published: games[a][:published], score: games[a][:score], created_at: games[a][:created_at] }
+      a += 1
     end
-    result.uniq
+    result
   end
 
   def self.find_collaborators_by_game(var, ids)

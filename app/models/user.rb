@@ -17,7 +17,7 @@ class User < ApplicationRecord
   def self.find_username_by_game_creator_id(games)
     users = []
     games.each do |g|
-      @user = User.find_by(id: g.user_id)
+      @user = User.find_by(id: g[:user_id])
       users << @user.username
     end
     users

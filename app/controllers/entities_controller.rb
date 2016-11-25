@@ -26,6 +26,13 @@ class EntitiesController < ApplicationController
     end
   end
 
+  def entity_current
+    @entity = Entity.find_by(id: params[:id])
+    @entity.current = params[:current]
+    render json: 'switched current avatar'
+  end
+
+
   def delete
     @entity = Entity.find_by(id: params[:id])
     if @entity.nil?

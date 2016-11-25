@@ -43,6 +43,7 @@ group :development, :test do
   gem 'shoulda'
   gem 'shoulda-matchers'
   gem 'shoulda-context'
+  gem 'derailed_benchmarks'
 end
 
 group :development do

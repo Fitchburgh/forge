@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   put 'entities/update'
   delete 'entities/delete'
   get 'entities/user' => 'entities#by_users'
+  patch 'entities/make-current' => 'entities#entity_current'
 
   get 'events/index'
   get 'events/search'

@@ -38,7 +38,6 @@ class Entity < ApplicationRecord
     var.name = params[:name].downcase
     var.tags = params[:tags].to_s.downcase
     var.thumbnail = params[:thumbnail]
-    var.current = params[:current]
   end
 
   def self.find_entity_by_game(var, params)

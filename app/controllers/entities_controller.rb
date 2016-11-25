@@ -33,6 +33,11 @@ class EntitiesController < ApplicationController
     render json: @entity.current
   end
 
+  def entity_current_for_game
+    temp = Entity.where(user_id: request.env['HTTP_USER_ID']).where(current: true).first
+    @entity = { info: temp.info, game_id: temp.game_id, name: temp.name, tags: temp.tags, current: temp.current }
+    render json: @entity
+  end
 
   def delete
     @entity = Entity.find_by(id: params[:id])

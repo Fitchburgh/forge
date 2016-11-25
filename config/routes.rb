@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'articles/search'
   get 'articles/game/all' => 'articles#find_game_articles'
 
+
   get 'backgrounds/all' => 'backgrounds#index'
   get 'backgrounds/search'
   post 'backgrounds/create'
@@ -81,6 +82,7 @@ Rails.application.routes.draw do
   get 'scenes/search'
   post 'scenes/create'
 
+  get 'users/avatar' => 'entities#entity_current_for_game'
   get 'users/total' => 'games#count_users'
   get 'users/plays' => 'games#check_user_play'
   get 'users/plays/count' => 'games#count_user_game_plays'

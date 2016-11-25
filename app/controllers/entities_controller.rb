@@ -43,4 +43,13 @@ class EntitiesController < ApplicationController
 
     render json: @entities
   end
+
+  def by_users
+    @entities = Entity.find_entity_by_user(@entities, request.env['HTTP_USER_ID'])
+    if @entities.nil?
+      render :json => { error: 'no entities found' }, status: 404
+    else
+      render json: @entities
+    end
+  end
 end

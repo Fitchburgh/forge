@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   post 'entities/create'
   put 'entities/update'
   delete 'entities/delete'
+  get 'entities/user' => 'entities#by_users'
 
   get 'events/index'
   get 'events/search'
@@ -93,6 +94,7 @@ Rails.application.routes.draw do
 
   get 'users/current/play' => 'users#current_play'
   get 'users/current/edit' => 'users#current_edit'
+  get 'current/username' => 'users#current_username'
 
   # rails routes for internal API views
   resources :admins

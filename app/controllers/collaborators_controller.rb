@@ -111,9 +111,9 @@ class CollaboratorsController < ApplicationController
   end
 
   def find_collaborations_by_user
-    game_ids = Collaborator.find_collaborations_by_user(request.env['HTTP_USER_ID']) # returns own games
+    game_ids = Collaborator.find_collaborations_by_user(request.env['HTTP_USER_ID'])
     games = Game.find_game_ids(game_ids, request.env['HTTP_USER_ID'])
-    users = User.find_username_by_game_creator_id(games)
+    users = User.find_username_by_game_creator_id(games) 
     result = Collaborator.return_user_collaborations(games, users)
     render json: result
   end

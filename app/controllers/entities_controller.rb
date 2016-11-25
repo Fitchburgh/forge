@@ -29,7 +29,8 @@ class EntitiesController < ApplicationController
   def entity_current
     @entity = Entity.find_by(id: params[:id])
     @entity.current = params[:current]
-    render json: 'switched current avatar'
+    @entity.save
+    render json: @entity.current
   end
 
 

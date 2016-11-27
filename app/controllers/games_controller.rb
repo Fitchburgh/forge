@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   def create
     @game = Game.create_new_game(@game, params, request.env['HTTP_USER_ID'])
     if @game.save
-      Redis.current.set(@game.name, @game.attributes.to_json)
+      Redis.current.set(@game.name, @game.attributes)
       Redis.current.expire(@game.name, 2592000)
       render json: @game
     else

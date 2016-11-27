@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   get 'articles/search'
   get 'articles/game/all' => 'articles#find_game_articles'
 
-
   get 'backgrounds/all' => 'backgrounds#index'
   get 'backgrounds/search'
   post 'backgrounds/create'

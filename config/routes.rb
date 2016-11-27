@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'articles/search'
   get 'articles/game/all' => 'articles#find_game_articles'
 
+
   get 'backgrounds/all' => 'backgrounds#index'
   get 'backgrounds/search'
   post 'backgrounds/create'
@@ -34,6 +35,8 @@ Rails.application.routes.draw do
   post 'entities/create'
   put 'entities/update'
   delete 'entities/delete'
+  get 'entities/user' => 'entities#by_users'
+  patch 'entities/make-current' => 'entities#entity_current'
 
   get 'events/index'
   get 'events/search'
@@ -79,6 +82,7 @@ Rails.application.routes.draw do
   get 'scenes/search'
   post 'scenes/create'
 
+  get 'users/avatar' => 'entities#entity_current_for_game'
   get 'users/total' => 'games#count_users'
   get 'users/plays' => 'games#check_user_play'
   get 'users/plays/count' => 'games#count_user_game_plays'
@@ -93,6 +97,7 @@ Rails.application.routes.draw do
 
   get 'users/current/play' => 'users#current_play'
   get 'users/current/edit' => 'users#current_edit'
+  get 'current/username' => 'users#current_username'
 
   # rails routes for internal API views
   resources :admins

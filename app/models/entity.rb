@@ -7,7 +7,7 @@ class Entity < ApplicationRecord
     var = []
     Entity.all.each do |t|
       if t.tags.include?(params.downcase) || t.name.include?(params.downcase)
-        var << { thumbnail: t.thumbnail, id: t.id, user_id: t.user_id, game_id: t.game_id, published: t.published, name: t.name, tags: t.tags }
+        var << { thumbnail: t.thumbnail, current: t.current, id: t.id, user_id: t.user_id, game_id: t.game_id, published: t.published, name: t.name, tags: t.tags }
       end
     end
     var
@@ -25,7 +25,8 @@ class Entity < ApplicationRecord
       published: params[:published],
       name: params[:name].downcase,
       tags: params[:tags].to_s.downcase,
-      thumbnail: params[:thumbnail]
+      thumbnail: params[:thumbnail],
+      current: params[:current]
     )
   end
 
@@ -43,6 +44,14 @@ class Entity < ApplicationRecord
     var = []
     Entity.where(game_id: params).each do |t|
       var << t
+    end
+    var
+  end
+
+  def self.find_entity_by_user(var, params)
+    var = []
+    Entity.where(user_id: params).each do |t|
+      var << { thumbnail: t.thumbnail, current: t.current, id: t.id, user_id: t.user_id, game_id: t.game_id, published: t.published, name: t.name, tags: t.tags }
     end
     var
   end

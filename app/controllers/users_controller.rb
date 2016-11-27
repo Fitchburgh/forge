@@ -41,4 +41,8 @@ class UsersController < ApplicationController
     render json: @game.errors.full_messages if @game.nil?
     render json: @game
   end
+
+  def current_username
+    render json: @user.username if current_user
+  end
 end

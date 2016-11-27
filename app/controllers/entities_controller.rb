@@ -26,6 +26,19 @@ class EntitiesController < ApplicationController
     end
   end
 
+  def entity_current
+    @entity = Entity.find_by(id: params[:id])
+    @entity.current = params[:current]
+    @entity.save
+    render json: @entity.current
+  end
+
+  def entity_current_for_game
+    temp = Entity.where(user_id: request.env['HTTP_USER_ID']).where(current: true).first
+    @entity = { info: temp.info, game_id: temp.game_id, name: temp.name, tags: temp.tags, current: temp.current }
+    render json: @entity
+  end
+
   def delete
     @entity = Entity.find_by(id: params[:id])
     if @entity.nil?
@@ -42,5 +55,14 @@ class EntitiesController < ApplicationController
     UserMailer.welcome_email(@user).deliver_now
 
     render json: @entities
+  end
+
+  def by_users
+    @entities = Entity.find_entity_by_user(@entities, request.env['HTTP_USER_ID'])
+    if @entities.nil?
+      render :json => { error: 'no entities found' }, status: 404
+    else
+      render json: @entities
+    end
   end
 end

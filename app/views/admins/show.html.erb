@@ -106,6 +106,20 @@
     </tr>
 
     <tr>
+      <td>current/username</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>plainly returns current users username (used for socket.io chat)</td>
+    </tr>
+
+    <tr>
+      <td>entities/user</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns all entities for a specific user</td>
+    </tr>
+
+    <tr>
       <td>entities/all</td>
       <td>n/a</td>
       <td>user_id, token</td>
@@ -292,6 +306,13 @@
       <td>n/a</td>
       <td>user_id, token</td>
       <td>returns total number of users</td>
+    </tr>
+
+    <tr>
+      <td>users/avatar</td>
+      <td>n/a</td>
+      <td>user_id, token</td>
+      <td>returns the users current avatar</td>
     </tr>
 
     <tr>
@@ -572,12 +593,13 @@
 
     <tr>
       <td>entities/update</td>
-      <td>info,
-        game_id,
-        published,
-        name,
-        tags,
-        thumbnail</td>
+      <td>info, (json)
+        game_id, (integer)
+        published, (boolean)
+        name, (string)
+        tags, (array)
+        thumbnail, (text)
+        current, (boolean)</td>
       <td>user_id, token</td>
       <td>updates an existing entity</td>
     </tr>

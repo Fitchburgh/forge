@@ -7,22 +7,20 @@ class Game < ApplicationRecord
     var = self.new_game(params, auth_id)
   end
 
-  class << self
-    def new_game(params, auth_id)
-      Game.new(
-        name: params[:name].downcase,
-        tags: params[:tags].to_s.downcase,
-        description: params[:description].downcase,
-        info: params[:info],
-        user_id: auth_id,
-        published: params[:published],
-        plays: 0,
-        score: 0,
-        thumbnail: params[:thumbnail]
-      )
-    end
-    handle_asynchronously :new_game
+  def self.new_game(params, auth_id)
+    Game.new(
+      name: params[:name].downcase,
+      tags: params[:tags].to_s.downcase,
+      description: params[:description].downcase,
+      info: params[:info],
+      user_id: auth_id,
+      published: params[:published],
+      plays: 0,
+      score: 0,
+      thumbnail: params[:thumbnail]
+    )
   end
+
 
   def self.find_game_by_input(var, params)
     var = []

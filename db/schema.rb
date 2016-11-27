@@ -62,21 +62,6 @@ ActiveRecord::Schema.define(version: 20161127200133) do
     t.index ["user_id"], name: "index_collaborators_on_user_id", using: :btree
   end
 
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
-  end
-
   create_table "entities", force: :cascade do |t|
     t.json     "info"
     t.integer  "user_id"
@@ -155,6 +140,17 @@ ActiveRecord::Schema.define(version: 20161127200133) do
     t.datetime "updated_at",                      null: false
     t.index ["game_id"], name: "index_obstacles_on_game_id", using: :btree
     t.index ["user_id"], name: "index_obstacles_on_user_id", using: :btree
+  end
+
+  create_table "que_jobs", primary_key: ["queue", "priority", "run_at", "job_id"], force: :cascade, comment: "3" do |t|
+    t.integer   "priority",    limit: 2, default: 100,            null: false
+    t.datetime  "run_at",                default: -> { "now()" }, null: false
+    t.bigserial "job_id",                                         null: false
+    t.text      "job_class",                                      null: false
+    t.json      "args",                  default: [],             null: false
+    t.integer   "error_count",           default: 0,              null: false
+    t.text      "last_error"
+    t.text      "queue",                 default: "",             null: false
   end
 
   create_table "save_games", force: :cascade do |t|

@@ -96,6 +96,11 @@ class CollaboratorsController < ApplicationController
     end
   end
 
+
+#   select games.name, users.id, collaborators.game_id, users.username
+# from games, collaborators, users
+# where collaborators.game_id = games.id
+
   def find_user_collaborators
     ids = Game.find_game_ids_by_creator(@games, request.env['HTTP_USER_ID'])
     collaborators = Collaborator.find_collaborators_by_game(@collaborators, ids)
@@ -113,7 +118,7 @@ class CollaboratorsController < ApplicationController
   def find_collaborations_by_user
     game_ids = Collaborator.find_collaborations_by_user(request.env['HTTP_USER_ID'])
     games = Game.find_game_ids(game_ids, request.env['HTTP_USER_ID'])
-    users = User.find_username_by_game_creator_id(games) 
+    users = User.find_username_by_game_creator_id(games)
     result = Collaborator.return_user_collaborations(games, users)
     render json: result
   end

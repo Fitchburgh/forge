@@ -43,7 +43,7 @@ class Entity < ApplicationRecord
   def self.find_entity_by_game(var, params)
     var = []
     Entity.where(game_id: params).each do |t|
-      var << t
+      var << { thumbnail: t.thumbnail, current: t.current, id: t.id, user_id: t.user_id, game_id: t.game_id, published: t.published, name: t.name, tags: t.tags }
     end
     var
   end
@@ -56,3 +56,6 @@ class Entity < ApplicationRecord
     var
   end
 end
+# for these api calls. all we need to return is everything BUT info and make a separate call when they actually click the object.
+
+# add currently_editing column boolean for all assets which will make sure that only one person can be editing one at a time

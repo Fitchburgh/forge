@@ -97,9 +97,10 @@ class CollaboratorsController < ApplicationController
   end
 
 
-#   select games.name, users.id, collaborators.game_id, users.username
-# from games, collaborators, users
-# where collaborators.game_id = games.id
+  # select distinct games.name, users.id, collaborators.game_id, users.username, games.description, games.score, games.published, games.created_at, games.updated_at, games.plays
+  # from games, users, collaborators
+  # where collaborators.game_id = games.id
+  # and game_id = 7 <-- this is the game ID. or could be a user_id or whatever.
 
   def find_user_collaborators
     ids = Game.find_game_ids_by_creator(@games, request.env['HTTP_USER_ID'])

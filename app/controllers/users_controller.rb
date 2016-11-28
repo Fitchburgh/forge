@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(request.env['HTTP_USER_ID'])
-    @user.username = params[:username]
+    @user.username = params[:username].downcase
     @user.save!
     render json: @user
   end

@@ -238,7 +238,6 @@ DEPENDENCIES
   puma (~> 3.0)
   rack-cors
   rails (~> 5.0.0, >= 5.0.0.1)
-  redis
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
   scout_apm

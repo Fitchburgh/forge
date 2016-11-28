@@ -20,7 +20,7 @@ gem 'whenever', :require => false
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'pry'
-gem 'redis'
+
 gem "letter_opener"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

@@ -14,7 +14,7 @@ RSpec.describe CharactersController, type: :controller do
       @user = User.create!(username: 'dude', uid: '256807', token: '89jfa8j4983aj')
       @character = Character.create!(name: 'Manbearpig', user_id: @user.id, current: true, obj: "{json stuff}")
     end
-    
+
     it "returns a new character if it was created successfully" do
       get :create
       expect{ Character.create!(name: name, user_id: @user.id, current: current, obj: obj) }.to change{ Character.count }.by(1)

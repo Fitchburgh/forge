@@ -41,7 +41,7 @@ class Event < ApplicationRecord
     var.published = params[:published]
     var.name = params[:name].downcase
     var.tags = params[:tags].to_s.downcase
-    var.category params[:category].downcase
+    var.category = params[:category].downcase
   end
 
   def self.find_event_by_game(var, params)

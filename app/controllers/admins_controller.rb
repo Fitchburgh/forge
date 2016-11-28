@@ -1,4 +1,3 @@
-#
 class AdminsController < ApplicationController
   skip_before_action :check_auth
 
@@ -31,7 +30,6 @@ class AdminsController < ApplicationController
   end
 
   private
-
   def admin_params
     params.require(:admin).permit(
       :first, :last, :email, :password_confirmation, :password, :username

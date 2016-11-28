@@ -1,5 +1,3 @@
-require 'pry'
-#
 class ArticlesController < ApplicationController
   def index
     @articles = { 'backgrounds' => Background.all, 'obstacles' => Obstacle.all, 'entities' => Entity.all }

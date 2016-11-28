@@ -26,7 +26,7 @@ class Obstacle < ApplicationRecord
       name: params[:name].downcase,
       tags: params[:tags].to_s.downcase,
       thumbnail: params[:thumbnail]
-  )
+    )
   end
 
   def self.update_obstacle(var, params, auth_id)

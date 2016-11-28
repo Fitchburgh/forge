@@ -1,6 +1,7 @@
 class BackgroundsController < ApplicationController
   def index
-    render :json => Background.all
+    @backgrounds = ActiveRecord::Base.connection.execute("SELECT id, user_id, game_id, published, name, tags, thumbnail FROM backgrounds;")
+    render :json => @backgrounds
   end
 
   def create
@@ -36,7 +37,8 @@ class BackgroundsController < ApplicationController
   end
 
   def search
-    @backgrounds = Background.find_background_by_input(@backgrounds, params[:name])
+    @backgrounds = ActiveRecord::Base.connection.execute("SELECT id, user_id, game_id, published, name, tags, thumbnail FROM backgrounds WHERE name LIKE '%#{params[:name]}%';")
+    # @backgrounds = Background.find_background_by_input(@backgrounds, params[:name])
     render json: @backgrounds
   end
 

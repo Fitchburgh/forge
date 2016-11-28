@@ -1,6 +1,7 @@
 class ObstaclesController < ApplicationController
   def index
-    render :json => Obstacle.all
+    @obstacles = ActiveRecord::Base.connection.execute("SELECT id, user_id, game_id, published, name, tags, thumbnail FROM obstacles;")
+    render :json => @obstacles
   end
 
   def create
@@ -36,7 +37,8 @@ class ObstaclesController < ApplicationController
   end
 
   def search
-    @obstacles = Obstacle.find_obstacle_by_input(@obstacles, params[:name])
+    # @obstacles = Obstacle.find_obstacle_by_input(@obstacles, params[:name])
+    @obstacles = ActiveRecord::Base.connection.execute("SELECT id, user_id, game_id, published, name, tags, thumbnail FROM obstacles WHERE name LIKE '%#{params[:name]}%';")
     render json: @obstacles
   end
 

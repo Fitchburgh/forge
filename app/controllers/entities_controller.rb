@@ -1,6 +1,7 @@
 class EntitiesController < ApplicationController
   def index
-    render :json => Entity.all
+    @entities = ActiveRecord::Base.connection.execute("SELECT id, user_id, game_id, published, name, tags, thumbnail FROM entities;")
+    render :json => @entities
   end
 
   def create
@@ -49,10 +50,8 @@ class EntitiesController < ApplicationController
   end
 
   def search
-    @entities = Entity.find_entity_by_input(@entities, params[:name])
-
-    @user = User.find_by(id: 1)
-    UserMailer.welcome_email(@user).deliver_now
+    # @entities = Entity.find_entity_by_input(@entities, params[:name])
+    @entities = ActiveRecord::Base.connection.execute("SELECT id, user_id, game_id, published, name, tags, thumbnail FROM entities WHERE name LIKE '%#{params[:name]}%';")
 
     render json: @entities
   end

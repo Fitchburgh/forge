@@ -39,4 +39,13 @@ class ObstaclesController < ApplicationController
     @obstacles = Obstacle.find_obstacle_by_input(@obstacles, params[:name])
     render json: @obstacles
   end
+
+  def select_obstacle
+    @obstacle = Obstacle.find_by(id: params[:id])
+    if @obstacle.nil?
+      render json: @obstacle.errors.full_messages
+    else
+      render json: @obstacle.info
+    end
+  end
 end

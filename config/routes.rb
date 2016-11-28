@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post 'backgrounds/create'
   put 'backgrounds/update'
   delete 'backgrounds/delete'
+  get 'backgrounds/select' => 'backgrounds#select_background' ## need api doc
 
   get 'characters/all' => 'characters#index'
   get 'characters/current_character'
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
   delete 'entities/delete'
   get 'entities/user' => 'entities#by_users'
   patch 'entities/make-current' => 'entities#entity_current'
+  get 'entities/select' => 'entities#select_entity' ## need api doc
 
   get 'events/index'
   get 'events/search'
@@ -76,6 +78,7 @@ Rails.application.routes.draw do
   post 'obstacles/create'
   put 'obstacles/update'
   delete 'obstacles/delete'
+  get 'obstacles/select' => 'obstacles#select_obstacle' ## need api doc
 
   get 'scenes/all' => 'scenes#index'
   get 'scenes/search'

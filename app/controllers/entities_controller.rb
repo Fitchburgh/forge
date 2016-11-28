@@ -65,4 +65,13 @@ class EntitiesController < ApplicationController
       render json: @entities
     end
   end
+
+  def select_entity
+    @entity = Entity.find_by(id: params[:id])
+    if @entity.nil?
+      render json: @entity.errors.full_messages
+    else
+      render json: @entity.info
+    end
+  end
 end

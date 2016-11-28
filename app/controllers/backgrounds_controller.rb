@@ -39,4 +39,14 @@ class BackgroundsController < ApplicationController
     @backgrounds = Background.find_background_by_input(@backgrounds, params[:name])
     render json: @backgrounds
   end
+
+  def select_background
+    @background = Background.find_by(id: params[:id])
+    if @background.nil?
+      render json: @background.errors.full_messages
+    else
+      render json: @background.info
+    end
+  end
+
 end

@@ -79,11 +79,12 @@ class Collaborator < ApplicationRecord
 
   def self.find_collaborators_by_game(var, ids)
     collaborators = []
-    ids.each do |id|
-      var = Collaborator.where('game_id = ? AND requested = ? AND accepted = ?', id, true, true)
-      collaborators.concat(var)
-    end
-    collaborators
+    var = ActiveRecord::Base.connection.execute("SELECT * FROM collaborators WHERE game_id CONTAINS #{ids.values} AND requested = true AND accepted = true")
+    # ids.values.each do |id|
+    #   var = Collaborator.where('game_id = ? AND requested = ? AND accepted = ?', id, true, true)
+    collaborators = collaborators.concat(var)
+    # end
+    # collaborators
   end
 
   def self.find_requesters_by_game(var, ids)

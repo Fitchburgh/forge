@@ -44,13 +44,15 @@ class Game < ApplicationRecord
   end
 
   def self.find_game_ids_by_creator(var, auth_id)
-    var = Game.where(user_id: auth_id)
-    ids = []
-    var.each do |game|
-      ids << game.id
-    end
-    ids.shift if ids.include? 0
-    ids
+    ids = ActiveRecord::Base.connection.execute("SELECT games.id FROM games WHERE games.user_id = #{auth_id}")
+    # var = Game.where(user_id: auth_id)
+    # ids = []
+    # var.each do |game|
+    #   ids << game.id
+    # end
+    # binding.pry
+    # ids.shift if ids.include? 0
+    # ids
   end
 
   def self.find_game_ids(game_ids, auth_id)

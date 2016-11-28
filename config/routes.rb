@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'articles/index'
   get 'articles/search'
   get 'articles/game/all' => 'articles#find_game_articles'
@@ -93,6 +92,7 @@ Rails.application.routes.draw do
   post 'users/create' => 'prelogin_users#create'
   patch 'users/login' => 'prelogin_users#login'
   patch 'users/plays' => 'games#update_user_play'
+  patch 'users/update'
 
   patch 'update/current/play' => 'users#update_current_play'
   patch 'update/current/edit' => 'users#update_current_edit'

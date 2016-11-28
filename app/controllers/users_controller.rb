@@ -1,7 +1,6 @@
-
 class UsersController < ApplicationController
   def current_user
-    @user = User.find_by(id: request.env['HTTP_USER_ID'])
+    @user = User.find(request.env['HTTP_USER_ID'])
   end
 
   def update_current_play
@@ -44,5 +43,12 @@ class UsersController < ApplicationController
 
   def current_username
     render json: @user.username if current_user
+  end
+
+  def update
+    @user = User.find(request.env['HTTP_USER_ID'])
+    @user.username = params[:username]
+    @user.save!
+    render json: @user
   end
 end

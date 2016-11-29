@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe BackgroundsController, type: :controller do
   before do
-    @user = User.create!(username: 'emanresu', token: 'asdKJFKNfsdJKDSNnfdsjnf', uid: 238879432983, google_oauth_data: 'placeholder' )
-    @user2 = User.create!(username: 'planetglobe', token: 'pqowiURTBVncmxPQOWI', uid: 34123432123, google_oauth_data: 'placeholder' )
-    @g1 = Game.create!( name: 'neature', tags: 'thats pretty neat', description: 'you can tell its a game from the way it is', user_id: @user.id, info: 'lots of stuff', published: true, archived: false, score: 100, plays: 12, thumbnail: 'asdf' )
-    @g2 = Game.create!( name: 'navy vs navy', tags: 'boats, game', description: 'seafare at it\'s finest', user_id: @user.id, info: 'lots of stuff', published: true, archived: false, score: 150, plays: 123, thumbnail: 'asdf' )
-    @b1 = Background.create!( name: 'ocean', tags: 'sea, water', user_id: @user.id, game_id: @g2.id, info: 'lots of stuff', published: true, thumbnail: 'more stuff' )
-    @b2 = Background.create!( name: 'stream', tags: 'brook, water', user_id: @user2.id, game_id: @g1.id, info: 'lots of stuff', published: true, thumbnail: 'more stuff' )
-    @b3 = Background.create!( name: 'river', tags: 'Amazon, water', user_id: @user2.id, game_id: @g1.id, info: 'lots of stuff', published: true, thumbnail: 'more stuff' )
-    @b4 = Background.create!( name: 'lake', tags: 'Michigan', user_id: @user.id, game_id: @g1.id, info: 'lots of stuff', published: true, thumbnail: 'more stuff' )
+    @u1 = User.create!(username: 'emanresu', token: 'asdKJFKNfsdJKDSNnfdsjnf', uid: 238879432983, google_oauth_data: 'placeholder' )
+    @u2 = User.create!(username: 'planetglobe', token: 'pqowiURTBVncmxPQOWI', uid: 34123432123, google_oauth_data: 'placeholder' )
+    @g1 = Game.create!( name: 'neature', tags: 'thats pretty neat', description: 'you can tell its a game from the way it is', user_id: @u1.id, info: 'lots of stuff', published: true, archived: false, score: 100, plays: 12, thumbnail: 'asdf' )
+    @g2 = Game.create!( name: 'navy vs navy', tags: 'boats, game', description: 'seafare at it\'s finest', user_id: @u1.id, info: 'lots of stuff', published: true, archived: false, score: 150, plays: 123, thumbnail: 'asdf' )
+    @b1 = Background.create!( name: 'ocean', tags: 'sea, water', user_id: @u1.id, game_id: @g2.id, info: 'lots of stuff', published: true, thumbnail: 'more stuff' )
+    @b2 = Background.create!( name: 'stream', tags: 'brook, water', user_id: @u2.id, game_id: @g1.id, info: 'lots of stuff', published: true, thumbnail: 'more stuff' )
+    @b3 = Background.create!( name: 'river', tags: 'Amazon, water', user_id: @u2.id, game_id: @g1.id, info: 'lots of stuff', published: true, thumbnail: 'more stuff' )
+    @b4 = Background.create!( name: 'lake', tags: 'Michigan', user_id: @u1.id, game_id: @g1.id, info: 'lots of stuff', published: true, thumbnail: 'more stuff' )
   end
 
   describe '#index' do
@@ -38,6 +38,18 @@ RSpec.describe BackgroundsController, type: :controller do
         )}.to raise_error( ActiveRecord::RecordInvalid )
       end
 
+      it 'raises an invalid record error if game does not exist' do
+        expect{ Background.create!(
+          info: 'info',
+          user_id: @u1.id,
+          game_id: 124,
+          published: false,
+          name: 'game name',
+          tags: 'tags, many tags',
+          thumbnail: 'thumbnail'
+        )}.to raise_error( ActiveRecord::RecordInvalid )
+      end
+
       it 'raises an invalid record error if user param not given' do
         expect{ Background.create!(
           info: 'info',
@@ -51,7 +63,7 @@ RSpec.describe BackgroundsController, type: :controller do
 
       it 'raises an invalid record error if info param not given' do
         expect{ Background.create!(
-          user_id: @user.id,
+          user_id: @u1.id,
           game_id: @g1.id,
           published: false,
           name: 'game name',
@@ -63,7 +75,7 @@ RSpec.describe BackgroundsController, type: :controller do
       it 'raises an invalid record error if game id param not given' do
         expect{ Background.create!(
           info: 'info',
-          user_id: @user.id,
+          user_id: @u1.id,
           published: false,
           name: 'game name',
           tags: 'tags, many tags',
@@ -74,7 +86,7 @@ RSpec.describe BackgroundsController, type: :controller do
       it 'raises an invalid record error if name param not given' do
         expect{ Background.create!(
           info: 'info',
-          user_id: @user.id,
+          user_id: @u1.id,
           game_id: @g1.id,
           published: false,
           tags: 'tags, many tags',
@@ -85,7 +97,7 @@ RSpec.describe BackgroundsController, type: :controller do
       it 'raises an invalid record error if tags param not given' do
         expect{ Background.create!(
           info: 'info',
-          user_id: @user.id,
+          user_id: @u1.id,
           game_id: @g1.id,
           name: 'game name',
           published: false,
@@ -122,7 +134,7 @@ RSpec.describe BackgroundsController, type: :controller do
         it 'updates the background' do
           @background = Background.find(@b1.id)
           @background.info = 'new info'
-          @background.user_id = @user.id
+          @background.user_id = @u1.id
           @background.game_id = @g2.id
           @background.published = true
           @background.name = 'ocean'

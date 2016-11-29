@@ -1,6 +1,6 @@
 class Character < ApplicationRecord
   belongs_to :user
-  validates_uniqueness_of :current, if: :current
+  validates_uniqueness_of :current, if: :current # as written only one user can have one current character
 
   def self.create_character(params, auth_id)
     Character.new(

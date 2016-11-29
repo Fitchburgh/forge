@@ -43,14 +43,8 @@ class Game < ApplicationRecord
     var.thumbnail = params[:thumbnail]
   end
 
-  def self.find_game_ids_by_creator(var, auth_id)
-    var = Game.where(user_id: auth_id)
-    ids = []
-    var.each do |game|
-      ids << game.id
-    end
-    ids.shift if ids.include? 0
-    ids
+  def self.find_game_ids_by_creator(auth_id)
+    ActiveRecord::Base.connection.execute("SELECT games.id FROM games WHERE games.user_id = #{auth_id}")
   end
 
   def self.find_game_ids(game_ids, auth_id)

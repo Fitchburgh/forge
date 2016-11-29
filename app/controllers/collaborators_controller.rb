@@ -96,29 +96,26 @@ class CollaboratorsController < ApplicationController
     end
   end
 
-
-  # select distinct games.name, users.id, collaborators.game_id, users.username, games.description, games.score, games.published, games.created_at, games.updated_at, games.plays
-  # from games, users, collaborators
-  # where collaborators.game_id = games.id
-  # and game_id = 7 <-- this is the game ID. or could be a user_id or whatever.
-
   def find_user_collaborators
-    ids = Game.find_game_ids_by_creator(@games, request.env['HTTP_USER_ID'])
-    collaborators = Collaborator.find_collaborators_by_game(@collaborators, ids)
+    user_id = request.env['HTTP_USER_ID']
+    ids = Game.find_game_ids_by_creator(user_id)
+    collaborators = Collaborator.find_collaborators_by_game(ids, user_id)
     user_collaborators = User.find_username_for_collaborators(collaborators)
     render json: user_collaborators
   end
 
   def find_user_requesters
-    ids = Game.find_game_ids_by_creator(@games, request.env['HTTP_USER_ID'])
-    requesters = Collaborator.find_requesters_by_game(@requesters, ids)
+    user_id = request.env['HTTP_USER_ID']
+    ids = Game.find_game_ids_by_creator(user_id)
+    requesters = Collaborator.find_requesters_by_game(ids, user_id)
     user_requesters = User.find_username_for_requesters(requesters)
     render json: user_requesters
   end
 
   def find_collaborations_by_user
-    game_ids = Collaborator.find_collaborations_by_user(request.env['HTTP_USER_ID'])
-    games = Game.find_game_ids(game_ids, request.env['HTTP_USER_ID'])
+    user_id = request.env['HTTP_USER_ID']
+    game_ids = Collaborator.find_collaborations_by_user(user_id)
+    games = Game.find_game_ids(game_ids, user_id)
     users = User.find_username_by_game_creator_id(games)
     result = Collaborator.return_user_collaborations(games, users)
     render json: result

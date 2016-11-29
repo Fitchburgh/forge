@@ -15,20 +15,9 @@ class GamesController < ApplicationController
     @game = Game.find_by(id: params[:id])
     if !@game.nil?
       if @game.archived == false
-        # I'd like to make this a model method, but we need to return two things:
-        # true or false, and if true the name of the game before we update it
-        make_new_key = false
-        if !(@game.name == params[:name])
-          make_new_key = true
-          old_name = @game.name
-        end
-
         if !Collaborator.find_by('game_id = ? AND user_id = ?', @game.id, request.env['HTTP_USER_ID']).nil?
           Game.update_game(@game, params)
           if @game.save
-            # Redis.current.del(old_name) if make_new_key == true
-            # Redis.current.set(@game.name, @game.attributes.to_json)
-            # Redis.current.expire(@game.name, 2592000)
             render :json => { id: @game.id, name: @game.name, tags: @game.tags, description: @game.description, user_id: @game.user_id, published: @game.published, plays: @game.plays, thumbnail: @game.thumbnail }
           else
             render :json => { errors: @savegame.errors.full_messages }, status: 404

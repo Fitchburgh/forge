@@ -4,8 +4,8 @@ RSpec.describe ArticlesController, type: :controller do
   before do
     @user = User.create!(username: 'emanresu', token: 'asdKJFKNfsdJKDSNnfdsjnf', uid: 238879432983, google_oauth_data: 'placeholder' )
     @user2 = User.create!(username: 'planetglobe', token: 'pqowiURTBVncmxPQOWI', uid: 34123432123, google_oauth_data: 'placeholder' )
-    @g1 = Game.create!( name: 'neature', tags: 'thats pretty neat', description: 'you can tell its a game from the way it is', user_id: @user.id, info: 'lots of stuff', published: true, archived: false, score: 100, plays: 12, thumbnail: 'asdf' )
-    @g2 = Game.create!( name: 'navy vs navy', tags: 'boats, game', description: 'seafare at it\'s finest', user_id: @user.id, info: 'lots of stuff', published: true, archived: false, score: 150, plays: 123, thumbnail: 'asdf' )
+    @g1 = Game.create!( name: 'neature', tags: 'thats pretty neat', description: 'you can tell its a game from the way it is', user_id: @user.id, info: 'lots of stuff' )
+    @g2 = Game.create!( name: 'navy vs navy', tags: 'boats, game', description: 'seafare at it\'s finest', user_id: @user.id, info: 'lots of stuff' )
     @b1 = Background.create!( name: 'tree', tags: 'oak tree, tall tree, nature', user_id: @user.id, game_id: @g1.id, info: 'stuff', published: true, thumbnail: 'less stuff' )
     @b2 = Background.create!( name: 'pirate ship', tags: 'ship, boat', user_id: @user.id, game_id: @g2.id, info: 'stuff', published: true, thumbnail: 'less stuff' )
     @b3 = Background.create!( name: 'nature', tags: 'grass, bush, tree', user_id: @user2.id, game_id: @g1.id, info: 'stuff', published: true, thumbnail: 'less stuff' )

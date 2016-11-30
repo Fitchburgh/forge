@@ -28,7 +28,7 @@ class User < ApplicationRecord
     game_id = collaborators.first[0][1]
     game_name = Game.find(game_id).name
     collaborators.first.each do |t|
-      username = User.find(t[0]).username
+      username = User.find(t[2]).username
       result.push({
         id: t[0],
         game_id: t[1],
@@ -47,7 +47,7 @@ class User < ApplicationRecord
     game_id = requesters.first[0][1]
     game_name = Game.find(game_id).name
     requesters.first.each do |t|
-      username = User.find(t[0]).username
+      username = User.find(t[2]).username
       result.push({
         id: t[0],
         game_id: t[1],

@@ -30,6 +30,25 @@ class Entity < ApplicationRecord
     )
   end
 
+  def self.default_entity(game_id, auth_id)
+    a = Entity.find(34)
+    entity = Entity.new(
+      info: a.info,
+      user_id: auth_id,
+      game_id: game_id,
+      published: false,
+      name: "default",
+      tags: "",
+      thumbnail: a.thumbnail,
+      current: true
+    )
+    if entity.save?
+      entity
+    else
+      "problem"
+    end
+  end
+
   def self.update_entity(var, params, auth_id)
     var.info = params[:info]
     var.user_id = auth_id

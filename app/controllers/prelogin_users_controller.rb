@@ -33,6 +33,8 @@ class PreloginUsersController < ApplicationController
 
   def create
     @user = User.create_new_user(@user, params)
+    @game = Game.create(name: "#{@user.username}'s first game", description: "", tags: "", info: "", user_id: @user.id, archived: false, published: false, score: 0, plays: 0)
+    @entity = Entity.default_entity(@game.id, @user.id)
     if @user.save
       render json: @user
     else

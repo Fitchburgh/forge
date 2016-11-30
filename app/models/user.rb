@@ -44,6 +44,8 @@ class User < ApplicationRecord
 
   def self.find_username_for_requesters(requesters)
     result = []
+    p requesters
+    p requesters.first
     game_id = requesters.first[0][1]
     game_name = Game.find(game_id).name
     requesters.first.each do |t|

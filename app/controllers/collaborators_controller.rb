@@ -103,6 +103,7 @@ class CollaboratorsController < ApplicationController
     user_collaborators = User.find_username_for_collaborators(collaborators)
     render json: user_collaborators
   end
+  
 
   def find_user_requesters
     user_id = request.env['HTTP_USER_ID']

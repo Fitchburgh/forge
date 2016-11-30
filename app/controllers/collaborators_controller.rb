@@ -113,7 +113,7 @@ class CollaboratorsController < ApplicationController
     user_id = request.env['HTTP_USER_ID'].to_i
     ids = Game.find_game_ids_by_creator(user_id)
     requesters = Collaborator.find_requesters_by_game(ids, user_id)
-    requesters = requesters.reject { |r| r.empty? }
+    requesters = requesters.reject{ |r| r.empty? }
     if !requesters.empty?
       user_requesters = User.find_username_for_requesters(requesters)
       render json: user_requesters

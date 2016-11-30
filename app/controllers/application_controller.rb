@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   def check_auth
     user_id = request.env['HTTP_USER_ID'].to_i
-    if user_id == nil
+    if user_id.nil?
       render json: "No User ID Detected", status: 401
     else
       current_user = User.find(user_id)

@@ -84,7 +84,7 @@ class Collaborator < ApplicationRecord
     ids.each do |id|
       collaborators << ActiveRecord::Base.connection.execute("SELECT * FROM collaborators WHERE game_id = #{id} AND requested = true AND accepted = true AND user_id != #{auth_id.to_i}").values
     end
-    collaborators.delete([])
+    collaborators
   end
 
   def self.find_requesters_by_game(ids, auth_id)

@@ -46,26 +46,72 @@ RSpec.describe UsersController do
   end
 
   describe '#update_current_edit' do
-    # game = params[:game_id]
-    # current_user
-    # @user.editing_game = game
-    # if @user.save
-    #   render json: 'User updated'
-    # describe 'given valid game params' do
-    #   it 'returns a game based on id' do
-    #     expect( Game.find(@g1.id) ).to eq( @g1 )
-    #   end
-    #
-    #   it 'finds the current user' do
-    #     expect(User.find_by(token: 'asdf1234')).to eq @alpha
-    #   end
-    #
-    #   it ''
-    # end
+    describe 'given valid game params' do
+      it 'returns a game based on id' do
+        expect( Game.find(@g1.id) ).to eq( @g1 )
+      end
+
+      it 'finds the current user' do
+        expect(User.find_by(token: 'asdf1234')).to eq @alpha
+      end
+
+      it 'updates the user editing game attribute' do
+        @user = User.find_by(token: 'asdf1234')
+        @user.editing_game = @g3.id
+        @user.save!
+        expect( @user.editing_game ).to eq( @g3.id )
+      end
+    end
 
     describe 'given invalid game params' do
       it 'raises a record invalid error' do
-        expect( Game.find(12345) ).to raise_error( ActiveRecord::RecordInvalid )
+        expect{ Game.find(12345) }.to raise_error( ActiveRecord::RecordNotFound )
+      end
+    end
+  end
+
+  describe '#find_current_game_send_response' do
+    before do
+      @user = User.find_by(token: 'asdf1234')
+      @user.playing_game = @g2.id
+      @user.editing_game = @g3.id
+      @user.save!
+    end
+
+    it 'finds a game by the given param, either the user playing or editing game attribute' do
+      expect( Game.find_by(id: @user.playing_game) ).to eq( @g2 )
+      expect( Game.find_by(id: @user.editing_game) ).to eq( @g3 )
+    end
+  end
+
+  describe '#current_username' do
+    it 'returns the username of the current user' do
+      @current_user = User.find_by(token: 'asdf1234')
+      expect( @current_user.username ).to eq( 'alpha' )
+    end
+  end
+
+  describe '#update' do
+    it 'finds the user by id' do
+      expect( User.find(@beta.id) ).to eq @beta
+    end
+
+    describe 'when username is unique' do
+      it 'reassigns the username of the user' do
+        @user = User.find( @beta.id )
+        @user.username = 'delta'
+        @user.save!
+        expect( @user.username ).to eq( 'delta' )
+      end
+    end
+
+    describe 'when username is not unique' do
+      it 'returns an invalid response error' do
+        @user = User.find( @beta.id )
+        expect{
+          @user.username = 'alpha'
+          @user.save!
+        }.to raise_error( ActiveRecord::RecordInvalid )
       end
     end
   end

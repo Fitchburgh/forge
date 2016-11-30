@@ -100,17 +100,25 @@ class CollaboratorsController < ApplicationController
     user_id = request.env['HTTP_USER_ID']
     ids = Game.find_game_ids_by_creator(user_id)
     collaborators = Collaborator.find_collaborators_by_game(ids, user_id)
-    user_collaborators = User.find_username_for_collaborators(collaborators)
-    render json: user_collaborators
+    if collaborators.join != ''
+      user_collaborators = User.find_username_for_collaborators(collaborators)
+      render json: user_collaborators
+    else
+      render :json => { message: 'no collabs' }, status: 400
+    end
   end
-  
+
 
   def find_user_requesters
     user_id = request.env['HTTP_USER_ID']
     ids = Game.find_game_ids_by_creator(user_id)
     requesters = Collaborator.find_requesters_by_game(ids, user_id)
-    user_requesters = User.find_username_for_requesters(requesters)
-    render json: user_requesters
+    if requesters.join != ''
+      user_requesters = User.find_username_for_requesters(requesters)
+      render json: user_requesters
+    else
+      render :json => { message: 'no collab requests' }, status: 400
+    end
   end
 
   def find_collaborations_by_user

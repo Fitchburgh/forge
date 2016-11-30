@@ -14,7 +14,7 @@ class BackgroundsController < ApplicationController
   end
 
   def update
-    @background = Background.find_by(id: params[:id])
+    @background = Background.find(params[:id])
     if !@background.nil?
       Background.update_background(@background, params, request.env['HTTP_USER_ID'])
       if @background.save
@@ -27,8 +27,9 @@ class BackgroundsController < ApplicationController
     end
   end
 
+  # for admins to delete profane/NSFW backgrounds
   def delete
-    @background = Background.find_by(id: params[:id])
+    @background = Background.find(params[:id])
     if @background.nil?
       render :json => { error: 'background not detected' }, status: 404
     else
@@ -38,17 +39,15 @@ class BackgroundsController < ApplicationController
 
   def search
     @backgrounds = ActiveRecord::Base.connection.execute("SELECT id, user_id, game_id, published, name, tags, thumbnail FROM backgrounds WHERE name LIKE '%#{params[:name]}%';")
-    # @backgrounds = Background.find_background_by_input(@backgrounds, params[:name])
     render json: @backgrounds
   end
 
   def select_background
-    @background = Background.find_by(id: params[:id])
+    @background = Background.find(params[:id])
     if @background.nil?
       render json: @background.errors.full_messages
     else
       render json: @background.info
     end
   end
-
 end

@@ -5,11 +5,11 @@ This is the API repo for making Yazua DPS. Design.Play.Share.
 ##Cloning Details
 Steps for cloning and getting up and running:
   - Begin by forking and creating your own folder.
-  - Bundle install
-  - rails db:create
-  - rails db:migrate
-  - rails db:seed (for some super fancy data)
-  - rails server
+  - `$ bundle install`
+  - `$ rails db:create`
+  - `$ rails db:migrate`
+  - `$ rails db:seed` (for some super fancy data)
+  - `$ rails server`
   - open chrome and nav to localhost:3000
 
 ##Endpoint Documentation

@@ -24,40 +24,34 @@ class User < ApplicationRecord
   end
 
   def self.find_username_for_collaborators(collaborators)
-    result = []
-    game_id = collaborators.first[0][1]
-    game_name = Game.find(game_id).name
-    collaborators.first.each do |t|
-      username = User.find(t[2]).username
-      result.push({
-        id: t[0],
-        game_id: t[1],
-        user_id: t[2],
-        game_name: game_name,
-        username: username,
-        requested: t[3],
-        accepted: t[4]
-        })
-    end
-    result
-  end
+   result = []
+   collaborators.each do |t|
+     username = User.find(t.user_id).username
+     result.push({
+       id: t.id,
+       game_id: t.game_id,
+       user_id: t.user_id,
+       username: username,
+       requested: true,
+       accepted: true
+       })
+   end
+   result
+ end
 
-  def self.find_username_for_requesters(requesters)
-    result = []
-    game_id = requesters.first[0][1]
-    game_name = Game.find(game_id).name
-    requesters.first.each do |t|
-      username = User.find(t[2]).username
-      result.push({
-        id: t[0],
-        game_id: t[1],
-        user_id: t[2],
-        game_name: game_name,
-        username: username,
-        requested: t[3],
-        accepted: t[4]
-        })
-    end
-    result
-  end
+ def self.find_username_for_requesters(requesters)
+   result = []
+   requesters.each do |t|
+     username = User.find(t.user_id).username
+     result.push({
+       id: t.id,
+       game_id: t.game_id,
+       user_id: t.user_id,
+       username: username,
+       requested: true,
+       accepted: false
+       })
+   end
+   result
+ end
 end

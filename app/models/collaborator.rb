@@ -77,22 +77,20 @@ class Collaborator < ApplicationRecord
     result
   end
 
-  def self.find_collaborators_by_game(ids, auth_id)
+  def self.find_collaborators_by_game(var, ids)
     collaborators = []
-    ids = ids.values.flatten
-    ids.delete(0)
     ids.each do |id|
-      collaborators << ActiveRecord::Base.connection.execute("SELECT * FROM collaborators WHERE game_id = #{id} AND requested = true AND accepted = true AND user_id != #{auth_id.to_i}").values
+      var = Collaborator.where('game_id = ? AND requested = ? AND accepted = ?', id, true, true)
+      collaborators.concat(var)
     end
     collaborators
   end
 
-  def self.find_requesters_by_game(ids, auth_id)
+  def self.find_requesters_by_game(var, ids)
     requesters = []
-    ids = ids.values.flatten
-    ids.delete(0)
     ids.each do |id|
-      requesters << ActiveRecord::Base.connection.execute("SELECT * FROM collaborators WHERE game_id = #{id} AND requested = true AND accepted = false AND user_id != #{auth_id}").values
+      var = Collaborator.where('game_id = ? AND requested = ? AND accepted = ?', id, true, false)
+      requesters.concat(var)
     end
     requesters
   end

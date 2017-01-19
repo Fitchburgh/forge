@@ -32,7 +32,6 @@ class Entity < ApplicationRecord
 
   def self.default_entity(auth_id)
     a = Entity.find(34)
-    binding.pry
     entity = Entity.new(
       info: a.info,
       user_id: auth_id,
